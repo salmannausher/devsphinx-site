@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Devsphinx is an AI-first software studio. We build autonomous agent systems AND software products where AI is the core architecture — not a feature added later.">
+<title>Devsphinx — AI-First Software Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --bg:#070707;--bg2:#0e0e0e;--bg3:#151515;--bg4:#1c1c1c;
+  --b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.13);--b3:rgba(255,255,255,0.22);
+  --t:#F0EEE6;--t2:#97948C;--t3:#464540;
+  --ac:#D4501A;--ac2:rgba(212,80,26,0.13);--ac3:rgba(212,80,26,0.07);
+  --blue:#3B82F6;--blue2:rgba(59,130,246,0.12);
+  --green:#22c55e;--green2:rgba(34,197,94,0.1);
+  --D:'Syne',sans-serif;--B:'DM Sans',sans-serif;--M:'DM Mono',monospace;
+  --r:8px;
+}
+body{background:var(--bg);color:var(--t);font-family:var(--B);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+
+/* ── Type ── */
+.eyebrow{font-family:var(--M);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);}
+.eyebrow-ac{color:var(--ac);}
+h1,h2,h3{font-family:var(--D);letter-spacing:-0.025em;line-height:1.06;}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--B);font-size:14px;font-weight:500;padding:12px 24px;border-radius:var(--r);border:none;cursor:pointer;transition:opacity .15s,transform .1s;white-space:nowrap;letter-spacing:.01em;}
+.btn:active{transform:scale(.97);}
+.btn-ac{background:var(--ac);color:#fff;}.btn-ac:hover{opacity:.86;}
+.btn-ghost{background:transparent;color:var(--t2);border:1px solid var(--b2);}.btn-ghost:hover{color:var(--t);border-color:var(--b3);}
+.btn-sm{padding:9px 18px;font-size:13px;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid var(--b);background:rgba(7,7,7,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}
+.nav-logo{font-family:var(--D);font-weight:800;font-size:20px;letter-spacing:-0.035em;}
+.nav-logo em{color:var(--ac);font-style:normal;}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;}
+.nav-links a{font-size:13px;color:var(--t2);transition:color .15s;}.nav-links a:hover{color:var(--t);}
+.ham{display:none;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;cursor:pointer;border:1px solid var(--b2);border-radius:var(--r);padding:8px;background:transparent;}
+.ham span{display:block;height:1px;background:var(--t);transition:all .25s;}
+.ham.open span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+.mob-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;z-index:190;background:rgba(7,7,7,.97);backdrop-filter:blur(18px);flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .25s;}
+.mob-menu.open{opacity:1;pointer-events:all;}
+.mob-menu a{font-family:var(--D);font-size:26px;font-weight:700;letter-spacing:-0.02em;color:var(--t2);transition:color .15s;}.mob-menu a:hover{color:var(--t);}
+.mob-menu .btn{font-family:var(--D);font-size:17px;padding:13px 32px;margin-top:6px;}
+
+/* ── HERO ── */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 24px 80px;overflow:hidden;}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.4;pointer-events:none;}
+.hero-inner{position:relative;z-index:2;max-width:920px;margin:0 auto;}
+.hero-pill{display:inline-flex;align-items:center;gap:9px;padding:7px 18px;border:1px solid var(--b2);border-radius:100px;background:rgba(255,255,255,.03);font-family:var(--M);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--t2);margin-bottom:32px;}
+.pill-dot{width:7px;height:7px;border-radius:50%;background:var(--ac);animation:blink 2.4s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.7);}}
+.hero-h1{font-size:clamp(46px,8.5vw,100px);font-weight:800;color:var(--t);margin-bottom:24px;line-height:.95;}
+.hero-h1 .hl{color:var(--ac);}
+.hero-sub{font-size:clamp(15px,1.8vw,19px);color:var(--t2);font-weight:300;line-height:1.7;max-width:600px;margin:0 auto 20px;}
+.hero-distinction{display:inline-flex;align-items:center;gap:0;border:1px solid var(--b2);border-radius:100px;overflow:hidden;margin-bottom:44px;}
+.hd-item{font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:7px 18px;color:var(--t3);}
+.hd-sep{width:1px;height:28px;background:var(--b2);}
+.hd-item.active{background:var(--ac2);color:var(--ac);}
+.hero-btns{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;}
+.scroll-hint span{font-family:var(--M);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);}
+.scroll-bar{width:1px;height:40px;background:var(--b);position:relative;overflow:hidden;}
+.scroll-bar::after{content:'';position:absolute;top:-100%;left:0;width:1px;height:100%;background:var(--ac);animation:scrollDrop 2s ease-in-out infinite;}
+@keyframes scrollDrop{0%{top:-100%;opacity:0;}40%{opacity:1;}100%{top:100%;opacity:0;}}
+
+/* ── STATS ── */
+#stats{background:var(--bg2);border-top:1px solid var(--b);border-bottom:1px solid var(--b);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+.stat-cell{padding:32px 24px;text-align:center;border-right:1px solid var(--b);}
+.stat-cell:last-child{border-right:none;}
+.stat-num{font-family:var(--D);font-size:clamp(28px,4vw,40px);font-weight:800;letter-spacing:-0.03em;color:var(--t);line-height:1;}
+.stat-num span{color:var(--ac);}
+.stat-lbl{font-family:var(--M);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-top:8px;}
+
+/* ── APPROACH BANNER ── */
+#approach{background:var(--bg3);border-bottom:1px solid var(--b);padding:52px 48px;}
+.app-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1px 1fr;gap:0;align-items:center;}
+.app-divider{background:var(--b2);height:80px;width:1px;}
+.app-side{padding:0 48px;}
+.app-side:first-child{padding-left:0;}
+.app-side:last-child{padding-right:0;}
+.app-side .eyebrow{margin-bottom:12px;}
+.app-side h3{font-family:var(--D);font-size:clamp(16px,1.8vw,20px);font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-0.01em;}
+.app-side p{font-size:14px;color:var(--t2);font-weight:300;line-height:1.72;}
+
+/* ── AGENT FLOW ── */
+#agent-flow{background:var(--bg);padding:64px 48px;}
+.af-inner{max-width:1100px;margin:0 auto;}
+.af-label{font-family:var(--M);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);text-align:center;margin-bottom:20px;}
+.flow-track{display:flex;align-items:center;justify-content:center;gap:0;overflow-x:auto;padding:4px 0 8px;scrollbar-width:thin;scrollbar-color:var(--b2) transparent;}
+.flow-track::-webkit-scrollbar{height:3px;}.flow-track::-webkit-scrollbar-track{background:transparent;}.flow-track::-webkit-scrollbar-thumb{background:var(--b2);border-radius:4px;}
+.flow-node{flex-shrink:0;display:flex;flex-direction:column;align-items:center;}
+.fn-box{padding:12px 18px;border:1px solid var(--b2);border-radius:var(--r);background:var(--bg2);text-align:center;min-width:120px;transition:border-color .2s,background .2s;}
+.fn-box:hover{border-color:var(--ac);background:var(--ac2);}
+.fn-role{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:5px;}
+.fn-name{font-family:var(--D);font-size:13px;font-weight:700;color:var(--t);letter-spacing:-0.01em;}
+.flow-arr{flex-shrink:0;padding:0 4px;color:var(--t3);}
+.flow-arr svg{width:18px;height:18px;}
+.fn-end{padding:12px 18px;border:1px solid rgba(34,197,94,.25);border-radius:var(--r);background:var(--green2);text-align:center;min-width:110px;}
+.fn-end .fn-role{color:rgba(34,197,94,.6);}
+.fn-end .fn-name{color:var(--green);}
+.fn-live{display:inline-flex;align-items:center;gap:5px;font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-top:4px;}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.8s ease-in-out infinite;}
+.stack-strip{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:28px;}
+.stack-chip{font-family:var(--M);font-size:10px;letter-spacing:.07em;padding:5px 12px;border:1px solid var(--b);border-radius:100px;color:var(--t3);}
+
+/* ── SECTION SHARED ── */
+.section{padding:100px 48px;}
+.s-in{max-width:1100px;margin:0 auto;}
+.s-hd{margin-bottom:60px;}
+.s-hd h2{font-size:clamp(32px,4.5vw,52px);font-weight:800;color:var(--t);margin-top:14px;}
+.s-hd p{margin-top:18px;font-size:17px;color:var(--t2);font-weight:300;line-height:1.7;max-width:520px;}
+hr.rule{border:none;border-top:1px solid var(--b);}
+
+/* ── SERVICES TABS ── */
+#services{background:var(--bg);}
+.svc-tabs{display:flex;gap:4px;margin-bottom:36px;border-bottom:1px solid var(--b);padding-bottom:0;}
+.svc-tab{font-family:var(--M);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:10px 20px;border:none;background:transparent;color:var(--t3);border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:color .15s,border-color .15s;}
+.svc-tab:hover{color:var(--t2);}
+.svc-tab.active{color:var(--ac);border-bottom-color:var(--ac);}
+.svc-panel{display:none;}.svc-panel.active{display:block;}
+.srv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.srv-card{background:var(--bg2);padding:44px;position:relative;overflow:hidden;transition:background .2s;}
+.srv-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ac);transform:scaleX(0);transform-origin:left;transition:transform .35s;}
+.srv-card:hover{background:var(--bg3);}.srv-card:hover::after{transform:scaleX(1);}
+.srv-n{font-family:var(--M);font-size:10px;letter-spacing:.14em;color:var(--t3);margin-bottom:20px;}
+.srv-card h3{font-size:21px;font-weight:700;color:var(--t);margin-bottom:14px;line-height:1.2;}
+.srv-card p{font-size:14px;color:var(--t2);font-weight:300;line-height:1.8;}
+.srv-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:24px;}
+.srv-tag{font-family:var(--M);font-size:10px;letter-spacing:.07em;padding:4px 11px;border:1px solid var(--b);border-radius:100px;color:var(--t3);}
+/* Software grid single col items */
+.srv-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+
+/* ── AI-FIRST MANIFESTO ── */
+#manifesto{background:var(--bg2);padding:80px 48px;}
+.mf-inner{max-width:900px;margin:0 auto;text-align:center;}
+.mf-inner blockquote{font-family:var(--D);font-size:clamp(22px,3vw,32px);font-weight:700;line-height:1.4;letter-spacing:-0.02em;color:var(--t);margin:24px 0 32px;}
+.mf-inner blockquote em{color:var(--ac);font-style:normal;}
+.mf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:48px;text-align:left;}
+.mf-card{background:var(--bg2);padding:32px;transition:background .2s;}.mf-card:hover{background:var(--bg3);}
+.mf-card h4{font-family:var(--D);font-size:15px;font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-0.01em;}
+.mf-card p{font-size:13px;color:var(--t2);font-weight:300;line-height:1.75;}
+.mf-tag{display:inline-block;font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:14px;}
+.tag-old{background:rgba(255,255,255,.05);color:var(--t3);}
+.tag-new{background:var(--ac2);color:var(--ac);}
+
+/* ── WHY ── */
+#why{background:var(--bg);}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.why-card{background:var(--bg2);padding:36px;transition:background .2s;}.why-card:hover{background:var(--bg3);}
+.why-ic{width:36px;height:36px;border-radius:var(--r);background:var(--ac2);border:1px solid rgba(212,80,26,.22);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
+.why-ic svg{width:16px;height:16px;stroke:var(--ac);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.why-card h3{font-size:16px;font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-0.01em;}
+.why-card p{font-size:14px;color:var(--t2);font-weight:300;line-height:1.75;}
+
+/* ── PROCESS ── */
+#process{background:var(--bg2);}
+.proc-list{border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.proc-row{display:grid;grid-template-columns:72px 1fr 120px;align-items:start;gap:28px;padding:36px 40px;border-bottom:1px solid var(--b);transition:background .18s;}
+.proc-row:last-child{border-bottom:none;}
+.proc-row:hover{background:rgba(255,255,255,.015);}
+.proc-n{font-family:var(--D);font-size:42px;font-weight:800;line-height:1;color:var(--b2);letter-spacing:-0.04em;padding-top:3px;}
+.proc-body h3{font-size:18px;font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-0.01em;}
+.proc-body p{font-size:14px;color:var(--t2);font-weight:300;line-height:1.78;max-width:520px;}
+.p-badge{font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border-radius:100px;margin-top:6px;white-space:nowrap;text-align:center;}
+.pb-build{background:var(--ac2);color:var(--ac);border:1px solid rgba(212,80,26,.22);}
+.pb-go{background:var(--green2);color:#22c55e;border:1px solid rgba(34,197,94,.2);}
+
+/* ── INDUSTRIES ── */
+#industries{background:var(--bg);}
+.ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.ind-card{background:var(--bg2);padding:32px 28px;transition:background .2s;position:relative;overflow:hidden;}
+.ind-card:hover{background:var(--bg3);}
+.ind-card::before{content:attr(data-num);position:absolute;bottom:-10px;right:10px;font-family:var(--D);font-size:80px;font-weight:800;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;}
+.ind-card h3{font-family:var(--D);font-size:15px;font-weight:700;color:var(--t);margin-bottom:8px;letter-spacing:-0.01em;}
+.ind-card p{font-size:13px;color:var(--t2);font-weight:300;line-height:1.7;}
+.ind-tag{display:inline-block;font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-bottom:14px;}
+
+/* ── WORK ── */
+#work{background:var(--bg2);}
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.wk-card{background:var(--bg2);padding:36px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;position:relative;transition:background .2s;}.wk-card:hover{background:var(--bg3);}
+.wk-ind{font-family:var(--M);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-bottom:14px;}
+.wk-card h3{font-size:17px;font-weight:700;color:var(--t);line-height:1.35;margin-bottom:12px;}
+.wk-card p{font-size:13px;color:var(--t2);font-weight:300;line-height:1.72;flex:1;}
+.wk-foot{margin-top:24px;padding-top:16px;border-top:1px solid var(--b);}
+.wk-foot-n{font-family:var(--D);font-size:24px;font-weight:700;color:var(--t3);letter-spacing:-0.02em;}
+.wk-foot-l{font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-top:2px;}
+.wk-pip{position:absolute;top:18px;right:18px;font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--b);border-radius:100px;color:var(--t3);}
+
+/* ── FAQ ── */
+#faq{background:var(--bg);}
+.faq-wrap{border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.faq-row{border-bottom:1px solid var(--b);}.faq-row:last-child{border-bottom:none;}
+.faq-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 36px;background:transparent;border:none;color:var(--t);font-family:var(--B);font-size:15px;font-weight:400;text-align:left;cursor:pointer;transition:background .15s;}
+.faq-btn:hover{background:rgba(255,255,255,.02);}
+.faq-ic{flex-shrink:0;width:22px;height:22px;border:1px solid var(--b2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1;color:var(--t3);transition:all .22s;}
+.faq-row.open .faq-ic{background:var(--ac);border-color:var(--ac);color:#fff;transform:rotate(45deg);}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .38s ease;}
+.faq-row.open .faq-body{max-height:340px;}
+.faq-inner{padding:4px 36px 28px;font-size:14px;color:var(--t2);font-weight:300;line-height:1.82;max-width:680px;}
+
+/* ── BOOKING ── */
+#booking{background:var(--bg2);border-top:1px solid var(--b);}
+.book-wrap{display:grid;grid-template-columns:1fr 1.35fr;gap:72px;align-items:start;max-width:1100px;margin:0 auto;padding:100px 48px;}
+.book-l .eyebrow{margin-bottom:14px;}
+.book-l h2{font-size:clamp(28px,4vw,48px);font-weight:800;color:var(--t);margin-bottom:20px;}
+.book-l p{font-size:15px;color:var(--t2);font-weight:300;line-height:1.78;margin-bottom:36px;}
+.book-meta{display:flex;flex-direction:column;gap:13px;margin-bottom:32px;}
+.bm-row{display:flex;align-items:center;gap:14px;}
+.bm-lbl{font-family:var(--M);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);width:76px;flex-shrink:0;}
+.bm-val{font-size:14px;color:var(--t2);}
+.bm-val a{color:var(--ac);}.bm-val a:hover{text-decoration:underline;}
+.calendly-wrap{border:1px solid var(--b);border-radius:10px;overflow:hidden;background:var(--bg2);}
+
+/* ── FOOTER ── */
+footer{padding:40px 48px;border-top:1px solid var(--b);}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;padding-bottom:36px;border-bottom:1px solid var(--b);}
+.foot-brand h3{font-family:var(--D);font-size:18px;font-weight:800;letter-spacing:-0.03em;margin-bottom:12px;}
+.foot-brand h3 em{color:var(--ac);font-style:normal;}
+.foot-brand p{font-size:13px;color:var(--t3);line-height:1.7;max-width:220px;}
+.foot-col-title{font-family:var(--M);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);margin-bottom:16px;}
+.foot-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.foot-col ul a{font-size:13px;color:var(--t2);transition:color .15s;}.foot-col ul a:hover{color:var(--t);}
+.foot-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;}
+.foot-copy{font-family:var(--M);font-size:10px;letter-spacing:.07em;color:var(--t3);}
+.foot-social{display:flex;gap:16px;}
+.foot-social a{font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);transition:color .15s;}.foot-social a:hover{color:var(--t2);}
+
+/* ── Fade-up ── */
+.fu{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;}
+.fu.vis{opacity:1;transform:translateY(0);}
+.fd1{transition-delay:.1s;}.fd2{transition-delay:.2s;}.fd3{transition-delay:.3s;}
+
+/* ── Responsive ── */
+@media(max-width:1024px){
+  .book-wrap{grid-template-columns:1fr;gap:48px;padding:72px 24px;}
+  .foot-top{grid-template-columns:1fr 1fr;gap:32px;}
+  .ind-grid{grid-template-columns:repeat(2,1fr);}
+  .srv-grid-3{grid-template-columns:1fr;}
+}
+@media(max-width:768px){
+  nav{padding:0 20px;}.nav-links,.nav-cta{display:none;}.ham{display:flex;}.mob-menu{display:flex;}
+  #hero{padding:90px 20px 72px;}
+  .section{padding:72px 20px;}
+  #agent-flow,#manifesto,#approach{padding:56px 20px;}
+  #booking .book-wrap{padding:60px 20px;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .stat-cell:nth-child(2){border-right:none;}
+  .stat-cell:nth-child(3){border-top:1px solid var(--b);}
+  .stat-cell:nth-child(4){border-top:1px solid var(--b);border-right:none;}
+  .srv-grid,.srv-grid-3,.why-grid,.work-grid,.mf-grid,.ind-grid{grid-template-columns:1fr;}
+  .proc-row{grid-template-columns:48px 1fr;gap:16px;}.p-badge{display:none;}
+  .app-inner{grid-template-columns:1fr;gap:28px;}.app-divider{display:none;}.app-side{padding:0 !important;}
+  footer{padding:36px 20px;}.foot-top{grid-template-columns:1fr;gap:24px;}
+  .foot-bottom{flex-direction:column;align-items:flex-start;}
+  .faq-btn{padding:20px 20px;}.faq-inner{padding:4px 20px 24px;}
+  .svc-tabs{overflow-x:auto;scrollbar-width:none;}.svc-tabs::-webkit-scrollbar{display:none;}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;width:100%;}.hero-btns .btn{width:100%;justify-content:center;}
+  .hero-distinction{flex-wrap:wrap;border-radius:var(--r);}.hd-sep{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Dev<em>sphinx</em></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#booking" class="btn btn-ac btn-sm nav-cta">Book a discovery call</a>
+  <button class="ham" id="ham-btn" aria-label="Menu" onclick="toggleMob()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-menu" id="mob-menu">
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#process" onclick="closeMob()">Process</a>
+  <a href="#industries" onclick="closeMob()">Industries</a>
+  <a href="#work" onclick="closeMob()">Work</a>
+  <a href="#faq" onclick="closeMob()">FAQ</a>
+  <a href="#booking" class="btn btn-ac" onclick="closeMob()">Book a discovery call →</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-pill">
+      <div class="pill-dot"></div>
+      AI-First Software Studio &nbsp;·&nbsp; Devsphinx
+    </div>
+    <h1 class="hero-h1">Software built<br><span class="hl">AI-first.</span></h1>
+    <p class="hero-sub">We build autonomous AI agent systems and AI-first software products — where intelligence is the foundation, not a feature added later.</p>
+    <div class="hero-distinction">
+      <span class="hd-item active">AI Agent Systems</span>
+      <div class="hd-sep"></div>
+      <span class="hd-item active">AI-First Products</span>
+      <div class="hd-sep"></div>
+      <span class="hd-item active">Claude-Native</span>
+      <div class="hd-sep"></div>
+      <span class="hd-item active">3–5 Week Delivery</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#booking" class="btn btn-ac">Book a free discovery call &nbsp;→</a>
+      <a href="#services" class="btn btn-ghost">See what we build</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-bar"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-cell fu"><div class="stat-num">3<span>–5</span></div><div class="stat-lbl">Weeks to production</div></div>
+    <div class="stat-cell fu fd1"><div class="stat-num">2<span>×</span></div><div class="stat-lbl">Delivery modes</div></div>
+    <div class="stat-cell fu fd2"><div class="stat-num">5<span>+</span></div><div class="stat-lbl">Industries served</div></div>
+    <div class="stat-cell fu fd3"><div class="stat-num">0<span>%</span></div><div class="stat-lbl">Hourly billing. Ever.</div></div>
+  </div>
+</div>
+
+<!-- APPROACH SPLIT -->
+<div id="approach">
+  <div class="app-inner fu">
+    <div class="app-side">
+      <span class="eyebrow eyebrow-ac" style="margin-bottom:12px;display:block;">AI Agent Systems</span>
+      <h3>Autonomous agents that run your business operations</h3>
+      <p>Multi-agent pipelines built on Claude that handle sales outreach, operations workflows, customer support, and internal processes — 24/7, without human input. Not chatbots. Not automations. AI that thinks and acts.</p>
+    </div>
+    <div class="app-divider"></div>
+    <div class="app-side">
+      <span class="eyebrow" style="color:var(--blue);margin-bottom:12px;display:block;">AI-First Software</span>
+      <h3>Software where AI is the architecture, not an add-on</h3>
+      <p>Web apps, SaaS platforms, and custom software built with AI at the core — not bolted on after launch. Every design decision starts with "what should AI handle here?" The result is software that gets smarter as it's used.</p>
+    </div>
+  </div>
+</div>
+
+<!-- AGENT FLOW -->
+<div id="agent-flow">
+  <div class="af-inner">
+    <div class="af-label fu">Example pipeline · AI Revenue Engine</div>
+    <div class="flow-track fu fd1">
+      <div class="flow-node"><div class="fn-box"><div class="fn-role">Agent 01</div><div class="fn-name">Research</div></div></div>
+      <div class="flow-arr"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="flow-node"><div class="fn-box"><div class="fn-role">Agent 02</div><div class="fn-name">Personalise</div></div></div>
+      <div class="flow-arr"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="flow-node"><div class="fn-box"><div class="fn-role">Agent 03</div><div class="fn-name">Outreach</div></div></div>
+      <div class="flow-arr"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="flow-node"><div class="fn-box"><div class="fn-role">Agent 04</div><div class="fn-name">CRM Sync</div></div></div>
+      <div class="flow-arr"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="flow-node"><div class="fn-box"><div class="fn-role">Agent 05</div><div class="fn-name">Report</div></div></div>
+      <div class="flow-arr"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="flow-node"><div class="fn-end"><div class="fn-role">Output</div><div class="fn-name">Pipeline</div><div class="fn-live"><span class="live-dot"></span>Autonomous</div></div></div>
+    </div>
+    <div class="stack-strip fu fd2">
+      <span class="stack-chip">Claude API</span><span class="stack-chip">MCP</span><span class="stack-chip">Python</span><span class="stack-chip">Node.js</span><span class="stack-chip">React</span><span class="stack-chip">Next.js</span><span class="stack-chip">PostgreSQL</span><span class="stack-chip">HubSpot</span><span class="stack-chip">Salesforce</span><span class="stack-chip">Slack</span><span class="stack-chip">Notion</span>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <div class="s-in">
+    <div class="s-hd fu">
+      <span class="eyebrow">What we build</span>
+      <h2>Two disciplines.<br>One standard.</h2>
+      <p>Whether you need an autonomous agent system or an AI-first software product, the approach is the same — AI at the center from day one, not retrofitted later.</p>
+    </div>
+    <div class="svc-tabs fu">
+      <button class="svc-tab active" onclick="switchSvc(this,'agents')">AI Agent Systems</button>
+      <button class="svc-tab" onclick="switchSvc(this,'software')">AI-First Software</button>
+    </div>
+
+    <!-- AGENTS panel -->
+    <div class="svc-panel active fu fd1" id="panel-agents">
+      <div class="srv-grid">
+        <div class="srv-card">
+          <div class="srv-n">01 &nbsp;/&nbsp; Revenue</div>
+          <h3>AI Revenue Engine</h3>
+          <p>Autonomous outbound pipeline that researches prospects, writes personalised outreach, books meetings, and syncs every activity to your CRM — running continuously without SDR overhead.</p>
+          <div class="srv-tags"><span class="srv-tag">Prospect research</span><span class="srv-tag">Personalised outreach</span><span class="srv-tag">CRM sync</span><span class="srv-tag">Meeting booking</span><span class="srv-tag">Pipeline reporting</span></div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-n">02 &nbsp;/&nbsp; Operations</div>
+          <h3>AI Operations Agent</h3>
+          <p>Workflow automation that eliminates manual coordination — approvals, document processing, internal reporting, knowledge retrieval, and cross-tool data sync. Fully autonomous, inside your stack.</p>
+          <div class="srv-tags"><span class="srv-tag">Workflow automation</span><span class="srv-tag">Approvals</span><span class="srv-tag">Document processing</span><span class="srv-tag">Status reporting</span><span class="srv-tag">Data sync</span></div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-n">03 &nbsp;/&nbsp; Support</div>
+          <h3>AI Customer Support Agent</h3>
+          <p>Intelligent support agent that handles inbound queries, resolves common issues autonomously, escalates when needed, and logs every interaction — reducing ticket volume without sacrificing quality.</p>
+          <div class="srv-tags"><span class="srv-tag">Inbound handling</span><span class="srv-tag">Auto-resolution</span><span class="srv-tag">Smart escalation</span><span class="srv-tag">CRM logging</span><span class="srv-tag">Sentiment tracking</span></div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-n">04 &nbsp;/&nbsp; Orchestration</div>
+          <h3>Multi-Agent Systems</h3>
+          <p>Production-grade architectures where multiple AI agents coordinate autonomously — each with defined roles, persistent memory, and tool access. Built for real users, real data, real scale.</p>
+          <div class="srv-tags"><span class="srv-tag">Agent orchestration</span><span class="srv-tag">Memory systems</span><span class="srv-tag">Tool use</span><span class="srv-tag">Handoff protocols</span><span class="srv-tag">MCP integrations</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOFTWARE panel -->
+    <div class="svc-panel fu fd1" id="panel-software">
+      <div class="srv-grid">
+        <div class="srv-card">
+          <div class="srv-n">01 &nbsp;/&nbsp; SaaS Products</div>
+          <h3>AI-First SaaS Platforms</h3>
+          <p>SaaS products designed from the ground up with AI at the core — not a ChatGPT button added to a traditional app. Intelligent workflows, AI-powered features, and systems that learn from usage. Built on React, Next.js, and Node.</p>
+          <div class="srv-tags"><span class="srv-tag">Next.js</span><span class="srv-tag">React</span><span class="srv-tag">Node.js</span><span class="srv-tag">AI workflows</span><span class="srv-tag">LLM integration</span></div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-n">02 &nbsp;/&nbsp; Internal Tools</div>
+          <h3>AI-Powered Internal Tools</h3>
+          <p>Custom internal platforms — dashboards, admin tools, ops software — built with AI embedded into every workflow. Document Q&amp;A, smart search, automated reporting, and AI decision support. No more manual data work.</p>
+          <div class="srv-tags"><span class="srv-tag">Internal dashboards</span><span class="srv-tag">Smart search</span><span class="srv-tag">RAG systems</span><span class="srv-tag">Auto-reporting</span><span class="srv-tag">Document Q&amp;A</span></div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-n">03 &nbsp;/&nbsp; Vertical AI Apps</div>
+          <h3>Vertical AI Applications</h3>
+          <p>Industry-specific platforms built around a core AI capability — recruitment matching platforms, healthcare scheduling systems, logistics route optimization, real estate lead scoring. End-to-end from design to deployment.</p>
+          <div class="srv-tags"><span class="srv-tag">Recruitment AI</span><span class="srv-tag">Healthcare</span><span class="srv-tag">Real estate</span><span class="srv-tag">Logistics</span><span class="srv-tag">Full-stack</span></div>
+        </div>
+        <div class="srv-card">
+          <div class="srv-n">04 &nbsp;/&nbsp; AI Integration</div>
+          <h3>AI Layer for Existing Products</h3>
+          <p>Already have a product? We build the AI layer — adding Claude-powered features, intelligent automation, and agent capabilities to your existing codebase without a rewrite. Proper architecture, not quick hacks.</p>
+          <div class="srv-tags"><span class="srv-tag">Claude API</span><span class="srv-tag">RAG</span><span class="srv-tag">Prompt engineering</span><span class="srv-tag">Evals</span><span class="srv-tag">Cost monitoring</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- AI-FIRST MANIFESTO -->
+<div id="manifesto">
+  <div class="mf-inner">
+    <span class="eyebrow fu">Our philosophy</span>
+    <blockquote class="fu fd1">"Most software companies add AI.<br>We <em>start</em> with AI and build everything else around it."</blockquote>
+    <p class="fu fd2" style="font-size:15px;color:var(--t2);font-weight:300;line-height:1.75;max-width:600px;margin:0 auto;">The difference between AI-enhanced and AI-first isn't a feature. It's a design philosophy. When AI is the foundation, every workflow is faster, every system is more capable, and the software compounds in value over time.</p>
+    <div class="mf-grid fu fd3">
+      <div class="mf-card">
+        <span class="mf-tag tag-old">Traditional approach</span>
+        <h4>Build first, add AI later</h4>
+        <p>Software is built around manual workflows, then an AI feature is bolted on. The AI is limited by the architecture it was never part of.</p>
+      </div>
+      <div class="mf-card">
+        <span class="mf-tag tag-new">AI-first approach</span>
+        <h4>Design the AI layer first</h4>
+        <p>Every workflow is designed around what AI should handle. The software is built to support that — resulting in deeper automation and systems that improve with use.</p>
+      </div>
+      <div class="mf-card">
+        <span class="mf-tag tag-new">The outcome</span>
+        <h4>Software that gets smarter</h4>
+        <p>AI-first systems accumulate intelligence over time. The more they're used, the better they get. Traditional software doesn't do that.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- WHY US -->
+<section id="why" class="section">
+  <div class="s-in">
+    <div class="s-hd fu">
+      <span class="eyebrow">Why Devsphinx</span>
+      <h2>Built for production.<br>Not proof of concept.</h2>
+      <p>The gap between an AI demo and a system that creates real business value — is architecture, scope discipline, and what happens after launch.</p>
+    </div>
+    <div class="why-grid fu fd1">
+      <div class="why-card">
+        <div class="why-ic"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <h3>Outcome-scoped delivery</h3>
+        <p>Every engagement is scoped to a business outcome — hours saved, pipeline generated, tickets deflected. We measure success in results, not features shipped.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ic"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3>Fixed scope, fixed price</h3>
+        <p>After the discovery call you receive a fixed-scope proposal with a defined deliverable, timeline, and price. No hourly billing. No scope creep. No surprises.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h3>3–5 week delivery</h3>
+        <p>We ship in weeks, not quarters. AI-first development using Claude agents in our own workflow compresses timelines without cutting corners on quality.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ic"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <h3>Claude-native from day one</h3>
+        <p>Whether it's an agent system or a SaaS product, every architecture is designed around Claude's capabilities — not adapted to fit them afterward.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ic"><svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+        <h3>Compounds after launch</h3>
+        <p>AI-first systems get better with data. Our retainer clients see the biggest performance and capability gains at 30, 60, and 90 days — long after the initial build.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ic"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Works with your team</h3>
+        <p>We work alongside your existing stack and your existing team. No rip-and-replace. No learning curve on tools you already use. We fit in, not over.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- PROCESS -->
+<section id="process" class="section">
+  <div class="s-in">
+    <div class="s-hd fu">
+      <span class="eyebrow">How it works</span>
+      <h2>Problem to shipped<br>system in 5 steps.</h2>
+      <p>A clear, accountable process with weekly demos and natural check-in points — same flow whether we're building an agent system or a full product.</p>
+    </div>
+    <div class="proc-list fu fd1">
+      <div class="proc-row">
+        <div class="proc-n">01</div>
+        <div class="proc-body">
+          <h3>Discovery call</h3>
+          <p>A free 30-minute session. We map the workflow you want to automate, or the product you want to build. We identify what AI should own, what the integrations are, and what success looks like. Free, no obligation.</p>
+        </div>
+        <div class="p-badge pb-build">Free · 30 min</div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-n">02</div>
+        <div class="proc-body">
+          <h3>Scoped proposal</h3>
+          <p>Within 5 business days: a fixed-scope proposal with the architecture, deliverables, timeline, and a single fixed price. No billing by the hour. You decide with no follow-up pressure.</p>
+        </div>
+        <div class="p-badge pb-build">5 business days</div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-n">03</div>
+        <div class="proc-body">
+          <h3>Architecture design</h3>
+          <p>We design the AI layer first — agent roles, memory, tool access, data flows, and integration points. For software builds, we define the AI-first architecture before any UI or backend work begins. You approve before we build.</p>
+        </div>
+        <div class="p-badge pb-build">Week 1–2</div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-n">04</div>
+        <div class="proc-body">
+          <h3>Build + weekly demos</h3>
+          <p>We build with weekly progress demos on real data. Staging environment access throughout. You see the system working before it goes live — not for the first time at handover.</p>
+        </div>
+        <div class="p-badge pb-build">Week 2–4</div>
+      </div>
+      <div class="proc-row">
+        <div class="proc-n">05</div>
+        <div class="proc-body">
+          <h3>Deploy, hypercare & evolution</h3>
+          <p>The system goes live with a 2-week hypercare window — prompt tuning, edge case handling, and performance monitoring. Optional monthly retainer for ongoing evolution as your product and team grow.</p>
+        </div>
+        <div class="p-badge pb-go">Monthly · Optional</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- INDUSTRIES -->
+<section id="industries" class="section">
+  <div class="s-in">
+    <div class="s-hd fu">
+      <span class="eyebrow">Industries</span>
+      <h2>Where we deliver<br>the most value.</h2>
+      <p>We focus on industries where manual work, fragmented systems, and operational complexity make AI-first builds harder — and more valuable.</p>
+    </div>
+    <div class="ind-grid fu fd1">
+      <div class="ind-card" data-num="01">
+        <div class="ind-tag">B2B SaaS</div>
+        <h3>SaaS & Digital Products</h3>
+        <p>AI-powered features, automated lead qualification, churn prediction, and intelligent onboarding. We build the engine that helps software products scale faster.</p>
+      </div>
+      <div class="ind-card" data-num="02">
+        <div class="ind-tag">Recruitment</div>
+        <h3>Recruitment & HR</h3>
+        <p>Autonomous CV screening, candidate scoring, personalised outreach, and interview scheduling. Staffing agencies and HR teams that deploy our agents stop competing on headcount.</p>
+      </div>
+      <div class="ind-card" data-num="03">
+        <div class="ind-tag">Healthcare</div>
+        <h3>Healthcare & Wellness</h3>
+        <p>AI scheduling, patient intake automation, and clinical workflow management. Built with privacy and compliance requirements in mind from day one — not retrofitted.</p>
+      </div>
+      <div class="ind-card" data-num="04">
+        <div class="ind-tag">Real Estate</div>
+        <h3>Real Estate & Property</h3>
+        <p>Lead scoring, automated follow-up, property matching agents, and tenant communication systems. High-volume, relationship-driven — exactly where AI-first builds create the most leverage.</p>
+      </div>
+      <div class="ind-card" data-num="05">
+        <div class="ind-tag">Logistics</div>
+        <h3>Logistics & Operations</h3>
+        <p>Automated dispatching, route optimisation, vendor communication, and operational reporting. Manual coordination is the enemy of scale — we eliminate it.</p>
+      </div>
+      <div class="ind-card" data-num="06">
+        <div class="ind-tag">Hospitality</div>
+        <h3>Hospitality & E-commerce</h3>
+        <p>AI guest experience agents, order management, support automation, and review management. High volume, predictable workflows, strong ROI signals — an ideal environment for agentic AI.</p>
+      </div>
+      <div class="ind-card" data-num="07">
+        <div class="ind-tag">Professional Services</div>
+        <h3>Professional Services</h3>
+        <p>Document processing, client onboarding automation, internal knowledge systems, and reporting for law firms, agencies, and consultancies. Document-heavy, time-sensitive, high-margin.</p>
+      </div>
+      <div class="ind-card" data-num="08">
+        <div class="ind-tag">Fintech</div>
+        <h3>Fintech & Finance</h3>
+        <p>AI-powered compliance checks, fraud signal analysis, customer onboarding agents, and reporting automation. Built with auditability and data handling requirements as first-class constraints.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- WORK -->
+<section id="work" class="section">
+  <div class="s-in">
+    <div class="s-hd fu">
+      <span class="eyebrow">Work</span>
+      <h2>Systems in the wild.</h2>
+      <p>First deployments are live across both agent systems and AI-first software builds. Full case studies with metrics and architecture diagrams publishing soon.</p>
+    </div>
+    <div class="work-grid fu fd1">
+      <div class="wk-card">
+        <div>
+          <div class="wk-ind">B2B SaaS &nbsp;·&nbsp; Agent System</div>
+          <h3>AI outbound pipeline replacing a full-time SDR</h3>
+          <p>5-agent pipeline handling prospect research, personalised email sequences, reply detection, and CRM sync for a 40-person company — zero human input after setup.</p>
+        </div>
+        <div class="wk-foot"><div class="wk-foot-n">—</div><div class="wk-foot-l">Metrics publishing soon</div></div>
+        <div class="wk-pip">In progress</div>
+      </div>
+      <div class="wk-card">
+        <div>
+          <div class="wk-ind">Recruitment &nbsp;·&nbsp; Agent System</div>
+          <h3>Autonomous CV screening and candidate scoring agent</h3>
+          <p>Claude-based agent ingesting CVs, scoring candidates, drafting personalised outreach, and scheduling interviews — without recruiter input at any stage.</p>
+        </div>
+        <div class="wk-foot"><div class="wk-foot-n">—</div><div class="wk-foot-l">Metrics publishing soon</div></div>
+        <div class="wk-pip">In progress</div>
+      </div>
+      <div class="wk-card">
+        <div>
+          <div class="wk-ind">SaaS Platform &nbsp;·&nbsp; AI-First Software</div>
+          <h3>AI-first mentoring platform with intelligent matching</h3>
+          <p>Full SaaS product with Claude-powered mentor matching, session summarisation, goal tracking, and progress analysis built into the core architecture.</p>
+        </div>
+        <div class="wk-foot"><div class="wk-foot-n">—</div><div class="wk-foot-l">Case study publishing soon</div></div>
+        <div class="wk-pip">Coming soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="s-in">
+    <div class="s-hd fu">
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions before<br>every call.</h2>
+    </div>
+    <div class="faq-wrap fu fd1">
+      <div class="faq-row">
+        <button class="faq-btn" onclick="toggleFaq(this)">Do you only build AI agents, or do you build full software products too?<span class="faq-ic">+</span></button>
+        <div class="faq-body"><div class="faq-inner">Both. We build autonomous AI agent systems (multi-agent pipelines for sales, ops, and support) and full AI-first software products (SaaS platforms, internal tools, vertical apps). The common thread is that AI is the core architecture in everything we build — not a feature bolted on afterward. If you have a workflow to automate or a product to build, we can help with either.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-btn" onclick="toggleFaq(this)">What's the difference between AI-first software and just adding AI to an app?<span class="faq-ic">+</span></button>
+        <div class="faq-body"><div class="faq-inner">Traditional software is built around manual workflows, then AI is added as a feature — usually a chatbot or a search bar. AI-first means we design the AI layer before anything else: what should the model handle, what data does it need, how does it interact with the rest of the system? The result is software where AI handles the heavy lifting on every core workflow, not just one bolt-on feature. It's a fundamentally different architecture, and it results in software that gets smarter as it's used.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-btn" onclick="toggleFaq(this)">How is this different from Zapier, Make, or a chatbot?<span class="faq-ic">+</span></button>
+        <div class="faq-body"><div class="faq-inner">Automation tools like Zapier move data between apps — they don't reason, adapt, or make decisions. Chatbots respond to questions. Our agent systems research context, evaluate options, write original content, coordinate across multiple tools, and take action autonomously. Think of the difference between an automation rule and an employee who uses judgment.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-btn" onclick="toggleFaq(this)">How long does a typical project take?<span class="faq-ic">+</span></button>
+        <div class="faq-body"><div class="faq-inner">Agent systems: 3–5 weeks in production. Simple single-agent integrations can be live in 2 weeks. AI-first software products: 4–8 weeks for an MVP, depending on scope. We give you a precise timeline in the scoped proposal after the discovery call — we never commit before we understand what we're building.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-btn" onclick="toggleFaq(this)">What does it cost?<span class="faq-ic">+</span></button>
+        <div class="faq-body"><div class="faq-inner">Agent system builds start from $8,000. Most complete agent systems are in the $10,000–$15,000 range. AI-first software MVPs typically start from $12,000 depending on scope and integrations. All engagements are fixed-price — no hourly billing. Monthly retainers for ongoing evolution start at $2,500/month. All pricing is confirmed in the scoped proposal after the discovery call.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-btn" onclick="toggleFaq(this)">Do you work with early-stage startups?<span class="faq-ic">+</span></button>
+        <div class="faq-body"><div class="faq-inner">Yes — some of our best-fit engagements are early-stage products where the founding team wants to build AI-first from the start rather than retrofit later. The earlier you bring AI into the architecture, the better the outcome. That said, we need a clear scope and a realistic budget conversation — we don't do exploratory builds on equity alone.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-btn" onclick="toggleFaq(this)">Do you sign NDAs?<span class="faq-ic">+</span></button>
+        <div class="faq-body"><div class="faq-inner">Yes. We're happy to sign a mutual NDA before the discovery call. Most of our case studies are anonymised for this reason. If you have sensitive processes or data requirements, let us know before we start.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="book-wrap">
+    <div class="book-l fu">
+      <span class="eyebrow">Book a discovery call</span>
+      <h2>Tell us what you want to build or automate.</h2>
+      <p>Every engagement starts with a free 30-minute call. We'll understand your problem, tell you honestly whether an agent system or an AI-first build is the right approach, and outline what it would involve. No obligation.</p>
+      <div class="book-meta">
+        <div class="bm-row"><span class="bm-lbl">Duration</span><span class="bm-val">30-minute call</span></div>
+        <div class="bm-row"><span class="bm-lbl">Response</span><span class="bm-val">Within 24 hours</span></div>
+        <div class="bm-row"><span class="bm-lbl">Cost</span><span class="bm-val">Free, no obligation</span></div>
+        <div class="bm-row"><span class="bm-lbl">Email</span><span class="bm-val"><a href="mailto:hello@devsphinx.com">hello@devsphinx.com</a></span></div>
+      </div>
+      <p style="font-size:13px;color:var(--t3);line-height:1.7;">We've turned down projects we weren't confident we could deliver excellently. If we're not the right fit, we'll tell you on the call and point you toward who is.</p>
+    </div>
+    <div class="calendly-wrap fu fd1">
+      <!-- Replace YOUR-CALENDLY-USERNAME with your actual Calendly or Cal.com username -->
+      <div class="calendly-inline-widget"
+        data-url="https://calendly.com/snausher/30min?hide_gdpr_banner=1&background_color=0e0e0e&text_color=F0EEE6&primary_color=D4501A"
+        style="min-width:280px;height:700px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <h3>Dev<em>sphinx</em></h3>
+      <p>AI-first software studio. Agent systems and AI-powered products built to production standard.</p>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">Services</div>
+      <ul>
+        <li><a href="#services">AI Agent Systems</a></li>
+        <li><a href="#services">AI-First SaaS</a></li>
+        <li><a href="#services">Internal AI Tools</a></li>
+        <li><a href="#services">MCP Integrations</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">Company</div>
+      <ul>
+        <li><a href="#process">Our process</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#work">Case studies</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <div class="foot-col-title">Get started</div>
+      <ul>
+        <li><a href="#booking">Book a discovery call</a></li>
+        <li><a href="mailto:hello@devsphinx.com">hello@devsphinx.com</a></li>
+        <li><a href="https://linkedin.com/company/devsphinx" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span class="foot-copy">© 2025 Devsphinx. All rights reserved.</span>
+    <div class="foot-social">
+      <a href="https://linkedin.com/company/devsphinx" target="_blank">LinkedIn</a>
+      <a href="mailto:hello@devsphinx.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script>
+/* Canvas */
+(function(){
+  const c=document.getElementById('hero-canvas'),ctx=c.getContext('2d');
+  let nodes=[],W=0,H=0,raf;
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
+  function init(){resize();nodes=[];const n=Math.floor(W*H/18000);for(let i=0;i<n;i++)nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.26,vy:(Math.random()-.5)*.26,r:Math.random()*1.4+.4});}
+  function draw(){
+    ctx.clearRect(0,0,W,H);const maxD=145;
+    for(let i=0;i<nodes.length;i++){
+      const a=nodes[i];a.x+=a.vx;a.y+=a.vy;
+      if(a.x<0||a.x>W)a.vx*=-1;if(a.y<0||a.y>H)a.vy*=-1;
+      for(let j=i+1;j<nodes.length;j++){const b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<maxD){ctx.beginPath();ctx.strokeStyle=`rgba(212,80,26,${(1-d/maxD)*.2})`;ctx.lineWidth=.6;ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}}
+      ctx.beginPath();ctx.fillStyle='rgba(212,80,26,.5)';ctx.arc(a.x,a.y,a.r,0,Math.PI*2);ctx.fill();
+    }
+    raf=requestAnimationFrame(draw);
+  }
+  init();draw();
+  let t;window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(()=>{cancelAnimationFrame(raf);init();draw();},200);});
+})();
+
+/* Scroll fade */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+
+/* Hamburger */
+function toggleMob(){const h=document.getElementById('ham-btn'),m=document.getElementById('mob-menu');h.classList.toggle('open');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
+function closeMob(){document.getElementById('ham-btn').classList.remove('open');document.getElementById('mob-menu').classList.remove('open');document.body.style.overflow='';}
+
+/* Service tabs */
+function switchSvc(btn,panel){
+  document.querySelectorAll('.svc-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.svc-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+panel).classList.add('active');
+}
+
+/* FAQ */
+function toggleFaq(btn){const row=btn.closest('.faq-row'),was=row.classList.contains('open');document.querySelectorAll('.faq-row.open').forEach(r=>r.classList.remove('open'));if(!was)row.classList.add('open');}
+
+/* Calendly popup on mobile */
+function openCal(e){if(window.innerWidth<768&&typeof Calendly!=='undefined'){e.preventDefault();Calendly.initPopupWidget({url:'https://calendly.com/snausher/30min'});}}
+
+/* Nav highlight */
+const secs=document.querySelectorAll('section[id],div[id]');
+const nls=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});nls.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--t)':'';});},{passive:true});
+</script>
+</body>
+</html>
