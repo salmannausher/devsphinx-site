@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI Revenue Engine — full system design and case study. 8-agent autonomous outbound sales pipeline built on Claude + MCP. Devsphinx.">
+<title>AI Revenue Engine — Case Study · Devsphinx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --bg:#070707;--bg2:#0e0e0e;--bg3:#151515;
+  --b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.13);--b3:rgba(255,255,255,0.22);
+  --t:#F0EEE6;--t2:#97948C;--t3:#464540;
+  --ac:#D4501A;--ac2:rgba(212,80,26,0.13);
+  --green:#22c55e;--green2:rgba(34,197,94,0.09);
+  --D:'Syne',sans-serif;--B:'DM Sans',sans-serif;--M:'DM Mono',monospace;--r:8px;
+}
+body{background:var(--bg);color:var(--t);font-family:var(--B);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+.eyebrow{font-family:var(--M);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);}
+.eyebrow-ac{color:var(--ac);}
+hr.rule{border:none;border-top:1px solid var(--b);}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid var(--b);background:rgba(7,7,7,.88);backdrop-filter:blur(18px);}
+.nav-logo{font-family:var(--D);font-weight:800;font-size:20px;letter-spacing:-0.035em;}
+.nav-logo em{color:var(--ac);font-style:normal;}
+.nav-back{font-family:var(--M);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);display:flex;align-items:center;gap:8px;transition:color .15s;}
+.nav-back:hover{color:var(--t2);}
+
+#hero{padding:120px 48px 72px;border-bottom:1px solid var(--b);background:var(--bg2);position:relative;overflow:hidden;}
+#hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(212,80,26,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(212,80,26,0.035) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.hero-top{display:grid;grid-template-columns:1fr 280px;gap:60px;align-items:start;margin-bottom:40px;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow::before{content:'';width:32px;height:2px;background:var(--ac);}
+.hero-h1{font-family:var(--D);font-size:clamp(40px,5.5vw,68px);font-weight:800;letter-spacing:-0.03em;line-height:.97;color:var(--t);margin-bottom:20px;}
+.hero-h1 em{color:var(--ac);font-style:normal;}
+.hero-desc{font-size:16px;color:var(--t2);font-weight:300;line-height:1.78;margin-bottom:24px;}
+.status-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border:1px solid rgba(34,197,94,.25);border-radius:100px;background:var(--green2);font-family:var(--M);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero-stats{display:flex;flex-direction:column;gap:1px;border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.hs-cell{background:var(--bg3);padding:18px 22px;border-bottom:1px solid var(--b);}
+.hs-cell:last-child{border-bottom:none;}
+.hs-n{font-family:var(--D);font-size:28px;font-weight:800;letter-spacing:-0.03em;color:var(--t);line-height:1;}
+.hs-n em{color:var(--ac);font-style:normal;}
+.hs-l{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-top:5px;}
+.meta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.meta-cell{background:var(--bg3);padding:16px 20px;}
+.meta-lbl{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);display:block;margin-bottom:5px;}
+.meta-val{font-size:13px;color:var(--t);}
+
+.cs{padding:80px 48px;max-width:1100px;margin:0 auto;}
+.cs-eye{font-family:var(--M);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.cs-eye::after{content:'';flex:1;height:.5px;background:var(--b);}
+.cs-h2{font-family:var(--D);font-size:clamp(26px,3.2vw,38px);font-weight:800;color:var(--t);letter-spacing:-0.02em;margin-bottom:14px;}
+.cs-p{font-size:15px;color:var(--t2);font-weight:300;line-height:1.82;max-width:660px;}
+
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:32px;}
+.prob-card{background:var(--bg2);padding:36px;}
+.prob-label{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;}
+.prob-old .prob-label{color:var(--t3);}
+.prob-new .prob-label{color:var(--ac);}
+.prob-old{border-top:2px solid rgba(255,255,255,.07);}
+.prob-new{border-top:2px solid var(--ac);}
+.prob-card h3{font-family:var(--D);font-size:17px;font-weight:700;color:var(--t);margin-bottom:12px;letter-spacing:-0.01em;}
+.prob-card p{font-size:14px;color:var(--t2);font-weight:300;line-height:1.78;}
+.prob-list{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:8px;}
+.prob-list li{font-size:13px;color:var(--t2);font-weight:300;padding-left:14px;position:relative;line-height:1.6;}
+.prob-list li::before{position:absolute;left:0;}
+.prob-old .prob-list li::before{content:'–';color:var(--t3);}
+.prob-new .prob-list li::before{content:'✓';color:var(--ac);}
+
+.stats6{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:24px;}
+.s6{background:var(--bg2);padding:22px 14px;text-align:center;}
+.s6n{font-family:var(--D);font-size:30px;font-weight:800;color:var(--ac);letter-spacing:-0.03em;line-height:1;}
+.s6l{font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-top:6px;}
+
+.pipe-wrap{border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:32px;}
+.pipe-hd{padding:16px 24px;border-bottom:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;}
+.pipe-hd-title{font-family:var(--M);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);}
+.pipe-hint{font-family:var(--M);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);opacity:.45;}
+.pipe-body{padding:28px 24px;}
+.pipe-trigger{display:inline-flex;flex-direction:column;padding:12px 22px;border:1px solid var(--b2);border-radius:var(--r);background:var(--bg3);margin-bottom:6px;}
+.pt-lbl{font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:3px;}
+.pt-name{font-family:var(--D);font-size:14px;font-weight:700;color:var(--t);}
+.pt-sub{font-size:11px;color:var(--t2);font-weight:300;}
+.pipe-arr{color:var(--ac);opacity:.5;font-size:20px;margin:6px 0 6px 30px;}
+
+.pipe-orch{display:flex;align-items:center;gap:16px;padding:14px 22px;border:1px solid rgba(130,100,220,.3);border-radius:var(--r);background:rgba(59,40,120,.1);cursor:pointer;width:100%;max-width:580px;transition:border-color .15s,background .15s;margin-bottom:6px;}
+.pipe-orch:hover,.pipe-orch.active,.node.active{border-color:var(--ac) !important;background:var(--ac2) !important;}
+.orch-ic{width:36px;height:36px;border-radius:50%;background:rgba(130,100,220,.12);border:1px solid rgba(130,100,220,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.orch-ic svg{width:15px;height:15px;stroke:rgba(160,130,255,.65);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+.agents-label{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin:16px 0 8px;}
+.agents-label.async-lbl{color:rgba(34,197,94,.4);}
+.agents-row{display:flex;align-items:stretch;gap:6px;flex-wrap:wrap;}
+.node{flex:1;min-width:140px;padding:13px 15px;border:1px solid var(--b2);border-radius:var(--r);background:var(--bg3);cursor:pointer;transition:border-color .15s,background .15s;}
+.node:hover{border-color:var(--b3);}
+.node.async{border-color:var(--b);}
+.node.human{border-color:rgba(34,197,94,.2);background:rgba(34,197,94,.04);}
+.n-role{font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:3px;}
+.n-name{font-family:var(--D);font-size:14px;font-weight:700;color:var(--t);letter-spacing:-0.01em;margin-bottom:2px;}
+.n-sub{font-size:11px;color:var(--t2);font-weight:300;}
+.flow-arr{color:var(--t3);font-size:16px;display:flex;align-items:center;flex-shrink:0;}
+
+.dp{margin-top:18px;border:1px solid var(--b);border-radius:var(--r);background:var(--bg);min-height:84px;}
+.dp-empty{padding:18px 22px;font-family:var(--M);font-size:10px;letter-spacing:.08em;color:var(--t3);}
+.dp-in{padding:20px 22px;display:flex;flex-direction:column;gap:9px;}
+.dp-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.dp-role{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);}
+.dp-name{font-family:var(--D);font-size:18px;font-weight:700;color:var(--t);letter-spacing:-0.015em;}
+.dp-desc{font-size:13px;color:var(--t2);font-weight:300;line-height:1.78;max-width:720px;}
+.dp-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.dp-chip{font-family:var(--M);font-size:10px;letter-spacing:.06em;padding:3px 10px;border:1px solid var(--b);border-radius:100px;color:var(--t3);}
+
+.mem3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:32px;}
+.mem-card{background:var(--bg2);padding:28px;}
+.mc-tier{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);opacity:.7;margin-bottom:8px;}
+.mc-title{font-family:var(--D);font-size:16px;font-weight:700;color:var(--t);letter-spacing:-0.01em;margin-bottom:10px;}
+.mc-desc{font-size:13px;color:var(--t2);font-weight:300;line-height:1.75;margin-bottom:14px;}
+.mc-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.mc-chip{font-family:var(--M);font-size:10px;letter-spacing:.06em;padding:3px 10px;border:1px solid var(--b);border-radius:100px;color:var(--t3);}
+
+.con2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:32px;}
+.con-card{background:var(--bg2);padding:28px;}
+.con-lbl{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-bottom:14px;}
+.con-list{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.con-list li{font-size:13px;color:var(--t2);font-weight:300;padding-left:14px;position:relative;line-height:1.6;}
+.con-list li::before{content:'–';position:absolute;left:0;color:var(--ac);}
+
+.stack-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;}
+.s-chip{font-family:var(--M);font-size:11px;letter-spacing:.07em;padding:6px 15px;border:1px solid var(--b);border-radius:100px;color:var(--t3);}
+.s-chip.pri{border-color:rgba(212,80,26,.35);color:var(--ac);background:var(--ac2);}
+
+.cta-section{padding:72px 48px;border-top:1px solid var(--b);background:var(--bg2);}
+.cta-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.cta-inner h2{font-family:var(--D);font-size:clamp(24px,3vw,36px);font-weight:800;color:var(--t);letter-spacing:-0.02em;max-width:480px;}
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--B);font-size:14px;font-weight:500;padding:12px 24px;border-radius:var(--r);border:none;cursor:pointer;transition:opacity .15s;white-space:nowrap;}
+.btn-ac{background:var(--ac);color:#fff;}.btn-ac:hover{opacity:.86;}
+.btn-ghost{background:transparent;color:var(--t2);border:1px solid var(--b2);}.btn-ghost:hover{color:var(--t);border-color:var(--b3);}
+.btns{display:flex;gap:12px;flex-wrap:wrap;}
+
+footer{padding:28px 48px;border-top:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.f-logo{font-family:var(--D);font-weight:800;font-size:16px;letter-spacing:-0.025em;}
+.f-logo em{color:var(--ac);font-style:normal;}
+.f-copy{font-family:var(--M);font-size:10px;letter-spacing:.07em;color:var(--t3);}
+
+.fu{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.fu.vis{opacity:1;transform:translateY(0);}
+.fd1{transition-delay:.1s;}.fd2{transition-delay:.2s;}.fd3{transition-delay:.3s;}
+
+@media(max-width:900px){
+  nav{padding:0 20px;}
+  #hero{padding:90px 20px 56px;}
+  .hero-top{grid-template-columns:1fr;gap:32px;}
+  .meta-strip{grid-template-columns:repeat(2,1fr);}
+  .cs{padding:56px 20px;}
+  .prob-grid,.con2{grid-template-columns:1fr;}
+  .mem3,.stats6{grid-template-columns:repeat(2,1fr);}
+  .agents-row{flex-direction:column;}
+  .flow-arr{transform:rotate(90deg);}
+  .cta-section{padding:52px 20px;}
+  .cta-inner{flex-direction:column;align-items:flex-start;}
+  footer{padding:24px 20px;flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Dev<em>sphinx</em></a>
+  <a href="index.html" class="nav-back">← Back to Devsphinx</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top fu">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow eyebrow-ac">Case study · Devsphinx</span></div>
+        <h1 class="hero-h1">AI Revenue<br><em>Engine.</em></h1>
+        <p class="hero-desc">An autonomous outbound sales pipeline built on Claude. 8 coordinated agents that handle prospecting, research, personalised email drafting, CRM sync, scheduling, and reply analysis — with zero human input after setup.</p>
+        <div style="margin-top:20px;"><span class="status-badge"><span class="status-dot"></span>In development · v1</span></div>
+      </div>
+      <div class="hero-stats fu fd2">
+        <div class="hs-cell"><div class="hs-n">8</div><div class="hs-l">Coordinated agents</div></div>
+        <div class="hs-cell"><div class="hs-n">50</div><div class="hs-l">Emails per day (safe cap)</div></div>
+        <div class="hs-cell"><div class="hs-n">0.7</div><div class="hs-l">Confidence threshold</div></div>
+        <div class="hs-cell"><div class="hs-n">3</div><div class="hs-l">Memory tiers</div></div>
+        <div class="hs-cell"><div class="hs-n" style="color:var(--green);">0</div><div class="hs-l">Human inputs required</div></div>
+      </div>
+    </div>
+    <div class="meta-strip fu fd1">
+      <div class="meta-cell"><span class="meta-lbl">Client type</span><span class="meta-val">B2B SaaS · 20–200 person teams</span></div>
+      <div class="meta-cell"><span class="meta-lbl">System type</span><span class="meta-val">Multi-agent orchestration</span></div>
+      <div class="meta-cell"><span class="meta-lbl">Core model</span><span class="meta-val">Claude API (Anthropic)</span></div>
+      <div class="meta-cell"><span class="meta-lbl">CRM integration</span><span class="meta-val">HubSpot via MCP</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">The problem</div>
+  <h2 class="cs-h2">Outbound sales is broken<br>by design.</h2>
+  <p class="cs-p">Most B2B companies run their outbound motion with a stack of manual steps — each requiring a different person, a different tool, and hours of low-leverage work. The result is expensive, inconsistent, and impossible to scale without headcount.</p>
+  <div class="prob-grid fu fd1">
+    <div class="prob-card prob-old">
+      <div class="prob-label">The old way — human SDR pipeline</div>
+      <h3>4 people. 8+ hours. One sequence.</h3>
+      <p>A typical B2B outbound sequence requires a researcher, copywriter, SDR, and manager — every week, for every campaign.</p>
+      <ul class="prob-list">
+        <li>2–3 hrs researching and qualifying each prospect</li>
+        <li>45 min writing one personalised email</li>
+        <li>Manual CRM updates after every send and reply</li>
+        <li>Friday reporting built by hand in spreadsheets</li>
+        <li>$70,000/year in salary for ~9 months of actual productivity</li>
+      </ul>
+    </div>
+    <div class="prob-card prob-new">
+      <div class="prob-label">The new way — AI Revenue Engine</div>
+      <h3>8 agents. Zero humans. Runs overnight.</h3>
+      <p>Every manual step replaced with a coordinated agent. Each with a single role, specific tools, and defined constraints.</p>
+      <ul class="prob-list">
+        <li>Prospector finds and qualifies ICP-matched leads automatically</li>
+        <li>Researcher enriches each lead with real account context</li>
+        <li>Copywriter drafts personalised emails from verified value props</li>
+        <li>CRM Agent logs every action with agent ID and timestamp</li>
+        <li>Analyst classifies every reply — interested, not now, booked</li>
+      </ul>
+    </div>
+  </div>
+  <div class="stats6 fu fd2">
+    <div class="s6"><div class="s6n">8</div><div class="s6l">Agents total</div></div>
+    <div class="s6"><div class="s6n">50</div><div class="s6l">Emails/day cap</div></div>
+    <div class="s6"><div class="s6n">0.7</div><div class="s6l">Confidence threshold</div></div>
+    <div class="s6"><div class="s6n">4</div><div class="s6l">Follow-up touchpoints</div></div>
+    <div class="s6"><div class="s6n">3</div><div class="s6l">Memory tiers</div></div>
+    <div class="s6"><div class="s6n">0</div><div class="s6l">Human inputs</div></div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">System architecture</div>
+  <h2 class="cs-h2">8 agents. Two pipelines.<br>One coordinated system.</h2>
+  <p class="cs-p">The main pipeline handles outbound sequencing from ICP matching through to send and CRM logging. The async reply pipeline is webhook-triggered on every inbound reply — classifying intent and updating CRM stage automatically.</p>
+  <div class="pipe-wrap fu fd1">
+    <div class="pipe-hd">
+      <span class="pipe-hd-title">Interactive pipeline · click any node</span>
+      <span class="pipe-hint">Agent details expand below</span>
+    </div>
+    <div class="pipe-body">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;">
+        <div class="pipe-trigger">
+          <div class="pt-lbl">Human input</div>
+          <div class="pt-name">Campaign goal</div>
+          <div class="pt-sub">ICP definition · target list · daily send cap · success metric</div>
+        </div>
+        <div class="pipe-arr">↓</div>
+        <div class="pipe-orch node" data-id="orchestrator" onclick="show(this)">
+          <div class="orch-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+          <div><div class="n-role">Orchestrator</div><div class="n-name">Pipeline brain</div><div class="n-sub">Routes · validates confidence · halts on error</div></div>
+        </div>
+        <div class="agents-label">↓ &nbsp; Main pipeline — sequential</div>
+        <div class="agents-row">
+          <div class="node" data-id="prospector" onclick="show(this)"><div class="n-role">Agent 01</div><div class="n-name">Prospector</div><div class="n-sub">ICP matching · Apollo / Clay</div></div>
+          <div class="flow-arr">→</div>
+          <div class="node" data-id="researcher" onclick="show(this)"><div class="n-role">Agent 02</div><div class="n-name">Researcher</div><div class="n-sub">Account context · 2K token cap</div></div>
+          <div class="flow-arr">→</div>
+          <div class="node" data-id="copywriter" onclick="show(this)"><div class="n-role">Agent 03</div><div class="n-name">Copywriter</div><div class="n-sub">Email drafting · vector retrieval</div></div>
+          <div class="flow-arr">→</div>
+          <div class="node" data-id="crm" onclick="show(this)"><div class="n-role">Agent 04</div><div class="n-name">CRM Agent</div><div class="n-sub">HubSpot via MCP · read/write</div></div>
+          <div class="flow-arr">→</div>
+          <div class="node" data-id="scheduler" onclick="show(this)"><div class="n-role">Agent 05</div><div class="n-name">Scheduler</div><div class="n-sub">Send timing · 50/day cap</div></div>
+        </div>
+        <div class="agents-label async-lbl">↓ &nbsp; Async reply pipeline — webhook-triggered</div>
+        <div class="agents-row">
+          <div class="node async" data-id="inbox" onclick="show(this)"><div class="n-role">Trigger</div><div class="n-name">Reply inbox</div><div class="n-sub">SendGrid parse · Action Mailbox</div></div>
+          <div class="flow-arr">→</div>
+          <div class="node async" data-id="analyst" onclick="show(this)"><div class="n-role">Agent 06</div><div class="n-name">Analyst</div><div class="n-sub">4-bucket intent classification</div></div>
+          <div class="flow-arr">→</div>
+          <div class="node human" data-id="human" onclick="show(this)"><div class="n-role">Escalation</div><div class="n-name">Human review</div><div class="n-sub">Slack · ambiguous replies only</div></div>
+          <div class="flow-arr">→</div>
+          <div class="node async" data-id="crmupdate" onclick="show(this)"><div class="n-role">Output</div><div class="n-name">CRM stage update</div><div class="n-sub">Engaged · Booked · DNC</div></div>
+        </div>
+        <div class="dp" id="dp"><div class="dp-empty">Click any agent or node above to see its role, tools, and constraints.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">Memory architecture</div>
+  <h2 class="cs-h2">Three tiers. Each with<br>a different job.</h2>
+  <p class="cs-p">Context isolation is what makes multi-agent systems reliable. Each agent only receives the context it needs. But the system as a whole accumulates knowledge — improving outreach quality with every email sent.</p>
+  <div class="mem3 fu fd1">
+    <div class="mem-card">
+      <div class="mc-tier">Tier 1 · Working memory</div>
+      <div class="mc-title">In-context window</div>
+      <div class="mc-desc">Active context for the current task — the structured handoff payload from the previous agent, the campaign goal, and the agent's system prompt. Cleared after each handoff. Prevents agents from carrying noise from earlier steps.</div>
+      <div class="mc-chips"><span class="mc-chip">Claude context window</span><span class="mc-chip">Per-task scope</span><span class="mc-chip">Cleared on handoff</span></div>
+    </div>
+    <div class="mem-card">
+      <div class="mc-tier">Tier 2 · Short-term memory</div>
+      <div class="mc-title">Redis cache</div>
+      <div class="mc-desc">Campaign state, active lead queue, send counters, sequence enrollment status, and structured handoff payloads between agents. TTL-managed to expire stale records. Survives individual agent restarts without losing pipeline state.</div>
+      <div class="mc-chips"><span class="mc-chip">Redis</span><span class="mc-chip">TTL-managed</span><span class="mc-chip">Campaign state</span><span class="mc-chip">Send counters</span></div>
+    </div>
+    <div class="mem-card">
+      <div class="mc-tier">Tier 3 · Long-term memory</div>
+      <div class="mc-title">Vector store (pgvector)</div>
+      <div class="mc-desc">High-performing past emails stored as embeddings. The Copywriter retrieves the most semantically similar examples as few-shot context before drafting. Includes negative few-shots. The system improves with every email sent.</div>
+      <div class="mc-chips"><span class="mc-chip">pgvector</span><span class="mc-chip">Semantic retrieval</span><span class="mc-chip">Positive few-shots</span><span class="mc-chip">Negative few-shots</span></div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">System constraints</div>
+  <h2 class="cs-h2">What the system can<br>and cannot do.</h2>
+  <p class="cs-p">Every production agent system needs explicit boundaries. These aren't limitations — they're the design decisions that make the system safe to run autonomously at scale.</p>
+  <div class="con2 fu fd1">
+    <div class="con-card">
+      <div class="con-lbl">Hard limits</div>
+      <ul class="con-list">
+        <li>50 outbound emails per day — protects sender domain reputation globally across all active campaigns</li>
+        <li>Confidence threshold of 0.7 — the Orchestrator halts the entire pipeline if any agent scores below this</li>
+        <li>Researcher context cap of 2,000 tokens per lead — controls per-lead API cost and keeps context focused on signal</li>
+        <li>Follow-up cadence: Day 1, Day 3, Day 7, Day 14 — enforced by the Scheduler regardless of campaign config</li>
+      </ul>
+    </div>
+    <div class="con-card">
+      <div class="con-lbl">Permission boundaries</div>
+      <ul class="con-list">
+        <li>CRM Agent has read/write access to HubSpot — no delete permissions, no auto-close or auto-disqualify on deals</li>
+        <li>Copywriter can only use value propositions from the injected knowledge base — no invented claims</li>
+        <li>No outreach to contacts flagged as unsubscribed or hard-bounced — checked before every send</li>
+        <li>v1 scope: email only — no LinkedIn automation, no SMS, no ad retargeting triggers</li>
+        <li>Analyst never auto-responds to any inbound reply — ambiguous replies always route to human review</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">Tech stack</div>
+  <h2 class="cs-h2">Built on Claude.<br>Connected via MCP.</h2>
+  <p class="cs-p">Every agent runs on Claude. Tool integrations use Model Context Protocol where available — direct, structured, no middleware layer. Rails handles orchestration, job queuing, and Action Mailbox routing for the async reply pipeline.</p>
+  <div class="stack-chips fu fd1">
+    <span class="s-chip pri">Claude API</span>
+    <span class="s-chip pri">MCP (HubSpot)</span>
+    <span class="s-chip pri">pgvector</span>
+    <span class="s-chip">Ruby on Rails</span>
+    <span class="s-chip">Apollo API</span>
+    <span class="s-chip">Clay API</span>
+    <span class="s-chip">SendGrid / SES</span>
+    <span class="s-chip">SendGrid Inbound Parse</span>
+    <span class="s-chip">Action Mailbox</span>
+    <span class="s-chip">Redis</span>
+    <span class="s-chip">Sidekiq</span>
+    <span class="s-chip">PostgreSQL</span>
+    <span class="s-chip">Slack API</span>
+    <span class="s-chip">Railway / Render</span>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cta-section">
+  <div class="cta-inner fu">
+    <h2>Want a system like this built for your sales team?</h2>
+    <div class="btns">
+      <a href="index.html#booking" class="btn btn-ac">Book a discovery call →</a>
+      <a href="index.html" class="btn btn-ghost">Back to Devsphinx</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="f-logo">Dev<em>sphinx</em></a>
+  <span class="f-copy">© 2025 Devsphinx · AI-First Software Studio</span>
+</footer>
+
+<script>
+const A={
+  orchestrator:{role:'Orchestrator',name:'Pipeline brain',desc:'The central decision-maker. Receives the campaign goal and decomposes it into a typed task queue. Routes tasks sequentially to agents, validates confidence scores at each handoff (threshold: 0.7), and halts the entire pipeline on any error or low-confidence result. Never calls tools directly — reasoning and routing only.',chips:['Task decomposition','Confidence threshold 0.7','Sequential routing','Pipeline halt on error','No direct tool access','Output: typed decision block']},
+  prospector:{role:'Agent 01',name:'Prospector',desc:'Finds and qualifies leads matching the ICP. Calls Apollo or Clay API to pull candidates, runs ICP validation on each, and discards low-confidence matches. Only professional domain emails — no Gmail or Hotmail. Outputs a typed XML lead profile consumed by the Researcher.',chips:['Apollo API','Clay API','ICP validation','Confidence scoring','No personal email domains','Output: &lt;lead_profile&gt;']},
+  researcher:{role:'Agent 02',name:'Researcher',desc:'Enriches each lead with deep account context before outreach. Searches for funding rounds, hiring signals, recent news, and tech stack data. Hard cap of 2,000 tokens per lead to control cost and keep context sharp.',chips:['Web search','Funding signals','Hiring signals','Tech stack detection','2,000 token cap per lead','Output: &lt;research_context&gt;']},
+  copywriter:{role:'Agent 03',name:'Copywriter',desc:'Drafts a personalised email using the lead profile and research context. Retrieves semantically similar past high-performing emails from pgvector as few-shot examples. Hard constraint: never invent claims — all value props must come from the injected knowledge base. Includes negative few-shots.',chips:['pgvector retrieval','Positive few-shot examples','Negative few-shots','No hallucinated claims','Personalisation rubric','Output: &lt;draft_email&gt;']},
+  crm:{role:'Agent 04',name:'CRM Agent',desc:'Reads and writes HubSpot via MCP. Creates or updates contact records, logs every pipeline action with agent ID and timestamp, and enrolls contacts in email sequences. Read-write access only — no delete permissions, no auto-close on deals.',chips:['HubSpot MCP','Contact upsert','Activity logging','Sequence enrollment','Agent ID + timestamp on all writes','No deletes permitted']},
+  scheduler:{role:'Agent 05',name:'Scheduler',desc:'Manages send timing and follow-up cadence across all active campaigns. Queues emails at optimal send windows, enforces Day 1/3/7/14 follow-up spacing, and respects the 50 emails/day domain reputation cap globally.',chips:['Send queue','Day 1 / 3 / 7 / 14 cadence','50/day global cap','Send window optimisation','SendGrid / SES']},
+  inbox:{role:'Trigger',name:'Reply inbox',desc:'Incoming email replies detected by SendGrid Inbound Parse and routed via Action Mailbox. Each reply triggers the async Analyst pipeline with the full email thread as context. Action Mailbox matches the original Message-ID to prevent processing unrelated inbound emails.',chips:['SendGrid Inbound Parse','Action Mailbox','Message-ID matching','Full thread context','Async webhook trigger']},
+  analyst:{role:'Agent 06',name:'Analyst',desc:'Runs asynchronously on every inbound reply. Classifies reply intent into four buckets: Interested, Not now, Unsubscribe, Meeting booked. Updates CRM stage automatically for clean classifications. Routes ambiguous replies to human review — never auto-responds.',chips:['4-bucket intent scoring','Interested / Not now / Unsubscribe / Booked','Automatic CRM stage update','Human escalation on ambiguity','Full thread context injected']},
+  human:{role:'Escalation',name:'Human review queue',desc:'Receives ambiguous or edge-case replies the Analyst cannot confidently classify. A human sees the full email thread and makes one of three decisions: respond manually, disqualify the lead, or escalate to sales. In v1 this is a Slack notification with three action buttons.',chips:['Slack notification','Full thread view','Respond / Disqualify / Escalate','Manual CRM write','No auto-action']},
+  crmupdate:{role:'Output',name:'CRM stage update',desc:'The terminal write from the async reply pipeline. Meeting booked → Demo Scheduled. Unsubscribe → Do Not Contact. Clear positive signal → Engaged. Only three automated stage transitions in v1. Deals are never auto-closed by the system.',chips:['Demo Scheduled','Do Not Contact','Engaged','No auto-close ever','Agent ID logged on every write']}
+};
+
+function show(el){
+  document.querySelectorAll('.node,.pipe-orch').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  const a=A[el.dataset.id];
+  if(!a)return;
+  document.getElementById('dp').innerHTML=`<div class="dp-in"><div class="dp-top"><span class="dp-role">${a.role}</span><span class="dp-name">${a.name}</span></div><div class="dp-desc">${a.desc}</div><div class="dp-chips">${a.chips.map(c=>`<span class="dp-chip">${c}</span>`).join('')}</div></div>`;
+}
+
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
