@@ -1141,11 +1141,13 @@ function openCal(e){if(window.innerWidth<768&&typeof Calendly!=='undefined'){e.p
 /* Sticky CTA */
 const stickyCta=document.getElementById('sticky-cta');
 const heroEl=document.getElementById('hero');
-window.addEventListener('scroll',()=>{
+function updateStickyCta(){
   if(!heroEl||!stickyCta)return;
   const past=window.scrollY>heroEl.offsetHeight;
   stickyCta.classList.toggle('sticky-cta--visible',past);
-},{passive:true});
+}
+window.addEventListener('scroll',updateStickyCta,{passive:true});
+updateStickyCta();
 
 /* Nav highlight */
 const secs=document.querySelectorAll('section[id],div[id]');
