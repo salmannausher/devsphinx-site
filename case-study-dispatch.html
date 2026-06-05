@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI Dispatch Platform — AI-native TMS for US trucking carriers. 7-agent system automating dispatching, rate negotiation, and driver communication. Devsphinx case study.">
+<title>AI Dispatch Platform — Case Study · Devsphinx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --bg:#070707;--bg2:#0e0e0e;--bg3:#151515;
+  --b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.13);--b3:rgba(255,255,255,0.22);
+  --t:#F0EEE6;--t2:#97948C;--t3:#464540;
+  --ac:#D4501A;--ac2:rgba(212,80,26,0.13);
+  --blue:#3B82F6;--blue2:rgba(59,130,246,0.12);
+  --green:#22c55e;--green2:rgba(34,197,94,0.09);
+  --D:'Syne',sans-serif;--B:'DM Sans',sans-serif;--M:'DM Mono',monospace;--r:8px;
+}
+body{background:var(--bg);color:var(--t);font-family:var(--B);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+.eyebrow{font-family:var(--M);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);}
+.eyebrow-ac{color:var(--ac);}
+hr.rule{border:none;border-top:1px solid var(--b);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;border-bottom:1px solid var(--b);background:rgba(7,7,7,.88);backdrop-filter:blur(18px);}
+.nav-logo{font-family:var(--D);font-weight:800;font-size:20px;letter-spacing:-0.035em;}
+.nav-logo em{color:var(--ac);font-style:normal;}
+.nav-back{font-family:var(--M);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);display:flex;align-items:center;gap:8px;transition:color .15s;}
+.nav-back:hover{color:var(--t2);}
+
+/* HERO */
+#hero{padding:120px 48px 72px;border-bottom:1px solid var(--b);background:var(--bg2);position:relative;overflow:hidden;}
+#hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;}
+.hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.hero-top{display:grid;grid-template-columns:1fr 280px;gap:60px;align-items:start;margin-bottom:40px;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.hero-eyebrow::before{content:'';width:32px;height:2px;background:var(--blue);}
+.hero-h1{font-family:var(--D);font-size:clamp(40px,5.5vw,68px);font-weight:800;letter-spacing:-0.03em;line-height:.97;color:var(--t);margin-bottom:20px;}
+.hero-h1 em{color:var(--ac);font-style:normal;}
+.hero-type{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border:1px solid var(--blue2);border-radius:100px;background:var(--blue2);font-family:var(--M);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:20px;}
+.hero-desc{font-size:16px;color:var(--t2);font-weight:300;line-height:1.78;margin-bottom:24px;}
+.status-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border:1px solid rgba(34,197,94,.25);border-radius:100px;background:var(--green2);font-family:var(--M);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
+.hero-stats{display:flex;flex-direction:column;gap:1px;border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.hs-cell{background:var(--bg3);padding:18px 22px;border-bottom:1px solid var(--b);}
+.hs-cell:last-child{border-bottom:none;}
+.hs-n{font-family:var(--D);font-size:26px;font-weight:800;letter-spacing:-0.03em;color:var(--t);line-height:1;}
+.hs-n em{color:var(--ac);font-style:normal;}
+.hs-l{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-top:5px;}
+.meta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.meta-cell{background:var(--bg3);padding:16px 20px;}
+.meta-lbl{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);display:block;margin-bottom:5px;}
+.meta-val{font-size:13px;color:var(--t);}
+
+/* SECTIONS */
+.cs{padding:80px 48px;max-width:1100px;margin:0 auto;}
+.cs-eye{font-family:var(--M);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.cs-eye::after{content:'';flex:1;height:.5px;background:var(--b);}
+.cs-eye.blue{color:var(--blue);}
+.cs-h2{font-family:var(--D);font-size:clamp(26px,3.2vw,38px);font-weight:800;color:var(--t);letter-spacing:-0.02em;margin-bottom:14px;}
+.cs-p{font-size:15px;color:var(--t2);font-weight:300;line-height:1.82;max-width:680px;}
+
+/* MARKET STATS */
+.market-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:32px;}
+.mkt-cell{background:var(--bg2);padding:28px 20px;text-align:center;}
+.mkt-n{font-family:var(--D);font-size:clamp(26px,3vw,36px);font-weight:800;color:var(--ac);letter-spacing:-0.03em;line-height:1;}
+.mkt-l{font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-top:8px;line-height:1.5;}
+.mkt-sub{font-size:12px;color:var(--t3);margin-top:4px;font-weight:300;}
+
+/* QUOTE */
+.cs-quote{border-left:3px solid var(--ac);padding:20px 28px;background:var(--ac2);border-radius:0 var(--r) var(--r) 0;margin:28px 0;}
+.cs-quote p{font-family:var(--D);font-size:clamp(16px,1.8vw,20px);font-weight:700;color:var(--t);line-height:1.5;letter-spacing:-0.01em;font-style:italic;}
+
+/* WHY UNSOLVED TABLE */
+.why-table{width:100%;border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:28px;border-collapse:collapse;}
+.why-table th{background:var(--bg3);padding:14px 20px;text-align:left;font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--b);}
+.why-table td{padding:14px 20px;font-size:13px;border-bottom:1px solid var(--b);vertical-align:top;}
+.why-table tr:last-child td{border-bottom:none;}
+.why-table tr:hover td{background:rgba(255,255,255,.015);}
+.why-table td:first-child{color:var(--t);font-weight:400;white-space:nowrap;width:240px;}
+.why-table td:last-child{color:var(--t2);font-weight:300;line-height:1.65;}
+
+/* DECISION TREE */
+.dt-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:28px;}
+.dt-col{background:var(--bg2);padding:20px 16px;display:flex;flex-direction:column;gap:8px;}
+.dt-phase{font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:4px;}
+.dt-decision{font-family:var(--D);font-size:13px;font-weight:700;color:var(--t);letter-spacing:-0.01em;margin-bottom:6px;}
+.dt-agent{font-size:11px;color:var(--ac);font-weight:400;font-family:var(--M);}
+.dt-level{display:inline-block;font-family:var(--M);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:100px;margin-top:6px;}
+.dt-high{background:var(--green2);color:var(--green);border:1px solid rgba(34,197,94,.2);}
+.dt-med{background:var(--ac2);color:var(--ac);border:1px solid rgba(212,80,26,.2);}
+
+/* 7 AGENTS */
+.agents-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:28px;}
+.agent-col{background:var(--bg2);padding:18px 14px;cursor:pointer;transition:background .15s;text-align:center;}
+.agent-col:hover,.agent-col.active{background:var(--ac2);border-bottom:2px solid var(--ac);}
+.ac-num{font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:6px;}
+.ac-name{font-family:var(--D);font-size:12px;font-weight:700;color:var(--t);letter-spacing:-0.01em;line-height:1.3;}
+.ac-lv{font-family:var(--M);font-size:8px;letter-spacing:.08em;text-transform:uppercase;margin-top:8px;padding:2px 6px;border-radius:100px;}
+.lv-high{color:var(--green);background:var(--green2);}
+.lv-med{color:var(--ac);background:var(--ac2);}
+
+/* Agent detail panel */
+.agent-dp{margin-top:12px;border:1px solid var(--b);border-radius:var(--r);background:var(--bg);min-height:80px;}
+.adp-empty{padding:18px 22px;font-family:var(--M);font-size:10px;letter-spacing:.08em;color:var(--t3);}
+.adp-in{padding:20px 22px;display:flex;flex-direction:column;gap:9px;}
+.adp-top{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.adp-role{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);}
+.adp-name{font-family:var(--D);font-size:18px;font-weight:700;color:var(--t);letter-spacing:-0.015em;}
+.adp-desc{font-size:13px;color:var(--t2);font-weight:300;line-height:1.78;max-width:720px;}
+.adp-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.adp-chip{font-family:var(--M);font-size:10px;letter-spacing:.06em;padding:3px 10px;border:1px solid var(--b);border-radius:100px;color:var(--t3);}
+
+/* PRINCIPLES */
+.principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:28px;}
+.prin-card{background:var(--bg2);padding:28px;transition:background .2s;}
+.prin-card:hover{background:var(--bg3);}
+.prin-n{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:10px;}
+.prin-title{font-family:var(--D);font-size:16px;font-weight:700;color:var(--t);letter-spacing:-0.01em;margin-bottom:10px;}
+.prin-desc{font-size:13px;color:var(--t2);font-weight:300;line-height:1.75;}
+
+/* STACK TABLE */
+.stack-table{width:100%;border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:28px;border-collapse:collapse;}
+.stack-table th{background:var(--bg3);padding:12px 20px;text-align:left;font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--b);}
+.stack-table td{padding:14px 20px;font-size:13px;border-bottom:1px solid var(--b);vertical-align:top;line-height:1.6;}
+.stack-table tr:last-child td{border-bottom:none;}
+.stack-table tr:hover td{background:rgba(255,255,255,.015);}
+.stack-table td:first-child{font-family:var(--M);font-size:10px;letter-spacing:.06em;color:var(--t3);width:90px;}
+.stack-table td:nth-child(2){color:var(--ac);font-weight:500;width:180px;}
+.stack-table td:last-child{color:var(--t2);font-weight:300;}
+
+/* MOAT */
+.moat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:28px;}
+.moat-card{background:var(--bg2);padding:32px;}
+.moat-label{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:12px;}
+.moat-title{font-family:var(--D);font-size:18px;font-weight:700;color:var(--t);margin-bottom:12px;letter-spacing:-0.01em;}
+.moat-desc{font-size:14px;color:var(--t2);font-weight:300;line-height:1.78;}
+
+/* RISK TABLE */
+.risk-table{width:100%;border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:28px;border-collapse:collapse;}
+.risk-table th{background:var(--bg3);padding:12px 20px;text-align:left;font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--b);}
+.risk-table td{padding:14px 20px;font-size:13px;border-bottom:1px solid var(--b);vertical-align:top;line-height:1.65;}
+.risk-table tr:last-child td{border-bottom:none;}
+.risk-table tr:hover td{background:rgba(255,255,255,.015);}
+.risk-table td:first-child{color:var(--t);font-weight:400;width:260px;}
+.risk-table td:last-child{color:var(--t2);font-weight:300;}
+
+/* WHO THIS IS FOR */
+.for-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:28px;}
+.for-card{background:var(--bg2);padding:28px;transition:background .2s;}
+.for-card:hover{background:var(--bg3);}
+.for-ic{width:36px;height:36px;border-radius:var(--r);background:var(--ac2);border:1px solid rgba(212,80,26,.22);display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:16px;}
+.for-title{font-family:var(--D);font-size:15px;font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-0.01em;line-height:1.3;}
+.for-desc{font-size:13px;color:var(--t2);font-weight:300;line-height:1.75;}
+.for-timeline{font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);margin-top:14px;}
+
+/* CTA */
+.cta-section{padding:72px 48px;border-top:1px solid var(--b);background:var(--bg2);}
+.cta-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;}
+.cta-inner h2{font-family:var(--D);font-size:clamp(24px,3vw,36px);font-weight:800;color:var(--t);letter-spacing:-0.02em;max-width:480px;}
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--B);font-size:14px;font-weight:500;padding:12px 24px;border-radius:var(--r);border:none;cursor:pointer;transition:opacity .15s;white-space:nowrap;}
+.btn-ac{background:var(--ac);color:#fff;}.btn-ac:hover{opacity:.86;}
+.btn-ghost{background:transparent;color:var(--t2);border:1px solid var(--b2);}.btn-ghost:hover{color:var(--t);border-color:var(--b3);}
+
+footer{padding:28px 48px;border-top:1px solid var(--b);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.f-logo{font-family:var(--D);font-weight:800;font-size:16px;letter-spacing:-0.025em;}
+.f-logo em{color:var(--ac);font-style:normal;}
+.f-copy{font-family:var(--M);font-size:10px;letter-spacing:.07em;color:var(--t3);}
+
+.fu{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.fu.vis{opacity:1;transform:translateY(0);}
+.fd1{transition-delay:.1s;}.fd2{transition-delay:.2s;}.fd3{transition-delay:.3s;}
+
+@media(max-width:900px){
+  nav{padding:0 20px;}
+  #hero{padding:90px 20px 56px;}
+  .hero-top{grid-template-columns:1fr;gap:32px;}
+  .meta-strip,.market-grid{grid-template-columns:repeat(2,1fr);}
+  .cs{padding:56px 20px;}
+  .dt-grid,.agents-grid{grid-template-columns:repeat(2,1fr);}
+  .principles-grid,.for-grid,.moat-grid{grid-template-columns:1fr;}
+  .cta-section{padding:52px 20px;}
+  .cta-inner{flex-direction:column;align-items:flex-start;}
+  footer{padding:24px 20px;flex-direction:column;align-items:flex-start;}
+  .why-table,.stack-table,.risk-table{font-size:12px;}
+  .why-table td:first-child,.stack-table td:nth-child(2){white-space:normal;width:auto;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Dev<em>sphinx</em></a>
+  <a href="index.html" class="nav-back">← Back to Devsphinx</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top fu">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow" style="color:var(--blue);">Case study · AI-First SaaS · Devsphinx</span></div>
+        <div class="hero-type">Vertical AI · Transportation</div>
+        <h1 class="hero-h1">AI Dispatch<br><em>Platform.</em></h1>
+        <p class="hero-desc">An AI-native Transportation Management System for small and medium US trucking carriers. Seven cooperating agents automate dispatching, load sourcing, rate negotiation, driver communication, tracking, and back-office operations — replacing $240,000/year in dispatch costs for a 10-truck carrier.</p>
+        <div style="margin-top:20px;"><span class="status-badge"><span class="status-dot"></span>MVP v0.1 · In active development</span></div>
+      </div>
+      <div class="hero-stats fu fd2">
+        <div class="hs-cell"><div class="hs-n">550<em>K+</em></div><div class="hs-l">US carriers — target market</div></div>
+        <div class="hs-cell"><div class="hs-n">$240<em>K</em></div><div class="hs-l">Saved per 10-truck carrier/yr</div></div>
+        <div class="hs-cell"><div class="hs-n">$1.65<em>B</em></div><div class="hs-l">Total addressable market</div></div>
+        <div class="hs-cell"><div class="hs-n">7</div><div class="hs-l">Cooperating AI agents</div></div>
+        <div class="hs-cell"><div class="hs-n">85<em>%</em></div><div class="hs-l">Dispatch cost reduction</div></div>
+      </div>
+    </div>
+    <div class="meta-strip fu fd1">
+      <div class="meta-cell"><span class="meta-lbl">Industry</span><span class="meta-val">US Trucking · Transportation</span></div>
+      <div class="meta-cell"><span class="meta-lbl">Product type</span><span class="meta-val">AI-native SaaS platform</span></div>
+      <div class="meta-cell"><span class="meta-lbl">Core model</span><span class="meta-val">Claude API (Haiku + Sonnet)</span></div>
+      <div class="meta-cell"><span class="meta-lbl">First customer target</span><span class="meta-val">June 2026</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- MARKET OPPORTUNITY -->
+<div class="cs fu">
+  <div class="cs-eye">The market opportunity</div>
+  <h2 class="cs-h2">A $900B industry running<br>on 30-year-old processes.</h2>
+  <p class="cs-p">The US trucking industry generates approximately $900 billion in annual revenue. The operational backbone — dispatching — has not meaningfully changed in 30 years. Carriers are not just open to automation; with -2.3% average operating margins in 2024, they need it to survive.</p>
+  <div class="market-grid fu fd1">
+    <div class="mkt-cell"><div class="mkt-n">550<span style="color:var(--t2);font-size:60%">K+</span></div><div class="mkt-l">US carriers<br>(1–100 trucks)</div></div>
+    <div class="mkt-cell"><div class="mkt-n">99.6<span style="color:var(--t2);font-size:60%">%</span></div><div class="mkt-l">Of carriers under<br>100 trucks</div></div>
+    <div class="mkt-cell"><div class="mkt-n">-2.3<span style="color:var(--t2);font-size:60%">%</span></div><div class="mkt-l">Average operating<br>margin 2024</div></div>
+    <div class="mkt-cell"><div class="mkt-n">$1.65<span style="color:var(--t2);font-size:60%">B</span></div><div class="mkt-l">TAM (550K × $3K<br>ACV)</div></div>
+  </div>
+  <div class="cs-quote fu fd2">
+    <p>"The value pool isn't the software price. It's the $240K/year a 10-truck carrier is spending on dispatch services that can be reduced by 85%."</p>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- WHY UNSOLVED -->
+<div class="cs fu">
+  <div class="cs-eye">Competitive landscape</div>
+  <h2 class="cs-h2">Why this problem hasn't<br>been solved yet.</h2>
+  <p class="cs-p">The TMS market is crowded — DAT, McLeod, Tailwind, Samsara, Motive, AscendTMS, Rose Rocket, and dozens more. So why is the dispatch workflow still manual for 99% of small carriers? Every incumbent is structurally disincentivised to solve it.</p>
+  <table class="why-table fu fd1">
+    <thead><tr><th>Incumbent</th><th>Why they haven't solved it</th></tr></thead>
+    <tbody>
+      <tr><td>McLeod / Tailwind (legacy TMS)</td><td>Per-seat pricing model. Automating dispatcher tasks destroys their revenue. Structurally disincentivised to build this.</td></tr>
+      <tr><td>Samsara / Motive (telematics)</td><td>Monetise hardware and safety compliance, not back-office labour. Different cost centre entirely.</td></tr>
+      <tr><td>DAT / Truckstop (load boards)</td><td>Monetise load discovery, not dispatch workflow. No incentive to replace the dispatcher.</td></tr>
+      <tr><td>Uber Freight / Convoy model</td><td>Digital brokerage — takes the margin, doesn't reduce the carrier's cost. Convoy shut in 2023.</td></tr>
+      <tr><td>New AI entrants (HappyRobot, FleetWorks)</td><td>Broker-side or dual-sided focus. Carrier workflow is under-served by all current entrants.</td></tr>
+    </tbody>
+  </table>
+  <p class="cs-p fu fd2" style="margin-top:20px;">The structural gap: no product owned the carrier's <strong style="color:var(--t);">financial system-of-record</strong> while also automating their daily dispatch workflow. That's the wedge.</p>
+</div>
+
+<hr class="rule">
+
+<!-- DISPATCH DECISION TREE -->
+<div class="cs fu">
+  <div class="cs-eye">System design</div>
+  <h2 class="cs-h2">The dispatch decision tree.<br>Mapped, then automated.</h2>
+  <p class="cs-p">A human dispatcher makes five sequential decisions every time a load comes in. We mapped every branch, every data input, and every possible outcome — then designed a specialist agent for each decision phase.</p>
+  <div class="dt-grid fu fd1">
+    <div class="dt-col">
+      <div class="dt-phase">Phase 1 · Screening</div>
+      <div class="dt-decision">Is this load worth evaluating?</div>
+      <div class="dt-agent">Intake Agent</div>
+      <div><span class="dt-level dt-high">High automation</span></div>
+      <div style="font-size:11px;color:var(--t3);margin-top:8px;font-weight:300;">Broker reputation, equipment type, lane, timeline — pure rules</div>
+    </div>
+    <div class="dt-col">
+      <div class="dt-phase">Phase 2 · Rate</div>
+      <div class="dt-decision">Accept, negotiate, or reject?</div>
+      <div class="dt-agent">Rate Analysis Agent</div>
+      <div><span class="dt-level dt-high">High automation</span></div>
+      <div style="font-size:11px;color:var(--t3);margin-top:8px;font-weight:300;">RPM, carrier cost basis, lane history, diesel price — deterministic</div>
+    </div>
+    <div class="dt-col">
+      <div class="dt-phase">Phase 3 · Negotiate</div>
+      <div class="dt-decision">What's the counter?</div>
+      <div class="dt-agent">Negotiation Agent</div>
+      <div><span class="dt-level dt-med">Supervised</span></div>
+      <div style="font-size:11px;color:var(--t3);margin-top:8px;font-weight:300;">Lane rate history, broker flexibility, carrier utilisation</div>
+    </div>
+    <div class="dt-col">
+      <div class="dt-phase">Phase 4 · Match</div>
+      <div class="dt-decision">Which driver gets it?</div>
+      <div class="dt-agent">Dispatch Agent</div>
+      <div><span class="dt-level dt-high">High automation</span></div>
+      <div style="font-size:11px;color:var(--t3);margin-top:8px;font-weight:300;">HOS, equipment, deadhead, home time, fairness — optimisation</div>
+    </div>
+    <div class="dt-col">
+      <div class="dt-phase">Phase 5 · Confirm</div>
+      <div class="dt-decision">Did the driver accept?</div>
+      <div class="dt-agent">Driver Comms Agent</div>
+      <div><span class="dt-level dt-high">High automation</span></div>
+      <div style="font-size:11px;color:var(--t3);margin-top:8px;font-weight:300;">Driver reply, 30-min escalation logic — fully automatable</div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- 7 AGENTS -->
+<div class="cs fu">
+  <div class="cs-eye">Agent architecture</div>
+  <h2 class="cs-h2">Seven specialist agents.<br>One event-driven platform.</h2>
+  <p class="cs-p">Each agent has a single, narrow responsibility. No agent calls another directly — they emit events and subscribe to events. This means any agent can be replaced, upgraded, or disabled without touching the others.</p>
+  <div class="agents-grid fu fd1">
+    <div class="agent-col" data-id="intake" onclick="showAgent(this)">
+      <div class="ac-num">Agent 01</div>
+      <div class="ac-name">Intake Agent</div>
+      <div class="ac-lv lv-high">High</div>
+    </div>
+    <div class="agent-col" data-id="rate" onclick="showAgent(this)">
+      <div class="ac-num">Agent 02</div>
+      <div class="ac-name">Rate Analysis</div>
+      <div class="ac-lv lv-high">High</div>
+    </div>
+    <div class="agent-col" data-id="negotiation" onclick="showAgent(this)">
+      <div class="ac-num">Agent 03</div>
+      <div class="ac-name">Negotiation</div>
+      <div class="ac-lv lv-med">Supervised</div>
+    </div>
+    <div class="agent-col" data-id="dispatch" onclick="showAgent(this)">
+      <div class="ac-num">Agent 04</div>
+      <div class="ac-name">Dispatch</div>
+      <div class="ac-lv lv-high">High</div>
+    </div>
+    <div class="agent-col" data-id="comms" onclick="showAgent(this)">
+      <div class="ac-num">Agent 05</div>
+      <div class="ac-name">Driver Comms</div>
+      <div class="ac-lv lv-high">High</div>
+    </div>
+    <div class="agent-col" data-id="tracking" onclick="showAgent(this)">
+      <div class="ac-num">Agent 06</div>
+      <div class="ac-name">Tracking</div>
+      <div class="ac-lv lv-high">High</div>
+    </div>
+    <div class="agent-col" data-id="backoffice" onclick="showAgent(this)">
+      <div class="ac-num">Agent 07</div>
+      <div class="ac-name">Back Office</div>
+      <div class="ac-lv lv-med">Supervised</div>
+    </div>
+  </div>
+  <div class="agent-dp" id="adp"><div class="adp-empty">Click any agent above to see its role, inputs, outputs, and tools.</div></div>
+
+  <!-- Agent design principles -->
+  <div style="margin-top:40px;">
+    <h3 style="font-family:var(--D);font-size:20px;font-weight:700;color:var(--t);letter-spacing:-0.01em;margin-bottom:8px;">Agent design philosophy</h3>
+    <p class="cs-p" style="margin-bottom:0;">Three principles govern every agent in the system — chosen to eliminate hallucination risk and make outputs auditable in a regulated industry.</p>
+  </div>
+  <div class="principles-grid fu fd1" style="margin-top:20px;">
+    <div class="prin-card">
+      <div class="prin-n">Principle 01</div>
+      <div class="prin-title">Tool calls, not prose</div>
+      <div class="prin-desc">Every agent returns a structured JSON tool call — never free text. Outputs are parseable, database-ready, and auditable. No regex. No hallucinations reaching brokers or drivers.</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-n">Principle 02</div>
+      <div class="prin-title">Temperature 0 for decisions, 0.3 for drafts</div>
+      <div class="prin-desc">Load scoring, driver ranking, and reply classification are fully deterministic (temperature 0). Message drafts and counteroffer language use slight creativity (temperature 0.3).</div>
+    </div>
+    <div class="prin-card">
+      <div class="prin-n">Principle 03</div>
+      <div class="prin-title">Human approval gates at v1.0</div>
+      <div class="prin-desc">Every agent action that communicates with a broker or commits a load requires a dispatcher click. Autonomy is earned with outcome data over 6–12 months, not assumed on day one.</div>
+    </div>
+  </div>
+  <div class="cs-quote" style="margin-top:28px;">
+    <p>"The goal is not to replace the dispatcher. The goal is to make one dispatcher as effective as three."</p>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- TECH STACK -->
+<div class="cs fu">
+  <div class="cs-eye">Technical decisions</div>
+  <h2 class="cs-h2">Every decision chosen<br>for a specific reason.</h2>
+  <p class="cs-p">Each technical choice was made to eliminate unnecessary cost and complexity at MVP scale while keeping the path clear to 1,000+ customers. Zero-overhead infrastructure. No Redis dependency. No separate auth provider.</p>
+  <table class="stack-table fu fd1">
+    <thead><tr><th>Layer</th><th>Technology</th><th>Why this choice</th></tr></thead>
+    <tbody>
+      <tr><td>Frontend</td><td>Next.js 14</td><td>Server Components for fast initial load; Supabase realtime for instant board updates without polling</td></tr>
+      <tr><td>Backend</td><td>NestJS 10</td><td>Module-per-agent architecture; class-validator for DTO safety; scales to microservices if needed</td></tr>
+      <tr><td>Database</td><td>Supabase (PostgreSQL)</td><td>Multi-tenant RLS, realtime subscriptions, and Auth in one service — no separate auth provider needed</td></tr>
+      <tr><td>Jobs</td><td>Inngest</td><td>50K runs/month free; step-level retry; dev server for local debugging; no Redis dependency at MVP</td></tr>
+      <tr><td>Inbound email</td><td>Cloudflare Email Routing</td><td>Free, unlimited, unblockable; Worker forwards to NestJS webhook with shared secret</td></tr>
+      <tr><td>Outbound email</td><td>Resend</td><td>3K/month free; developer-first API; clean TypeScript SDK</td></tr>
+      <tr><td>AI agents</td><td>Claude API (Anthropic)</td><td>Tool-calling for structured outputs; claude-haiku-4-5 for high-volume tasks (scoring, ranking); Sonnet for complex parsing</td></tr>
+      <tr><td>Messaging</td><td>Twilio (WhatsApp + SMS)</td><td>WhatsApp Business API with SMS fallback; TCPA-compliant consent and disclosure built in from day one</td></tr>
+      <tr><td>Caching</td><td>Supabase cache table</td><td>TTL caching via expires_at field; nightly Inngest cron cleans stale rows; zero extra infrastructure</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="rule">
+
+<!-- MOAT -->
+<div class="cs fu">
+  <div class="cs-eye">Competitive moat</div>
+  <h2 class="cs-h2">The AI model is not the moat.<br>The data is.</h2>
+  <p class="cs-p">The underlying models commoditize any thin wrapper. The durable competitive advantage is built at two layers — both of which compound over time and are impossible to replicate without operating history.</p>
+  <div class="moat-grid fu fd1">
+    <div class="moat-card">
+      <div class="moat-label">Moat 01 · Lock-in</div>
+      <div class="moat-title">System-of-record lock-in</div>
+      <div class="moat-desc">Once a carrier runs its loads, settlements, documents, and customer portal on the platform, switching means re-platforming the entire back office. The TMS becomes too painful to leave — not because of contracts, but because of data gravity.</div>
+    </div>
+    <div class="moat-card">
+      <div class="moat-label">Moat 02 · Data</div>
+      <div class="moat-title">Proprietary outcome data</div>
+      <div class="moat-desc">Every load processed is a labelled training example: offered rate, negotiated rate, accepted or rejected, lane performance, broker reliability. At 200,000 loads/month, this rate and negotiation dataset has no equivalent anywhere in the market.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- RISK TRANSPARENCY -->
+<div class="cs fu">
+  <div class="cs-eye">Risk transparency</div>
+  <h2 class="cs-h2">Risks we watch closely<br>on every build like this.</h2>
+  <p class="cs-p">We believe clients deserve an honest view of the challenges in any AI build. Here is what we monitor closely in this project — and in any similar engagement.</p>
+  <table class="risk-table fu fd1">
+    <thead><tr><th>Risk</th><th>How we manage it</th></tr></thead>
+    <tbody>
+      <tr><td>AI gross margin compression</td><td>Voice and inference costs are metered usage, not bundled into flat pricing. Monitored per-customer monthly with alerting thresholds.</td></tr>
+      <tr><td>Regulatory exposure (FMCSA, TCPA)</td><td>Legal review of architecture before launch. Consent capture and AI disclosure built into the comms layer from day one — not retrofitted.</td></tr>
+      <tr><td>Thin-wrapper commoditisation</td><td>Proprietary data capture and system-of-record lock-in are first-class product goals, not afterthoughts. Architecture enforces this from the first line of code.</td></tr>
+      <tr><td>Trust and adoption</td><td>Human-in-the-loop by default. Autonomy is earned with outcome data over 6–12 months, not assumed. Dispatcher remains in control throughout v1.0.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<hr class="rule">
+
+<!-- WHO THIS IS FOR -->
+<div class="cs fu">
+  <div class="cs-eye">What this means for you</div>
+  <h2 class="cs-h2">This case study is a<br>demonstration of how we think.</h2>
+  <p class="cs-p">The AI Dispatch Platform is not just a product story. It shows how Devsphinx approaches a build — from market analysis and competitive mapping through architectural decisions to production engineering. The same thinking applies to your engagement.</p>
+  <div class="for-grid fu fd1">
+    <div class="for-card">
+      <div class="for-ic">🏗</div>
+      <div class="for-title">SaaS founders adding AI to an existing product</div>
+      <div class="for-desc">The pattern here — identify high-frequency low-judgment workflows, build focused agents, gate autonomy with human approval, expand as trust accumulates — applies directly to your product. We can run the same discovery process on your workflow and identify the 20% of tasks representing 80% of the labour.</div>
+      <div class="for-timeline">8–12 weeks to first AI workflow in production</div>
+    </div>
+    <div class="for-card">
+      <div class="for-ic">🏢</div>
+      <div class="for-title">Enterprises building internal AI automation</div>
+      <div class="for-desc">The AiTask table in this system logs every model call: input, output, tokens, latency, and whether a human overrode the AI decision. That's the audit trail your compliance team needs. The event-driven architecture means any agent can be isolated, replaced, or disabled independently.</div>
+      <div class="for-timeline">Architecture-first · Compliance-ready from day one</div>
+    </div>
+    <div class="for-card">
+      <div class="for-ic">🚀</div>
+      <div class="for-title">Startups seeking technical partnership</div>
+      <div class="for-desc">Every decision in this build — Inngest over BullMQ, Cloudflare over SendGrid, cache table over Redis — was made to eliminate unnecessary cost and complexity at the MVP stage while keeping the path clear to scale. This is CTO-level thinking for every stage of your build.</div>
+      <div class="for-timeline">Architecture · Vendor selection · Hands-on engineering</div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-inner fu">
+    <h2>Want to build something like this?</h2>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="index.html#booking" class="btn btn-ac">Book a discovery call →</a>
+      <a href="case-study.html" class="btn btn-ghost">See AI Revenue Engine →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="index.html" class="f-logo">Dev<em>sphinx</em></a>
+  <span class="f-copy">© 2025 Devsphinx · AI-First Software Studio · Confidential</span>
+</footer>
+
+<script>
+const AGENTS = {
+  intake:{role:'Agent 01',name:'Intake Agent',desc:'The first filter in the pipeline. Evaluates every inbound load offer against hard criteria: broker reputation score, equipment type match, origin/destination feasibility, and timeline viability. Runs at temperature 0 — pure rules engine. Only passes loads that clear every threshold to the Rate Analysis Agent.',chips:['Broker reputation score','Equipment type validation','Lane feasibility check','Timeline validation','Temperature: 0','Output: typed screening decision']},
+  rate:{role:'Agent 02',name:'Rate Analysis Agent',desc:'Performs the financial decision: accept at offered rate, request a counter, or reject. Calculates RPM against the carrier\'s true cost basis (fuel, driver pay, fixed overhead), benchmarks against lane history, and accounts for current diesel price. Deterministic — no ambiguity in the output.',chips:['RPM calculation','Carrier cost basis','Lane rate history','Diesel price index','Temperature: 0','Output: accept / counter / reject']},
+  negotiation:{role:'Agent 03',name:'Negotiation Agent',desc:'When the Rate Agent returns "counter", the Negotiation Agent drafts the counteroffer message. Uses lane rate history, known broker flexibility patterns, and current carrier utilisation to craft a counter that maximises acceptance probability. Runs at temperature 0.3 for natural language variation. Human approval required before sending.',chips:['Lane rate benchmarks','Broker flexibility data','Carrier utilisation context','Temperature: 0.3','Human approval gate','Output: counteroffer draft']},
+  dispatch:{role:'Agent 04',name:'Dispatch Agent',desc:'Matches the accepted load to the optimal available driver. Inputs: current HOS for all available drivers, equipment certifications, deadhead distance from current position, home time balance, and historical load fairness scores. Outputs a ranked driver list with a recommended assignment and reasoning.',chips:['Hours-of-service (HOS) data','Equipment certification check','Deadhead distance optimisation','Home time fairness score','Optimisation algorithm','Output: ranked driver list']},
+  comms:{role:'Agent 05',name:'Driver Comms Agent',desc:'Sends the load assignment to the selected driver via WhatsApp (primary) or SMS (fallback). Waits for acceptance confirmation. If no response within 30 minutes, escalates to the next driver on the ranked list and notifies the dispatcher. TCPA-compliant consent and AI disclosure built into every message.',chips:['Twilio WhatsApp Business','SMS fallback','30-min escalation logic','TCPA disclosure built-in','Consent capture','Output: confirmed assignment or escalation']},
+  tracking:{role:'Agent 06',name:'Tracking Agent',desc:'Monitors load progress against scheduled milestones — pickup, en route checkpoints, and delivery. Detects exceptions (delays, missed check-ins, geofence violations) and generates automated shipper/broker status updates. Reduces inbound "where\'s my freight?" calls to near zero.',chips:['GPS geofencing','Milestone tracking','Exception detection','Automated status updates','Shipper/broker notifications','Output: status events']},
+  backoffice:{role:'Agent 07',name:'Back Office Agent',desc:'Handles post-delivery workflows: rate confirmation generation, document collection (BoL, POD), invoice creation, and factoring submission. Supervised automation — agent prepares and queues all documents, dispatcher or owner reviews and releases. Eliminates 2–3 hours of daily admin per dispatcher.',chips:['Rate confirmation generation','BoL / POD collection','Invoice creation','Factoring integration','Human review gate','Output: ready-to-send financial documents']}
+};
+function showAgent(el){
+  document.querySelectorAll('.agent-col').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  const a=AGENTS[el.dataset.id];
+  if(!a)return;
+  document.getElementById('adp').innerHTML=`<div class="adp-in"><div class="adp-top"><span class="adp-role">${a.role}</span><span class="adp-name">${a.name}</span></div><div class="adp-desc">${a.desc}</div><div class="adp-chips">${a.chips.map(c=>`<span class="adp-chip">${c}</span>`).join('')}</div></div>`;
+}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
