@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Devsphinx is an AI-first software studio. We build autonomous agent systems AND software products where AI is the core architecture — not a feature added later.">
+<meta name="description" content="Devsphinx builds AI agent systems and AI-first software that replace manual workflows in weeks. Fixed-scope builds, production architecture, and Claude-native delivery.">
 <title>Devsphinx — AI-First Software Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -19,12 +18,12 @@ html{scroll-behavior:smooth;}
   --ac:#D4501A;--ac2:rgba(212,80,26,0.13);--ac3:rgba(212,80,26,0.07);
   --blue:#3B82F6;--blue2:rgba(59,130,246,0.12);
   --green:#22c55e;--green2:rgba(34,197,94,0.1);
-  --blue:#3B82F6;--blue2:rgba(59,130,246,0.12);
   --D:'Syne',sans-serif;--B:'DM Sans',sans-serif;--M:'DM Mono',monospace;
   --r:8px;
 }
 body{background:var(--bg);color:var(--t);font-family:var(--B);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 a{color:inherit;text-decoration:none;}
+:focus-visible{outline:2px solid var(--ac);outline-offset:4px;}
 
 /* ── Type ── */
 .eyebrow{font-family:var(--M);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--t3);}
@@ -59,7 +58,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.82;pointer-events:none;}
 .hero-inner{position:relative;z-index:2;max-width:920px;margin:0 auto;}
 .hero-pill{display:inline-flex;align-items:center;gap:9px;padding:7px 18px;border:1px solid var(--b2);border-radius:100px;background:rgba(255,255,255,.03);font-family:var(--M);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--t2);margin-bottom:32px;}
-.pill-dot{width:7px;height:7px;border-radius:50%;background:var(--ac);animation:blink 2.4s ease-in-out infinite;}
+.pill-dot{width:7px;height:7px;border-radius:50%;background:var(--ac);}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.35;transform:scale(.7);}}
 .hero-h1{font-size:clamp(46px,8.5vw,100px);font-weight:800;color:var(--t);margin-bottom:24px;line-height:.95;}
 .hero-h1 .hl{color:var(--ac);}
@@ -69,10 +68,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .hd-sep{width:1px;height:28px;background:var(--b2);}
 .hd-item.active{background:var(--ac2);color:var(--ac);}
 .hero-btns{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.hero-proof{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:26px;}
+.proof-chip{font-family:var(--M);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--t2);border:1px solid var(--b);border-radius:100px;background:rgba(255,255,255,.025);padding:6px 12px;}
+.proof-chip strong{color:var(--t);font-weight:500;}
 .scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;}
 .scroll-hint span{font-family:var(--M);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--t3);}
 .scroll-bar{width:1px;height:40px;background:var(--b);position:relative;overflow:hidden;}
-.scroll-bar::after{content:'';position:absolute;top:-100%;left:0;width:1px;height:100%;background:var(--ac);animation:scrollDrop 2s ease-in-out infinite;}
+.scroll-bar::after{content:'';position:absolute;top:-100%;left:0;width:1px;height:100%;background:var(--ac);}
 @keyframes scrollDrop{0%{top:-100%;opacity:0;}40%{opacity:1;}100%{top:100%;opacity:0;}}
 
 /* ── STATS ── */
@@ -112,7 +114,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .fn-end .fn-role{color:rgba(34,197,94,.6);}
 .fn-end .fn-name{color:var(--green);}
 .fn-live{display:inline-flex;align-items:center;gap:5px;font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-top:4px;}
-.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.8s ease-in-out infinite;}
+.live-dot{width:5px;height:5px;border-radius:50%;background:var(--green);}
 .stack-strip{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:28px;}
 .stack-chip{font-family:var(--M);font-size:10px;letter-spacing:.07em;padding:5px 12px;border:1px solid var(--b);border-radius:100px;color:var(--t3);}
 
@@ -132,9 +134,9 @@ hr.rule{border:none;border-top:1px solid var(--b);}
 .svc-tab.active{color:var(--ac);border-bottom-color:var(--ac);}
 .svc-panel{display:none;}.svc-panel.active{display:block;}
 .srv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
-.srv-card{background:var(--bg2);padding:44px;position:relative;overflow:hidden;transition:background .2s;}
+.srv-card{background:var(--bg2);padding:44px;position:relative;overflow:hidden;transition:background .2s,transform .2s,box-shadow .2s;}
 .srv-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ac);transform:scaleX(0);transform-origin:left;transition:transform .35s;}
-.srv-card:hover{background:var(--bg3);}.srv-card:hover::after{transform:scaleX(1);}
+.srv-card:hover{background:var(--bg3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35);}.srv-card:hover::after{transform:scaleX(1);}
 .srv-n{font-family:var(--M);font-size:10px;letter-spacing:.14em;color:var(--t3);margin-bottom:20px;}
 .srv-card h3{font-size:21px;font-weight:700;color:var(--t);margin-bottom:14px;line-height:1.2;}
 .srv-card p{font-size:14px;color:var(--t2);font-weight:300;line-height:1.8;}
@@ -149,7 +151,7 @@ hr.rule{border:none;border-top:1px solid var(--b);}
 .mf-inner blockquote{font-family:var(--D);font-size:clamp(22px,3vw,32px);font-weight:700;line-height:1.4;letter-spacing:-0.02em;color:var(--t);margin:24px 0 32px;}
 .mf-inner blockquote em{color:var(--ac);font-style:normal;}
 .mf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-top:48px;text-align:left;}
-.mf-card{background:var(--bg2);padding:32px;transition:background .2s;}.mf-card:hover{background:var(--bg3);}
+.mf-card{background:var(--bg2);padding:32px;transition:background .2s,transform .2s,box-shadow .2s;}.mf-card:hover{background:var(--bg3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35);}
 .mf-card h4{font-family:var(--D);font-size:15px;font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-0.01em;}
 .mf-card p{font-size:13px;color:var(--t2);font-weight:300;line-height:1.75;}
 .mf-tag{display:inline-block;font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:14px;}
@@ -159,7 +161,7 @@ hr.rule{border:none;border-top:1px solid var(--b);}
 /* ── WHY ── */
 #why{background:var(--bg);}
 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
-.why-card{background:var(--bg2);padding:36px;transition:background .2s;}.why-card:hover{background:var(--bg3);}
+.why-card{background:var(--bg2);padding:36px;transition:background .2s,transform .2s,box-shadow .2s;}.why-card:hover{background:var(--bg3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35);}
 .why-ic{width:36px;height:36px;border-radius:var(--r);background:var(--ac2);border:1px solid rgba(212,80,26,.22);display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
 .why-ic svg{width:16px;height:16px;stroke:var(--ac);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
 .why-card h3{font-size:16px;font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-0.01em;}
@@ -181,8 +183,8 @@ hr.rule{border:none;border-top:1px solid var(--b);}
 /* ── INDUSTRIES ── */
 #industries{background:var(--bg);}
 .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
-.ind-card{background:var(--bg2);padding:32px 28px;transition:background .2s;position:relative;overflow:hidden;}
-.ind-card:hover{background:var(--bg3);}
+.ind-card{background:var(--bg2);padding:32px 28px;transition:background .2s,transform .2s,box-shadow .2s;position:relative;overflow:hidden;}
+.ind-card:hover{background:var(--bg3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35);}
 .ind-card::before{content:attr(data-num);position:absolute;bottom:-10px;right:10px;font-family:var(--D);font-size:80px;font-weight:800;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;}
 .ind-card h3{font-family:var(--D);font-size:15px;font-weight:700;color:var(--t);margin-bottom:8px;letter-spacing:-0.01em;}
 .ind-card p{font-size:13px;color:var(--t2);font-weight:300;line-height:1.7;}
@@ -191,7 +193,9 @@ hr.rule{border:none;border-top:1px solid var(--b);}
 /* ── WORK ── */
 #work{background:var(--bg2);}
 .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
-.wk-card{background:var(--bg2);padding:36px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;position:relative;transition:background .2s;}.wk-card:hover{background:var(--bg3);}
+.wk-card{background:var(--bg2);padding:36px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;position:relative;transition:background .2s,transform .2s,box-shadow .2s;}.wk-card:hover{background:var(--bg3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35);}
+.wk-card:focus-visible{position:relative;z-index:1;}
+.wk-link{font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);white-space:nowrap;margin-left:12px;}
 .wk-ind{font-family:var(--M);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);margin-bottom:14px;}
 .wk-card h3{font-size:17px;font-weight:700;color:var(--t);line-height:1.35;margin-bottom:12px;}
 .wk-card p{font-size:13px;color:var(--t2);font-weight:300;line-height:1.72;flex:1;}
@@ -199,6 +203,35 @@ hr.rule{border:none;border-top:1px solid var(--b);}
 .wk-foot-n{font-family:var(--D);font-size:24px;font-weight:700;color:var(--t3);letter-spacing:-0.02em;}
 .wk-foot-l{font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-top:2px;}
 .wk-pip{position:absolute;top:18px;right:18px;font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border:1px solid var(--b);border-radius:100px;color:var(--t3);}
+.wk-tag{font-family:var(--M);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);border:1px solid var(--b);border-radius:100px;padding:4px 9px;}
+
+/* ── ENGAGEMENT MODELS ── */
+#engagements{background:var(--bg);}
+.eng-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.eng-card{background:var(--bg2);padding:34px;transition:background .2s,transform .2s,box-shadow .2s;}
+.eng-card:hover{background:var(--bg3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35);}
+.eng-k{font-family:var(--M);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:16px;}
+.eng-card h3{font-size:19px;font-weight:700;color:var(--t);margin-bottom:12px;}
+.eng-card p{font-size:14px;color:var(--t2);font-weight:300;line-height:1.78;margin-bottom:22px;}
+.eng-meta{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--b);padding-top:18px;}
+.eng-meta span{font-family:var(--M);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);}
+
+/* ── FIT ── */
+#fit{background:var(--bg);}
+.fit-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:48px;align-items:start;}
+.fit-intro{position:sticky;top:100px;}
+.fit-intro h2{font-size:clamp(30px,4.2vw,48px);font-weight:800;color:var(--t);margin-top:14px;}
+.fit-intro p{margin-top:18px;font-size:16px;color:var(--t2);font-weight:300;line-height:1.75;}
+.fit-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.fit-card{background:var(--bg2);padding:28px;transition:background .2s,transform .2s,box-shadow .2s;}
+.fit-card:hover{background:var(--bg3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35);}
+.fit-tag{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);margin-bottom:12px;}
+.fit-card h3{font-size:16px;font-weight:700;color:var(--t);margin-bottom:10px;}
+.fit-card p{font-size:13px;color:var(--t2);font-weight:300;line-height:1.75;}
+.prebook{background:var(--bg2);border-top:1px solid var(--b);border-bottom:1px solid var(--b);padding:58px 48px;}
+.prebook-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+.prebook h2{font-size:clamp(24px,3vw,36px);font-weight:800;color:var(--t);max-width:660px;}
+.prebook p{font-size:15px;color:var(--t2);font-weight:300;max-width:620px;margin-top:12px;}
 
 /* ── FAQ ── */
 #faq{background:var(--bg);}
@@ -214,6 +247,9 @@ hr.rule{border:none;border-top:1px solid var(--b);}
 
 /* ── BOOKING ── */
 #booking{background:var(--bg2);border-top:1px solid var(--b);}
+#sticky-cta{position:fixed;bottom:28px;right:28px;z-index:40;padding:13px 22px;background:var(--ac);color:#fff;font-family:var(--B);font-size:14px;font-weight:600;border-radius:8px;text-decoration:none;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease;white-space:nowrap;box-shadow:0 14px 34px rgba(0,0,0,.38);}
+#sticky-cta.sticky-cta--visible{opacity:1;pointer-events:auto;transform:translateY(0);}
+#sticky-cta:hover{opacity:.88;}
 .book-wrap{display:grid;grid-template-columns:1fr 1.35fr;gap:72px;align-items:start;max-width:1100px;margin:0 auto;padding:100px 48px;}
 .book-l .eyebrow{margin-bottom:14px;}
 .book-l h2{font-size:clamp(28px,4vw,48px);font-weight:800;color:var(--t);margin-bottom:20px;}
@@ -240,7 +276,7 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
 .foot-social a{font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);transition:color .15s;}.foot-social a:hover{color:var(--t2);}
 
 /* ── Fade-up ── */
-.fu{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;}
+.fu{opacity:1;transform:none;}
 .fu.vis{opacity:1;transform:translateY(0);}
 .fd1{transition-delay:.1s;}.fd2{transition-delay:.2s;}.fd3{transition-delay:.3s;}
 
@@ -250,6 +286,8 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
   .foot-top{grid-template-columns:1fr 1fr;gap:32px;}
   .ind-grid{grid-template-columns:repeat(2,1fr);}
   .srv-grid-3{grid-template-columns:1fr;}
+  .eng-grid{grid-template-columns:1fr;}
+  .fit-wrap{grid-template-columns:1fr;}.fit-intro{position:static;}
 }
 @media(max-width:768px){
   nav{padding:0 20px;}.nav-links,.nav-cta{display:none;}.ham{display:flex;}.mob-menu{display:flex;}
@@ -257,6 +295,8 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
   .section{padding:72px 20px;}
   #agent-flow,#manifesto,#approach{padding:56px 20px;}
   #booking .book-wrap{padding:60px 20px;}
+  .prebook{padding:48px 20px;}
+  .fit-grid{grid-template-columns:1fr;}
   .stats-grid{grid-template-columns:repeat(2,1fr);}
   .stat-cell:nth-child(2){border-right:none;}
   .stat-cell:nth-child(3){border-top:1px solid var(--b);}
@@ -268,10 +308,23 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
   .foot-bottom{flex-direction:column;align-items:flex-start;}
   .faq-btn{padding:20px 20px;}.faq-inner{padding:4px 20px 24px;}
   .svc-tabs{overflow-x:auto;scrollbar-width:none;}.svc-tabs::-webkit-scrollbar{display:none;}
+  #sticky-cta{left:20px;right:20px;bottom:18px;text-align:center;display:flex;justify-content:center;}
 }
 @media(max-width:480px){
   .hero-btns{flex-direction:column;width:100%;}.hero-btns .btn{width:100%;justify-content:center;}
   .hero-distinction{flex-wrap:wrap;border-radius:var(--r);}.hd-sep{display:none;}
+}
+
+@media(prefers-reduced-motion:no-preference){
+  .pill-dot{animation:blink 2.4s ease-in-out infinite;}
+  .scroll-bar::after{animation:scrollDrop 2s ease-in-out infinite;}
+  .live-dot,.cs-dot{animation:blink 1.8s ease-in-out infinite;}
+  .fu{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;}
+  .fu.vis{opacity:1;transform:translateY(0);}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
 }
 
 /* ── Case Study ───────────────────────────────────────── */
@@ -280,7 +333,7 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
 .cs-meta-lbl{font-family:var(--M);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);display:block;margin-bottom:5px;}
 .cs-meta-val{font-size:13px;color:var(--t);font-weight:400;}
 .cs-live{display:inline-flex;align-items:center;gap:6px;}
-.cs-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;animation:blink 2s ease-in-out infinite;}
+.cs-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;}
 
 .cs-stats{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;margin-bottom:32px;}
 .cs-stat{background:var(--bg2);padding:20px 16px;text-align:center;}
@@ -370,12 +423,12 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
     <li><a href="#faq">FAQ</a></li>
   </ul>
   <a href="#booking" class="btn btn-ac btn-sm nav-cta">Book a discovery call</a>
-  <button class="ham" id="ham-btn" aria-label="Menu" onclick="toggleMob()">
+  <button class="ham" id="ham-btn" aria-label="Menu" aria-expanded="false" aria-controls="mob-menu" onclick="toggleMob()">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<div class="mob-menu" id="mob-menu">
+<div class="mob-menu" id="mob-menu" aria-hidden="true">
   <a href="#services" onclick="closeMob()">Services</a>
   <a href="#process" onclick="closeMob()">Process</a>
   <a href="#industries" onclick="closeMob()">Industries</a>
@@ -386,14 +439,14 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
 
 <!-- HERO -->
 <section id="hero">
-  <canvas id="hero-canvas"></canvas>
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-inner">
     <div class="hero-pill">
       <div class="pill-dot"></div>
       AI-First Software Studio &nbsp;·&nbsp; Devsphinx
     </div>
-    <h1 class="hero-h1">Software built<br><span class="hl">AI-first.</span></h1>
-    <p class="hero-sub">We build autonomous AI agent systems and AI-first software products — where intelligence is the foundation, not a feature added later.</p>
+    <h1 class="hero-h1">Replace manual workflows<br><span class="hl">with AI-first systems.</span></h1>
+    <p class="hero-sub">We build AI agent systems and AI-first software that automate sales, ops, support, and internal workflows — shipped as fixed-scope production builds in weeks.</p>
     <div class="hero-distinction">
       <span class="hd-item active">AI Agent Systems</span>
       <div class="hd-sep"></div>
@@ -406,6 +459,13 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
     <div class="hero-btns">
       <a href="#booking" class="btn btn-ac">Book a free discovery call &nbsp;→</a>
       <a href="#services" class="btn btn-ghost">See what we build</a>
+    </div>
+    <div class="hero-proof" aria-label="Delivery proof points">
+      <span class="proof-chip"><strong>Fixed-price</strong> builds</span>
+      <span class="proof-chip"><strong>Claude</strong> native</span>
+      <span class="proof-chip"><strong>MCP</strong> integrations</span>
+      <span class="proof-chip"><strong>Production</strong> architecture</span>
+      <span class="proof-chip"><strong>Founder-led</strong> delivery</span>
     </div>
   </div>
   <div class="scroll-hint">
@@ -474,13 +534,13 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
       <h2>Two disciplines.<br>One standard.</h2>
       <p>Whether you need an autonomous agent system or an AI-first software product, the approach is the same — AI at the center from day one, not retrofitted later.</p>
     </div>
-    <div class="svc-tabs fu">
-      <button class="svc-tab active" onclick="switchSvc(this,'agents')">AI Agent Systems</button>
-      <button class="svc-tab" onclick="switchSvc(this,'software')">AI-First Software</button>
+    <div class="svc-tabs fu" role="tablist" aria-label="Service categories">
+      <button class="svc-tab active" id="tab-agents" role="tab" aria-selected="true" aria-controls="panel-agents" onclick="switchSvc(this,'agents')">AI Agent Systems</button>
+      <button class="svc-tab" id="tab-software" role="tab" aria-selected="false" aria-controls="panel-software" onclick="switchSvc(this,'software')">AI-First Software</button>
     </div>
 
     <!-- AGENTS panel -->
-    <div class="svc-panel active fu fd1" id="panel-agents">
+    <div class="svc-panel active fu fd1" id="panel-agents" role="tabpanel" aria-labelledby="tab-agents">
       <div class="srv-grid">
         <div class="srv-card">
           <div class="srv-n">01 &nbsp;/&nbsp; Revenue</div>
@@ -510,7 +570,7 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
     </div>
 
     <!-- SOFTWARE panel -->
-    <div class="svc-panel fu fd1" id="panel-software">
+    <div class="svc-panel fu fd1" id="panel-software" role="tabpanel" aria-labelledby="tab-software">
       <div class="srv-grid">
         <div class="srv-card">
           <div class="srv-n">01 &nbsp;/&nbsp; SaaS Products</div>
@@ -535,6 +595,51 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
           <h3>AI Layer for Existing Products</h3>
           <p>Already have a product? We build the AI layer — adding Claude-powered features, intelligent automation, and agent capabilities to your existing codebase without a rewrite. Proper architecture, not quick hacks.</p>
           <div class="srv-tags"><span class="srv-tag">Claude API</span><span class="srv-tag">RAG</span><span class="srv-tag">Prompt engineering</span><span class="srv-tag">Evals</span><span class="srv-tag">Cost monitoring</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ENGAGEMENT MODELS -->
+<section id="engagements" class="section">
+  <div class="s-in">
+    <div class="s-hd fu">
+      <span class="eyebrow">Engagement models</span>
+      <h2>Choose the path<br>that matches your stage.</h2>
+      <p>Some teams need a production agent system. Others need a full AI-first product. Others need the architecture first. We keep the entry point simple.</p>
+    </div>
+    <div class="eng-grid fu fd1">
+      <div class="eng-card">
+        <div class="eng-k">01 / Build</div>
+        <h3>AI Agent System Build</h3>
+        <p>For teams with a repeatable manual workflow in sales, support, operations, research, or back office work. We design and ship the agent system end to end.</p>
+        <div class="eng-meta">
+          <span>Typical timeline: 3-5 weeks</span>
+          <span>Best for: workflow automation</span>
+          <span>Output: deployed agent system</span>
+        </div>
+      </div>
+      <div class="eng-card">
+        <div class="eng-k">02 / Product</div>
+        <h3>AI-First MVP Build</h3>
+        <p>For founders and product teams building SaaS, internal tools, or vertical applications where AI is part of the core workflow from day one.</p>
+        <div class="eng-meta">
+          <span>Typical timeline: 4-8 weeks</span>
+          <span>Best for: new software products</span>
+          <span>Output: production-ready MVP</span>
+        </div>
+      </div>
+      <div class="eng-card">
+        <div class="eng-k">03 / Architecture</div>
+        <h3>AI Automation Audit</h3>
+        <p>For teams that know there is automation potential but need a clear map first. We identify the highest-ROI workflows and define the build plan.</p>
+        <div class="eng-meta">
+          <span>Typical timeline: 1 week</span>
+          <span>Best for: unclear scope</span>
+          <span>Output: architecture + proposal</span>
         </div>
       </div>
     </div>
@@ -735,7 +840,7 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
       <p>First deployments are live across both agent systems and AI-first software builds. Full case studies with metrics and architecture diagrams publishing soon.</p>
     </div>
     <div class="work-grid fu fd1">
-      <div class="wk-card" style="cursor:pointer;" onclick="window.location.href='case-study.html'">
+      <a class="wk-card" href="case-study.html" aria-label="View AI Revenue Engine case study">
         <div>
           <div class="wk-ind">B2B SaaS &nbsp;·&nbsp; Agent System</div>
           <h3>AI Revenue Engine — autonomous outbound pipeline</h3>
@@ -748,11 +853,11 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
             <span class="wk-tag">pgvector</span>
             <span class="wk-tag">HubSpot</span>
           </div>
-          <a href="case-study.html" style="font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);text-decoration:none;white-space:nowrap;margin-left:12px;">View case study →</a>
+          <span class="wk-link">View case study →</span>
         </div>
         <div class="wk-pip" style="background:var(--ac2);color:var(--ac);border-color:rgba(212,80,26,.25);">In development</div>
-      </div>
-      <div class="wk-card" style="cursor:pointer;" onclick="window.location.href='case-study-dispatch.html'">
+      </a>
+      <a class="wk-card" href="case-study-dispatch.html" aria-label="View AI Dispatch Platform case study">
         <div>
           <div class="wk-ind" style="color:var(--blue);">Trucking &nbsp;·&nbsp; AI-First SaaS</div>
           <h3>AI Dispatch Platform — AI-native TMS for US trucking carriers</h3>
@@ -765,10 +870,10 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
             <span class="wk-tag">Next.js</span>
             <span class="wk-tag">Inngest</span>
           </div>
-          <a href="case-study-dispatch.html" style="font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);text-decoration:none;white-space:nowrap;margin-left:12px;">View case study →</a>
+          <span class="wk-link">View case study →</span>
         </div>
         <div class="wk-pip" style="background:var(--green2);color:var(--green);border-color:rgba(34,197,94,.25);">In development</div>
-      </div>
+      </a>
       <div class="wk-card">
         <div>
           <div class="wk-ind">Recruitment &nbsp;·&nbsp; Agent System</div>
@@ -793,6 +898,53 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
 
 <hr class="rule">
 
+<!-- FIT -->
+<section id="fit" class="section">
+  <div class="s-in">
+    <div class="fit-wrap">
+      <div class="fit-intro fu">
+        <span class="eyebrow">Who this is for</span>
+        <h2>Best fit when manual work is blocking scale.</h2>
+        <p>We are most useful when your team already has a real workflow, real users, or real operational pain. The sharper the workflow, the faster an AI-first system can create value.</p>
+      </div>
+      <div class="fit-grid fu fd1">
+        <div class="fit-card">
+          <div class="fit-tag">SaaS founders</div>
+          <h3>Adding real AI workflows</h3>
+          <p>You have a product and want AI to handle core user workflows, not sit in the corner as a chatbot.</p>
+        </div>
+        <div class="fit-card">
+          <div class="fit-tag">Ops-heavy teams</div>
+          <h3>Replacing repetitive coordination</h3>
+          <p>Your team spends hours copying data, checking statuses, creating reports, routing tasks, or updating tools.</p>
+        </div>
+        <div class="fit-card">
+          <div class="fit-tag">B2B revenue teams</div>
+          <h3>Automating research and outreach</h3>
+          <p>You need better prospect research, personalised outreach, lead qualification, CRM hygiene, or reply handling.</p>
+        </div>
+        <div class="fit-card">
+          <div class="fit-tag">Technical founders</div>
+          <h3>Needing architecture plus execution</h3>
+          <p>You know what to build, but need a partner who can design the AI layer and ship production code.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="prebook">
+  <div class="prebook-inner fu">
+    <div>
+      <h2>Have a workflow that still depends on people copying, researching, writing, checking, or updating data?</h2>
+      <p>That is usually where an agent system pays for itself fastest. Bring the workflow to the discovery call and we will tell you if it is worth automating.</p>
+    </div>
+    <a href="#booking" class="btn btn-ac">Book a Discovery Call →</a>
+  </div>
+</div>
+
+<hr class="rule">
+
 <!-- FAQ -->
 <section id="faq" class="section">
   <div class="s-in">
@@ -802,32 +954,32 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
     </div>
     <div class="faq-wrap fu fd1">
       <div class="faq-row">
-        <button class="faq-btn" onclick="toggleFaq(this)">Do you only build AI agents, or do you build full software products too?<span class="faq-ic">+</span></button>
-        <div class="faq-body"><div class="faq-inner">Both. We build autonomous AI agent systems (multi-agent pipelines for sales, ops, and support) and full AI-first software products (SaaS platforms, internal tools, vertical apps). The common thread is that AI is the core architecture in everything we build — not a feature bolted on afterward. If you have a workflow to automate or a product to build, we can help with either.</div></div>
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-a1" onclick="toggleFaq(this)">Do you only build AI agents, or do you build full software products too?<span class="faq-ic">+</span></button>
+        <div class="faq-body" id="faq-a1"><div class="faq-inner">Both. We build autonomous AI agent systems (multi-agent pipelines for sales, ops, and support) and full AI-first software products (SaaS platforms, internal tools, vertical apps). The common thread is that AI is the core architecture in everything we build — not a feature bolted on afterward. If you have a workflow to automate or a product to build, we can help with either.</div></div>
       </div>
       <div class="faq-row">
-        <button class="faq-btn" onclick="toggleFaq(this)">What's the difference between AI-first software and just adding AI to an app?<span class="faq-ic">+</span></button>
-        <div class="faq-body"><div class="faq-inner">Traditional software is built around manual workflows, then AI is added as a feature — usually a chatbot or a search bar. AI-first means we design the AI layer before anything else: what should the model handle, what data does it need, how does it interact with the rest of the system? The result is software where AI handles the heavy lifting on every core workflow, not just one bolt-on feature. It's a fundamentally different architecture, and it results in software that gets smarter as it's used.</div></div>
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-a2" onclick="toggleFaq(this)">What's the difference between AI-first software and just adding AI to an app?<span class="faq-ic">+</span></button>
+        <div class="faq-body" id="faq-a2"><div class="faq-inner">Traditional software is built around manual workflows, then AI is added as a feature — usually a chatbot or a search bar. AI-first means we design the AI layer before anything else: what should the model handle, what data does it need, how does it interact with the rest of the system? The result is software where AI handles the heavy lifting on every core workflow, not just one bolt-on feature. It's a fundamentally different architecture, and it results in software that gets smarter as it's used.</div></div>
       </div>
       <div class="faq-row">
-        <button class="faq-btn" onclick="toggleFaq(this)">How is this different from Zapier, Make, or a chatbot?<span class="faq-ic">+</span></button>
-        <div class="faq-body"><div class="faq-inner">Automation tools like Zapier move data between apps — they don't reason, adapt, or make decisions. Chatbots respond to questions. Our agent systems research context, evaluate options, write original content, coordinate across multiple tools, and take action autonomously. Think of the difference between an automation rule and an employee who uses judgment.</div></div>
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-a3" onclick="toggleFaq(this)">How is this different from Zapier, Make, or a chatbot?<span class="faq-ic">+</span></button>
+        <div class="faq-body" id="faq-a3"><div class="faq-inner">Automation tools like Zapier move data between apps — they don't reason, adapt, or make decisions. Chatbots respond to questions. Our agent systems research context, evaluate options, write original content, coordinate across multiple tools, and take action autonomously. Think of the difference between an automation rule and an employee who uses judgment.</div></div>
       </div>
       <div class="faq-row">
-        <button class="faq-btn" onclick="toggleFaq(this)">How long does a typical project take?<span class="faq-ic">+</span></button>
-        <div class="faq-body"><div class="faq-inner">Agent systems: 3–5 weeks in production. Simple single-agent integrations can be live in 2 weeks. AI-first software products: 4–8 weeks for an MVP, depending on scope. We give you a precise timeline in the scoped proposal after the discovery call — we never commit before we understand what we're building.</div></div>
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-a4" onclick="toggleFaq(this)">How long does a typical project take?<span class="faq-ic">+</span></button>
+        <div class="faq-body" id="faq-a4"><div class="faq-inner">Agent systems: 3–5 weeks in production. Simple single-agent integrations can be live in 2 weeks. AI-first software products: 4–8 weeks for an MVP, depending on scope. We give you a precise timeline in the scoped proposal after the discovery call — we never commit before we understand what we're building.</div></div>
       </div>
       <div class="faq-row">
-        <button class="faq-btn" onclick="toggleFaq(this)">What does it cost?<span class="faq-ic">+</span></button>
-        <div class="faq-body"><div class="faq-inner">Agent system builds start from $8,000. Most complete agent systems are in the $10,000–$15,000 range. AI-first software MVPs typically start from $12,000 depending on scope and integrations. All engagements are fixed-price — no hourly billing. Monthly retainers for ongoing evolution start at $2,500/month. All pricing is confirmed in the scoped proposal after the discovery call.</div></div>
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-a5" onclick="toggleFaq(this)">What does it cost?<span class="faq-ic">+</span></button>
+        <div class="faq-body" id="faq-a5"><div class="faq-inner">Agent system builds start from $8,000. Most complete agent systems are in the $10,000–$15,000 range. AI-first software MVPs typically start from $12,000 depending on scope and integrations. All engagements are fixed-price — no hourly billing. Monthly retainers for ongoing evolution start at $2,500/month. All pricing is confirmed in the scoped proposal after the discovery call.</div></div>
       </div>
       <div class="faq-row">
-        <button class="faq-btn" onclick="toggleFaq(this)">Do you work with early-stage startups?<span class="faq-ic">+</span></button>
-        <div class="faq-body"><div class="faq-inner">Yes — some of our best-fit engagements are early-stage products where the founding team wants to build AI-first from the start rather than retrofit later. The earlier you bring AI into the architecture, the better the outcome. That said, we need a clear scope and a realistic budget conversation — we don't do exploratory builds on equity alone.</div></div>
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-a6" onclick="toggleFaq(this)">Do you work with early-stage startups?<span class="faq-ic">+</span></button>
+        <div class="faq-body" id="faq-a6"><div class="faq-inner">Yes — some of our best-fit engagements are early-stage products where the founding team wants to build AI-first from the start rather than retrofit later. The earlier you bring AI into the architecture, the better the outcome. That said, we need a clear scope and a realistic budget conversation — we don't do exploratory builds on equity alone.</div></div>
       </div>
       <div class="faq-row">
-        <button class="faq-btn" onclick="toggleFaq(this)">Do you sign NDAs?<span class="faq-ic">+</span></button>
-        <div class="faq-body"><div class="faq-inner">Yes. We're happy to sign a mutual NDA before the discovery call. Most of our case studies are anonymised for this reason. If you have sensitive processes or data requirements, let us know before we start.</div></div>
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-a7" onclick="toggleFaq(this)">Do you sign NDAs?<span class="faq-ic">+</span></button>
+        <div class="faq-body" id="faq-a7"><div class="faq-inner">Yes. We're happy to sign a mutual NDA before the discovery call. Most of our case studies are anonymised for this reason. If you have sensitive processes or data requirements, let us know before we start.</div></div>
       </div>
     </div>
   </div>
@@ -890,21 +1042,47 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
       <ul>
         <li><a href="#booking">Book a discovery call</a></li>
         <li><a href="mailto:hello@devsphinx.com">hello@devsphinx.com</a></li>
-        <li><a href="https://linkedin.com/company/devsphinx" target="_blank">LinkedIn</a></li>
+        <li><a href="https://linkedin.com/company/devsphinx" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
       </ul>
     </div>
   </div>
   <div class="foot-bottom">
-    <span class="foot-copy">© 2025 Devsphinx. All rights reserved.</span>
+    <span class="foot-copy">© 2026 Devsphinx. All rights reserved.</span>
     <div class="foot-social">
-      <a href="https://linkedin.com/company/devsphinx" target="_blank">LinkedIn</a>
+      <a href="https://linkedin.com/company/devsphinx" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="mailto:hello@devsphinx.com">Email</a>
     </div>
   </div>
 </footer>
 
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 <script>
+/* Lazy Calendly */
+(function(){
+  const wrap=document.querySelector('.calendly-inline-widget');
+  if(!wrap)return;
+  let loaded=false;
+  function loadCalendly(){
+    if(loaded)return;
+    loaded=true;
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href='https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(link);
+    const script=document.createElement('script');
+    script.src='https://assets.calendly.com/assets/external/widget.js';
+    script.async=true;
+    document.body.appendChild(script);
+  }
+  if('IntersectionObserver'in window){
+    const io=new IntersectionObserver(entries=>{
+      if(entries.some(e=>e.isIntersecting)){io.disconnect();loadCalendly();}
+    },{rootMargin:'220px'});
+    io.observe(wrap);
+  }else{
+    loadCalendly();
+  }
+})();
+
 /* ── Neural Command Centre ────────────────────────────── */
 (function(){
   const c=document.getElementById('hero-canvas');
@@ -1101,11 +1279,13 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
     });
   }
 
-  init();draw();
+  const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  init();
+  if(prefersReduced){draw();cancelAnimationFrame(raf);}else{draw();}
   let resT;
   window.addEventListener('resize',()=>{
     clearTimeout(resT);
-    resT=setTimeout(()=>{cancelAnimationFrame(raf);init();draw();},220);
+    resT=setTimeout(()=>{cancelAnimationFrame(raf);init();if(prefersReduced){draw();cancelAnimationFrame(raf);}else{draw();}},220);
   });
 })();
 
@@ -1114,22 +1294,34 @@ const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target
 document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
 
 /* Hamburger */
-function toggleMob(){const h=document.getElementById('ham-btn'),m=document.getElementById('mob-menu');h.classList.toggle('open');m.classList.toggle('open');document.body.style.overflow=m.classList.contains('open')?'hidden':'';}
-function closeMob(){document.getElementById('ham-btn').classList.remove('open');document.getElementById('mob-menu').classList.remove('open');document.body.style.overflow='';}
+function toggleMob(){const h=document.getElementById('ham-btn'),m=document.getElementById('mob-menu');h.classList.toggle('open');m.classList.toggle('open');const open=m.classList.contains('open');h.setAttribute('aria-expanded',open);m.setAttribute('aria-hidden',!open);document.body.style.overflow=open?'hidden':'';}
+function closeMob(){const h=document.getElementById('ham-btn'),m=document.getElementById('mob-menu');h.classList.remove('open');m.classList.remove('open');h.setAttribute('aria-expanded','false');m.setAttribute('aria-hidden','true');document.body.style.overflow='';}
 
 /* Service tabs */
 function switchSvc(btn,panel){
-  document.querySelectorAll('.svc-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.svc-tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false');});
   document.querySelectorAll('.svc-panel').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
   document.getElementById('panel-'+panel).classList.add('active');
 }
 
 /* FAQ */
-function toggleFaq(btn){const row=btn.closest('.faq-row'),was=row.classList.contains('open');document.querySelectorAll('.faq-row.open').forEach(r=>r.classList.remove('open'));if(!was)row.classList.add('open');}
+function toggleFaq(btn){const row=btn.closest('.faq-row'),was=row.classList.contains('open');document.querySelectorAll('.faq-row.open').forEach(r=>{r.classList.remove('open');const b=r.querySelector('.faq-btn');if(b)b.setAttribute('aria-expanded','false');});if(!was){row.classList.add('open');btn.setAttribute('aria-expanded','true');}else{btn.setAttribute('aria-expanded','false');}}
 
 /* Calendly popup on mobile */
 function openCal(e){if(window.innerWidth<768&&typeof Calendly!=='undefined'){e.preventDefault();Calendly.initPopupWidget({url:'https://calendly.com/snausher/30min'});}}
+
+/* Sticky CTA */
+const stickyCta=document.getElementById('sticky-cta');
+const heroEl=document.getElementById('hero');
+function updateStickyCta(){
+  if(!heroEl||!stickyCta)return;
+  const past=window.scrollY>heroEl.offsetHeight;
+  stickyCta.classList.toggle('sticky-cta--visible',past);
+}
+window.addEventListener('scroll',updateStickyCta,{passive:true});
+updateStickyCta();
 
 /* Nav highlight */
 const secs=document.querySelectorAll('section[id],div[id]');
@@ -1137,6 +1329,8 @@ const nls=document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});nls.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--t)':'';});},{passive:true});
 </script>
 
+
+<a href="#booking" id="sticky-cta" aria-label="Book a Discovery Call">Book a Discovery Call</a>
 
 </body>
 </html>
