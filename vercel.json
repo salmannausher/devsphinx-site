@@ -1,0 +1,29 @@
+{
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/case-study.html",
+      "destination": "/case-studies/revenue-engine/",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-dispatch.html",
+      "destination": "/case-studies/dispatch-platform/",
+      "permanent": true
+    },
+    {
+      "source": "/case-study/",
+      "destination": "/case-studies/revenue-engine/",
+      "permanent": true
+    },
+    {
+      "source": "/case-study-dispatch/",
+      "destination": "/case-studies/dispatch-platform/",
+      "permanent": true
+    }
+  ]
+}
