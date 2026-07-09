@@ -7,6 +7,8 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
 ---
 
 <BaseLayout title={title} description={description}>
+<div id="scroll-progress" aria-hidden="true"><span></span></div>
+
 <!-- NAV -->
 <nav>
   <a href="/#hero" class="nav-logo">Dev<em>sphinx</em></a>
@@ -15,6 +17,7 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
     <li><a href="/#process">Process</a></li>
     <li><a href="/#industries">Industries</a></li>
     <li><a href="/#work">Work</a></li>
+    <li><a href="/#founder">Founder</a></li>
     <li><a href="/#faq">FAQ</a></li>
   </ul>
   <a href="/#booking" class="btn btn-ac btn-sm nav-cta">Book a discovery call</a>
@@ -28,6 +31,7 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
   <a href="/#process" onclick="closeMob()">Process</a>
   <a href="/#industries" onclick="closeMob()">Industries</a>
   <a href="/#work" onclick="closeMob()">Work</a>
+  <a href="/#founder" onclick="closeMob()">Founder</a>
   <a href="/#faq" onclick="closeMob()">FAQ</a>
   <a href="/#booking" class="btn btn-ac" onclick="closeMob()">Book a discovery call →</a>
 </div>
@@ -36,13 +40,13 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
 <section id="hero">
   <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-inner">
-    <div class="hero-pill">
+    <div class="hero-pill hero-el" style="--hd:.05s;">
       <div class="pill-dot"></div>
       AI-First Software Studio &nbsp;·&nbsp; Devsphinx
     </div>
-    <h1 class="hero-h1">Replace manual workflows<br><span class="hl">with AI-first systems.</span></h1>
-    <p class="hero-sub">We build AI agent systems and AI-first software that automate sales, ops, support, and internal workflows — shipped as fixed-scope production builds in weeks.</p>
-    <div class="hero-distinction">
+    <h1 class="hero-h1" data-split>Replace manual workflows<br><span class="hl">with AI-first systems.</span></h1>
+    <p class="hero-sub hero-el" style="--hd:.5s;">We build AI agent systems and AI-first software that automate sales, ops, support, and internal workflows — shipped as fixed-scope production builds in weeks.</p>
+    <div class="hero-distinction hero-el" style="--hd:.65s;">
       <span class="hd-item active">AI Agent Systems</span>
       <div class="hd-sep"></div>
       <span class="hd-item active">AI-First Products</span>
@@ -51,11 +55,11 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
       <div class="hd-sep"></div>
       <span class="hd-item active">3–5 Week Delivery</span>
     </div>
-    <div class="hero-btns">
+    <div class="hero-btns hero-el" style="--hd:.8s;">
       <a href="/#booking" class="btn btn-ac">Book a free discovery call &nbsp;→</a>
       <a href="/#services" class="btn btn-ghost">See what we build</a>
     </div>
-    <div class="hero-proof" aria-label="Delivery proof points">
+    <div class="hero-proof hero-el" style="--hd:.95s;" aria-label="Delivery proof points">
       <span class="proof-chip"><strong>Fixed-price</strong> builds</span>
       <span class="proof-chip"><strong>Claude</strong> native</span>
       <span class="proof-chip"><strong>MCP</strong> integrations</span>
@@ -72,10 +76,10 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
 <!-- STATS -->
 <div id="stats">
   <div class="stats-grid">
-    <div class="stat-cell fu"><div class="stat-num">3<span>–5</span></div><div class="stat-lbl">Weeks to production</div></div>
-    <div class="stat-cell fu fd1"><div class="stat-num">2<span>×</span></div><div class="stat-lbl">Delivery modes</div></div>
-    <div class="stat-cell fu fd2"><div class="stat-num">5<span>+</span></div><div class="stat-lbl">Industries served</div></div>
-    <div class="stat-cell fu fd3"><div class="stat-num">0<span>%</span></div><div class="stat-lbl">Hourly billing. Ever.</div></div>
+    <div class="stat-cell fu"><div class="stat-num"><span class="cnt" data-count="3">3</span><span>–5</span></div><div class="stat-lbl">Weeks to production</div></div>
+    <div class="stat-cell fu fd1"><div class="stat-num"><span class="cnt" data-count="2">2</span><span>×</span></div><div class="stat-lbl">Delivery modes</div></div>
+    <div class="stat-cell fu fd2"><div class="stat-num"><span class="cnt" data-count="5">5</span><span>+</span></div><div class="stat-lbl">Industries served</div></div>
+    <div class="stat-cell fu fd3"><div class="stat-num"><span class="cnt" data-count="0">0</span><span>%</span></div><div class="stat-lbl">Hourly billing. Ever.</div></div>
   </div>
 </div>
 
@@ -126,7 +130,7 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
   <div class="s-in">
     <div class="s-hd fu">
       <span class="eyebrow">What we build</span>
-      <h2>Two disciplines.<br>One standard.</h2>
+      <h2 data-split>Two disciplines.<br>One standard.</h2>
       <p>Whether you need an autonomous agent system or an AI-first software product, the approach is the same — AI at the center from day one, not retrofitted later.</p>
     </div>
     <div class="svc-tabs fu" role="tablist" aria-label="Service categories">
@@ -203,7 +207,7 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
   <div class="s-in">
     <div class="s-hd fu">
       <span class="eyebrow">Engagement models</span>
-      <h2>Choose the path<br>that matches your stage.</h2>
+      <h2 data-split>Choose the path<br>that matches your stage.</h2>
       <p>Some teams need a production agent system. Others need a full AI-first product. Others need the architecture first. We keep the entry point simple.</p>
     </div>
     <div class="eng-grid fu fd1">
@@ -247,7 +251,7 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
 <div id="manifesto">
   <div class="mf-inner">
     <span class="eyebrow fu">Our philosophy</span>
-    <blockquote class="fu fd1">"Most software companies add AI.<br>We <em>start</em> with AI and build everything else around it."</blockquote>
+    <blockquote class="fu fd1" data-split>"Most software companies add AI.<br>We <em>start</em> with AI and build everything else around it."</blockquote>
     <p class="fu fd2" style="font-size:15px;color:var(--t2);font-weight:300;line-height:1.75;max-width:600px;margin:0 auto;">The difference between AI-enhanced and AI-first isn't a feature. It's a design philosophy. When AI is the foundation, every workflow is faster, every system is more capable, and the software compounds in value over time.</p>
     <div class="mf-grid fu fd3">
       <div class="mf-card">
@@ -276,7 +280,7 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
   <div class="s-in">
     <div class="s-hd fu">
       <span class="eyebrow">Why Devsphinx</span>
-      <h2>Built for production.<br>Not proof of concept.</h2>
+      <h2 data-split>Built for production.<br>Not proof of concept.</h2>
       <p>The gap between an AI demo and a system that creates real business value — is architecture, scope discipline, and what happens after launch.</p>
     </div>
     <div class="why-grid fu fd1">
@@ -321,7 +325,7 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
   <div class="s-in">
     <div class="s-hd fu">
       <span class="eyebrow">How it works</span>
-      <h2>Problem to shipped<br>system in 5 steps.</h2>
+      <h2 data-split>Problem to shipped<br>system in 5 steps.</h2>
       <p>A clear, accountable process with weekly demos and natural check-in points — same flow whether we're building an agent system or a full product.</p>
     </div>
     <div class="proc-list fu fd1">
@@ -376,7 +380,7 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
   <div class="s-in">
     <div class="s-hd fu">
       <span class="eyebrow">Industries</span>
-      <h2>Where we deliver<br>the most value.</h2>
+      <h2 data-split>Where we deliver<br>the most value.</h2>
       <p>We focus on industries where manual work, fragmented systems, and operational complexity make AI-first builds harder — and more valuable.</p>
     </div>
     <div class="ind-grid fu fd1">
@@ -431,7 +435,7 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
   <div class="s-in">
     <div class="s-hd fu">
       <span class="eyebrow">Work</span>
-      <h2>Systems in the wild.</h2>
+      <h2 data-split>Systems in the wild.</h2>
       <p>First deployments are live across both agent systems and AI-first software builds. Full case studies with metrics and architecture diagrams publishing soon.</p>
     </div>
     <div class="work-grid fu fd1">
@@ -493,13 +497,52 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
 
 <hr class="rule">
 
+<!-- FOUNDER -->
+<section id="founder" class="section">
+  <div class="s-in">
+    <div class="founder-wrap">
+      <div class="founder-visual fu">
+        <div class="founder-frame">
+          <div class="f-border" aria-hidden="true"></div>
+          <div class="f-inner">
+            <img src="/founder.png" alt="Salman Nausher, founder of Devsphinx" class="founder-photo" loading="lazy" />
+            <div class="f-chip">Founder · Principal Engineer</div>
+          </div>
+        </div>
+        <div class="founder-caption">Every project. Every line. One person accountable.</div>
+      </div>
+      <div class="founder-body fu fd1">
+        <span class="eyebrow">Who you'll work with</span>
+        <h2 data-split>You talk to the person<br>who builds it.</h2>
+        <p>Devsphinx is founder-led by design. When you book a call, you're talking to me — the engineer who scopes your system, designs the architecture, writes the code, and answers for the result. No account managers. No handoffs. No junior team learning on your budget.</p>
+        <p>I've spent my career shipping production software, and the last few years deep in the Claude ecosystem — agent architectures, MCP integrations, and AI-first product design. I deliberately take on a small number of builds at a time, so everything that ships carries the standard this page promises.</p>
+        <div class="founder-stats">
+          <div><strong><span class="cnt" data-count="1">1</span></strong><span>Point of contact, start to finish</span></div>
+          <div><strong><span class="cnt" data-count="100">100</span>%</strong><span>Founder-built, nothing outsourced</span></div>
+          <div><strong><span class="cnt" data-count="0">0</span></strong><span>Handoffs between sales and delivery</span></div>
+        </div>
+        <div>
+          <span class="founder-sig">Salman Nausher</span>
+          <div class="founder-role">Founder, Devsphinx</div>
+        </div>
+        <div class="founder-links">
+          <a href="/#booking" class="btn btn-ac btn-sm">Book a call with me →</a>
+          <a href="https://linkedin.com/company/devsphinx" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-sm">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
 <!-- FIT -->
 <section id="fit" class="section">
   <div class="s-in">
     <div class="fit-wrap">
       <div class="fit-intro fu">
         <span class="eyebrow">Who this is for</span>
-        <h2>Best fit when manual work is blocking scale.</h2>
+        <h2 data-split>Best fit when manual work is blocking scale.</h2>
         <p>We are most useful when your team already has a real workflow, real users, or real operational pain. The sharper the workflow, the faster an AI-first system can create value.</p>
       </div>
       <div class="fit-grid fu fd1">
@@ -545,7 +588,7 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
   <div class="s-in">
     <div class="s-hd fu">
       <span class="eyebrow">FAQ</span>
-      <h2>Questions before<br>every call.</h2>
+      <h2 data-split>Questions before<br>every call.</h2>
     </div>
     <div class="faq-wrap fu fd1">
       <div class="faq-row">
@@ -905,6 +948,7 @@ function switchSvc(btn,panel){
   btn.classList.add('active');
   btn.setAttribute('aria-selected','true');
   document.getElementById('panel-'+panel).classList.add('active');
+  document.querySelectorAll('#panel-'+panel+' .st-child').forEach(c=>c.classList.add('vis'));
 }
 
 /* FAQ */
@@ -923,6 +967,108 @@ function updateStickyCta(){
 }
 window.addEventListener('scroll',updateStickyCta,{passive:true});
 updateStickyCta();
+
+/* ── Motion enhancements ─────────────────────────────── */
+(function(){
+  const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Scroll progress hairline */
+  const spb=document.querySelector('#scroll-progress span');
+  if(spb){
+    const upd=()=>{
+      const h=document.documentElement;
+      const max=h.scrollHeight-window.innerHeight;
+      spb.style.transform='scaleX('+(max>0?Math.min(window.scrollY/max,1):0)+')';
+    };
+    window.addEventListener('scroll',upd,{passive:true});
+    window.addEventListener('resize',upd,{passive:true});
+    upd();
+  }
+
+  if(RM)return;
+
+  /* Split-text word reveals */
+  function split(el){
+    const walk=node=>{
+      [...node.childNodes].forEach(ch=>{
+        if(ch.nodeType===3&&ch.textContent.trim()){
+          const frag=document.createDocumentFragment();
+          ch.textContent.split(/(\s+)/).forEach(tok=>{
+            if(!tok)return;
+            if(/^\s+$/.test(tok)){frag.appendChild(document.createTextNode(' '));return;}
+            const w=document.createElement('span');w.className='sw';
+            const i=document.createElement('i');i.textContent=tok;
+            w.appendChild(i);frag.appendChild(w);
+          });
+          node.replaceChild(frag,ch);
+        }else if(ch.nodeType===1&&ch.tagName!=='BR'){walk(ch);}
+      });
+    };
+    walk(el);
+    el.querySelectorAll('.sw i').forEach((w,i)=>w.style.setProperty('--d',(i*.05)+'s'));
+  }
+  document.querySelectorAll('[data-split]').forEach(split);
+
+  /* Hero entrance on load */
+  const heroH1=document.querySelector('.hero-h1');
+  const heroSec=document.getElementById('hero');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    if(heroH1)heroH1.classList.add('split-vis');
+    if(heroSec)heroSec.classList.add('hero-in');
+  }));
+
+  /* Scroll-triggered heading reveals */
+  const sObs=new IntersectionObserver(es=>es.forEach(x=>{
+    if(x.isIntersecting){x.target.classList.add('split-vis');sObs.unobserve(x.target);}
+  }),{threshold:.3});
+  document.querySelectorAll('[data-split]:not(.hero-h1)').forEach(el=>sObs.observe(el));
+
+  /* Grid cascade stagger */
+  const gObs=new IntersectionObserver(es=>es.forEach(x=>{
+    if(x.isIntersecting){[...x.target.children].forEach(c=>c.classList.add('vis'));gObs.unobserve(x.target);}
+  }),{threshold:.08});
+  document.querySelectorAll('.srv-grid,.why-grid,.ind-grid,.eng-grid,.mf-grid,.fit-grid,.work-grid').forEach(g=>{
+    const host=g.classList.contains('fu')?g:g.closest('.fu');
+    if(host){host.classList.remove('fu','fd1','fd2','fd3');host.classList.add('vis');}
+    [...g.children].forEach((c,i)=>{c.classList.add('st-child');c.style.transitionDelay=(i*.06)+'s';});
+    gObs.observe(g);
+  });
+
+  /* Animated counters */
+  const ease=t=>1-Math.pow(2,-10*t);
+  function runCount(el){
+    const target=parseFloat(el.dataset.count)||0,dur=1300,t0=performance.now();
+    const step=now=>{
+      const p=Math.min((now-t0)/dur,1);
+      el.textContent=Math.round(target*ease(p));
+      if(p<1)requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  const cObs=new IntersectionObserver(es=>es.forEach(x=>{
+    if(x.isIntersecting){runCount(x.target);cObs.unobserve(x.target);}
+  }),{threshold:.6});
+  document.querySelectorAll('.cnt[data-count]').forEach(el=>cObs.observe(el));
+
+  /* Card spotlight + magnetic CTAs (pointer devices only) */
+  if(window.matchMedia('(hover:hover)').matches){
+    document.querySelectorAll('.srv-card,.why-card,.eng-card,.ind-card,.mf-card,.fit-card,.wk-card').forEach(card=>{
+      card.addEventListener('mousemove',e=>{
+        const r=card.getBoundingClientRect();
+        card.style.setProperty('--mx',(e.clientX-r.left)+'px');
+        card.style.setProperty('--my',(e.clientY-r.top)+'px');
+      });
+    });
+    document.querySelectorAll('.btn-ac').forEach(b=>{
+      b.style.transition='transform .18s cubic-bezier(.22,1,.36,1),opacity .15s';
+      b.addEventListener('mousemove',e=>{
+        const r=b.getBoundingClientRect();
+        b.style.transform='translate('+((e.clientX-r.left-r.width/2)*.18)+'px,'+((e.clientY-r.top-r.height/2)*.32)+'px)';
+      });
+      b.addEventListener('mouseleave',()=>{b.style.transform='';});
+    });
+  }
+})();
 
 /* Nav highlight */
 const secs=document.querySelectorAll('section[id],div[id]');
