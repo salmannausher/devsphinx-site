@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-study.css';
+import '../../styles/service.css';
+
+const title = "AI Workflow Automation Company — Devsphinx";
+const description = "Replace manual, repeatable workflows with AI agents that reason and act — not just move data between apps.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "AI Workflow Automation",
+      "provider": { "@id": "https://www.devshinx.dev/#org" },
+      "serviceType": "AI workflow automation",
+      "areaServed": "Worldwide",
+      "description": description,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "8000",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": "8000", "priceCurrency": "USD" }
+      },
+      "url": "https://www.devshinx.dev/services/ai-workflow-automation/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What's the difference between an AI agent and Zapier or Make?", "acceptedAnswer": { "@type": "Answer", "text": "Zapier and Make move data between apps on a trigger. An AI agent reasons about the data and decides what to do with it — something no fixed rule can do." } },
+        { "@type": "Question", "name": "Can this replace our Zapier or Make setup?", "acceptedAnswer": { "@type": "Answer", "text": "Often partially — simple triggers stay on Zapier where they work fine. The agent layer handles the steps that need judgment, sitting alongside your existing automations." } },
+        { "@type": "Question", "name": "What if the agent makes a mistake?", "acceptedAnswer": { "@type": "Answer", "text": "Every workflow agent ships with a confidence threshold and an audit log. Below the threshold, or on any genuine exception, the task escalates to a human." } },
+        { "@type": "Question", "name": "How do you measure ROI?", "acceptedAnswer": { "@type": "Answer", "text": "Every engagement is scoped against a specific outcome — hours saved per week, tickets deflected, or throughput increased — agreed before the build starts." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.devshinx.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "AI Workflow Automation", "item": "https://www.devshinx.dev/services/ai-workflow-automation/" }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<nav>
+  <a href="/" class="nav-logo">Dev<em>sphinx</em></a>
+  <a href="/" class="nav-back">← Back to Devsphinx</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top fu">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow eyebrow-ac">Services · AI Workflow Automation</span></div>
+        <h1 class="hero-h1">Automation that <em>thinks,</em><br>not just triggers.</h1>
+        <p class="hero-desc">Zapier moves data when a trigger fires. An AI agent looks at the data, decides what it means, and acts on it — closer to a process than a rule.</p>
+        <div class="btns"><a href="/#booking" class="btn btn-ac">Book a discovery call →</a></div>
+      </div>
+      <div class="hero-stats fu fd2">
+        <div class="hs-cell"><div class="hs-n">$8k<em>+</em></div><div class="hs-l">Starting price, fixed</div></div>
+        <div class="hs-cell"><div class="hs-n">$2k<em>+</em></div><div class="hs-l">Automation audit, optional first step</div></div>
+        <div class="hs-cell"><div class="hs-n">24<em>/7</em></div><div class="hs-l">Runs without human input</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">The problem</div>
+  <h2 class="cs-h2">You've automated everything a rule can automate.<br>Now you're stuck on "it depends."</h2>
+  <p class="cs-p">You've wired up the triggers a rule-based tool can handle, and you're still stuck doing the parts that require judgment: approvals, exceptions, anything that starts with "it depends." That's not a Zapier problem — it's a reasoning problem.</p>
+  <div class="prob-grid fu fd1">
+    <div class="prob-card prob-old">
+      <div class="prob-label">Rule-based automation</div>
+      <h3>Great for the predictable 80%.</h3>
+      <p>Fires reliably when the input matches exactly what the rule expects.</p>
+      <ul class="prob-list">
+        <li>Can't handle an invoice that's slightly out of format</li>
+        <li>Can't decide whether an exception is worth escalating</li>
+        <li>Breaks silently, and nobody notices until it's a problem</li>
+      </ul>
+    </div>
+    <div class="prob-card prob-new">
+      <div class="prob-label">An AI workflow agent</div>
+      <h3>Handles the 20% that needs judgment.</h3>
+      <p>Reasons about the exception the way a person on your team would.</p>
+      <ul class="prob-list">
+        <li>Reads the out-of-format invoice, extracts what it needs anyway</li>
+        <li>Decides whether the exception needs a human, and routes it</li>
+        <li>Logs everything it did and why, so nothing breaks silently</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">What we build</div>
+  <h2 class="cs-h2">Agents that handle<br>the judgment calls.</h2>
+  <p class="cs-p">Approvals, document review, cross-tool reconciliation, status reporting — automated with an agent that reasons about each case, escalating to a human only on genuine exceptions.</p>
+  <div class="con-card" style="max-width:680px;margin-top:24px;">
+    <div class="con-lbl">Deliverables</div>
+    <ul class="con-list">
+      <li>Workflow audit and automation map (optional first step)</li>
+      <li>Agent design and deployment for the workflow you scope</li>
+      <li>Integration with your existing stack — no rip and replace</li>
+      <li>Reporting on what the agent handled vs. escalated</li>
+    </ul>
+  </div>
+  <div class="stack-chips fu fd1">
+    <span class="s-chip pri">Claude API</span><span class="s-chip pri">MCP</span><span class="s-chip">Zapier (where it still fits)</span><span class="s-chip">Slack</span><span class="s-chip">Google Workspace</span><span class="s-chip">PostgreSQL</span>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">Process &amp; pricing</div>
+  <h2 class="cs-h2">Start with an audit,<br>or go straight to a build.</h2>
+  <p class="cs-p">If the highest-ROI workflow is already obvious, we scope it directly. If you're not sure where to start, a 1-week automation audit maps it first.</p>
+  <div class="step-list fu fd1">
+    <div class="step-row"><span class="step-n">01</span><span class="step-txt"><strong>Discovery call</strong> — free, 30 minutes. We identify the workflow and whether an audit is needed first.</span></div>
+    <div class="step-row"><span class="step-n">02</span><span class="step-txt"><strong>Automation audit</strong> — optional, 1 week. Maps the highest-ROI workflow and defines the build plan.</span></div>
+    <div class="step-row"><span class="step-n">03</span><span class="step-txt"><strong>Scoped proposal</strong> — fixed price and timeline, within 5 business days.</span></div>
+    <div class="step-row"><span class="step-n">04</span><span class="step-txt"><strong>Build, with weekly demos</strong> — on real data, in a staging environment you can access.</span></div>
+    <div class="step-row"><span class="step-n">05</span><span class="step-txt"><strong>Deploy + hypercare</strong> — 2 weeks of tuning after launch, with reporting on what the agent handled.</span></div>
+  </div>
+  <div class="price-grid fu fd2">
+    <div class="price-cell"><div class="price-n">$2,000</div><div class="price-l">Automation audit</div></div>
+    <div class="price-cell"><div class="price-n">$8,000</div><div class="price-l">Single-workflow agent, starting price</div></div>
+    <div class="price-cell"><div class="price-n">$2,500/mo</div><div class="price-l">Optional retainer</div></div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">FAQs</div>
+  <h2 class="cs-h2">Questions before<br>the call.</h2>
+  <div class="faq-wrap fu fd1">
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="wa1" onclick="toggleFaq(this)">Can this replace our Zapier or Make setup?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="wa1"><div class="faq-inner">Often partially — simple triggers stay on Zapier where they already work fine. The agent layer handles the steps that need judgment, sitting alongside your existing automations rather than replacing all of them.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="wa2" onclick="toggleFaq(this)">What if the agent makes a mistake?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="wa2"><div class="faq-inner">Every workflow agent ships with a confidence threshold and an audit log. Below the threshold, or on any genuine exception, the task escalates to a human instead of the agent guessing.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="wa3" onclick="toggleFaq(this)">Does it work with legacy systems?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="wa3"><div class="faq-inner">Yes — agents integrate with older systems via API, RPA-style browser automation, or direct database access where an API doesn't exist.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="wa4" onclick="toggleFaq(this)">How do you measure ROI?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="wa4"><div class="faq-inner">Every engagement is scoped against a specific outcome — hours saved per week, tickets deflected, or throughput increased — agreed before the build starts.</div></div>
+    </div>
+  </div>
+  <div class="related-links fu fd2">
+    <a href="/services/ai-agent-development/">AI Agent Development →</a>
+    <a href="/services/saas-mvp-development/">SaaS MVP Development →</a>
+    <a href="/#founder">About Devsphinx →</a>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cta-section">
+  <div class="cta-inner fu">
+    <h2>Still doing "it depends" work by hand?</h2>
+    <div class="btns">
+      <a href="/#booking" class="btn btn-ac">Book a discovery call →</a>
+      <a href="/" class="btn btn-ghost">Back to Devsphinx</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="f-logo">Dev<em>sphinx</em></a>
+  <span class="f-copy">© 2026 Devsphinx · AI-First Software Studio</span>
+</footer>
+
+<script is:inline>
+function toggleFaq(btn){const row=btn.closest('.faq-row'),was=row.classList.contains('open');document.querySelectorAll('.faq-row.open').forEach(r=>{r.classList.remove('open');const b=r.querySelector('.faq-btn');if(b)b.setAttribute('aria-expanded','false');});if(!was){row.classList.add('open');btn.setAttribute('aria-expanded','true');}else{btn.setAttribute('aria-expanded','false');}}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</BaseLayout>

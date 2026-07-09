@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-study.css';
+import '../../styles/service.css';
+
+const title = "AI Agent Development Company — Devsphinx";
+const description = "We design and ship autonomous AI agent systems on Claude and MCP — for sales, support, and operations. Fixed price, from $8,000.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "AI Agent Development",
+      "provider": { "@id": "https://www.devshinx.dev/#org" },
+      "serviceType": "AI agent development",
+      "areaServed": "Worldwide",
+      "description": description,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "8000",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": "8000", "priceCurrency": "USD" }
+      },
+      "url": "https://www.devshinx.dev/services/ai-agent-development/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "What is an AI agent?", "acceptedAnswer": { "@type": "Answer", "text": "An AI agent is software that completes a task end to end by making its own decisions, not just following a fixed script. It researches, decides, writes, and acts, the way a capable employee would." } },
+        { "@type": "Question", "name": "How much does it cost to build an AI agent?", "acceptedAnswer": { "@type": "Answer", "text": "A production AI agent system from Devsphinx starts at $8,000, with most complete builds landing between $10,000 and $15,000, fixed price." } },
+        { "@type": "Question", "name": "Can it connect to our existing CRM?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Agents connect to HubSpot, Salesforce, and most common CRMs via MCP or direct API integration." } },
+        { "@type": "Question", "name": "What happens when the agent isn't confident?", "acceptedAnswer": { "@type": "Answer", "text": "Every agent system ships with a confidence threshold. Below it, the task escalates to a human instead of the agent guessing." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.devshinx.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "AI Agent Development", "item": "https://www.devshinx.dev/services/ai-agent-development/" }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<nav>
+  <a href="/" class="nav-logo">Dev<em>sphinx</em></a>
+  <a href="/" class="nav-back">← Back to Devsphinx</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top fu">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow eyebrow-ac">Services · AI Agent Development</span></div>
+        <h1 class="hero-h1">AI agents that run parts of your business, <em>autonomously.</em></h1>
+        <p class="hero-desc">Not a chatbot. Not a Zapier rule. An AI agent researches, decides, writes, and acts — the way a capable employee would, without a human approving every step.</p>
+        <div class="btns"><a href="/#booking" class="btn btn-ac">Book a discovery call →</a></div>
+      </div>
+      <div class="hero-stats fu fd2">
+        <div class="hs-cell"><div class="hs-n">$8k<em>+</em></div><div class="hs-l">Starting price, fixed</div></div>
+        <div class="hs-cell"><div class="hs-n">3<em>–5</em></div><div class="hs-l">Weeks to production</div></div>
+        <div class="hs-cell"><div class="hs-n">0<em>%</em></div><div class="hs-l">Hourly billing</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">The problem</div>
+  <h2 class="cs-h2">Some work needs judgment.<br>Rules can't make judgment calls.</h2>
+  <p class="cs-p">Your best people spend hours a week on work that follows a pattern but still needs a decision: researching a lead, triaging a ticket, checking a status across three tools. Automation tools can't do it, because there's no fixed rule to write. Hiring for it doesn't scale.</p>
+  <div class="prob-grid fu fd1">
+    <div class="prob-card prob-old">
+      <div class="prob-label">Rule-based automation</div>
+      <h3>Moves data. Doesn't decide anything.</h3>
+      <p>Zapier and Make fire when a trigger matches — reliable for the parts of a process that never change, and useless the moment judgment is required.</p>
+      <ul class="prob-list">
+        <li>Can copy a new lead into a spreadsheet</li>
+        <li>Can't decide if that lead is worth pursuing</li>
+        <li>Breaks silently when the input looks slightly different</li>
+      </ul>
+    </div>
+    <div class="prob-card prob-new">
+      <div class="prob-label">An AI agent</div>
+      <h3>Reads the situation. Decides. Acts.</h3>
+      <p>An agent reads context the way a person would, weighs it, and takes the next action — escalating to a human only when it's genuinely unsure.</p>
+      <ul class="prob-list">
+        <li>Reads the lead's company, researches, decides if it's worth pursuing</li>
+        <li>Drafts a personalised outreach, logs it to your CRM</li>
+        <li>Escalates to a human only below its confidence threshold</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">What we build</div>
+  <h2 class="cs-h2">A multi-agent system,<br>purpose-built for your workflow.</h2>
+  <p class="cs-p">Each agent has a defined role, its own memory, and access to only the tools it needs — running continuously, with a human checking in only where you want one to. Built on Claude, connected to your stack via MCP.</p>
+  <div class="con-card" style="max-width:680px;margin-top:24px;">
+    <div class="con-lbl">Deliverables</div>
+    <ul class="con-list">
+      <li>Architecture design — agent roles, memory, tool access, escalation rules</li>
+      <li>Production deployment on your infrastructure or ours</li>
+      <li>CRM, email, and calendar integrations via MCP</li>
+      <li>2-week hypercare window after launch</li>
+    </ul>
+  </div>
+  <div class="stack-chips fu fd1">
+    <span class="s-chip pri">Claude API</span><span class="s-chip pri">MCP</span><span class="s-chip">HubSpot</span><span class="s-chip">Salesforce</span><span class="s-chip">Slack</span><span class="s-chip">PostgreSQL</span>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">Process &amp; pricing</div>
+  <h2 class="cs-h2">3–5 weeks, fixed price,<br>weekly demos.</h2>
+  <p class="cs-p">The same process for every agent build, whether it's a single-agent integration or a five-agent pipeline.</p>
+  <div class="step-list fu fd1">
+    <div class="step-row"><span class="step-n">01</span><span class="step-txt"><strong>Discovery call</strong> — free, 30 minutes. We map the workflow and what the agent should own.</span></div>
+    <div class="step-row"><span class="step-n">02</span><span class="step-txt"><strong>Scoped proposal</strong> — fixed price and timeline, within 5 business days.</span></div>
+    <div class="step-row"><span class="step-n">03</span><span class="step-txt"><strong>Architecture design</strong> — agent roles, memory, tool access, escalation rules. You approve before we build.</span></div>
+    <div class="step-row"><span class="step-n">04</span><span class="step-txt"><strong>Build, with weekly demos</strong> — on real data, in a staging environment you can access.</span></div>
+    <div class="step-row"><span class="step-n">05</span><span class="step-txt"><strong>Deploy + hypercare</strong> — 2 weeks of tuning after launch, optional retainer after that.</span></div>
+  </div>
+  <div class="price-grid fu fd2">
+    <div class="price-cell"><div class="price-n">$8,000</div><div class="price-l">Starting price</div></div>
+    <div class="price-cell"><div class="price-n">$10–15k</div><div class="price-l">Typical complete system</div></div>
+    <div class="price-cell"><div class="price-n">$2,500/mo</div><div class="price-l">Optional retainer</div></div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">FAQs</div>
+  <h2 class="cs-h2">Questions before<br>the call.</h2>
+  <div class="faq-wrap fu fd1">
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="sa1" onclick="toggleFaq(this)">What counts as one "agent"?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="sa1"><div class="faq-inner">An agent is one defined role with its own instructions, memory, and tool access — a Researcher, a Copywriter, a CRM Agent. Most production systems use 3–8 agents coordinated by an orchestrator.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="sa2" onclick="toggleFaq(this)">Can it connect to our existing CRM?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="sa2"><div class="faq-inner">Yes — HubSpot, Salesforce, and most common CRMs, via MCP or direct API integration, decided during the architecture phase.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="sa3" onclick="toggleFaq(this)">What happens when it's not confident?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="sa3"><div class="faq-inner">Every agent system ships with a confidence threshold. Below it, the task escalates to a human — the agent never guesses on your behalf.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="sa4" onclick="toggleFaq(this)">Do you maintain it after launch?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="sa4"><div class="faq-inner">Every build includes a 2-week hypercare window. After that, monthly retainers for ongoing tuning and evolution start at $2,500/month.</div></div>
+    </div>
+  </div>
+  <div class="related-links fu fd2">
+    <a href="/services/ai-workflow-automation/">AI Workflow Automation →</a>
+    <a href="/case-studies/revenue-engine/">See the AI Revenue Engine case study →</a>
+    <a href="/#founder">About Devsphinx →</a>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cta-section">
+  <div class="cta-inner fu">
+    <h2>Have a workflow that needs judgment, not just a rule?</h2>
+    <div class="btns">
+      <a href="/#booking" class="btn btn-ac">Book a discovery call →</a>
+      <a href="/" class="btn btn-ghost">Back to Devsphinx</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="f-logo">Dev<em>sphinx</em></a>
+  <span class="f-copy">© 2026 Devsphinx · AI-First Software Studio</span>
+</footer>
+
+<script is:inline>
+function toggleFaq(btn){const row=btn.closest('.faq-row'),was=row.classList.contains('open');document.querySelectorAll('.faq-row.open').forEach(r=>{r.classList.remove('open');const b=r.querySelector('.faq-btn');if(b)b.setAttribute('aria-expanded','false');});if(!was){row.classList.add('open');btn.setAttribute('aria-expanded','true');}else{btn.setAttribute('aria-expanded','false');}}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</BaseLayout>

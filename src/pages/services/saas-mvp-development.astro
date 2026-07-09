@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-study.css';
+import '../../styles/service.css';
+
+const title = "SaaS MVP Development Company — Devsphinx";
+const description = "AI-first SaaS MVPs built on Next.js and Node.js, shipped in 4–8 weeks, fixed price from $12,000.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "SaaS MVP Development",
+      "provider": { "@id": "https://www.devshinx.dev/#org" },
+      "serviceType": "SaaS MVP development",
+      "areaServed": "Worldwide",
+      "description": description,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "12000",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": "12000", "priceCurrency": "USD" }
+      },
+      "url": "https://www.devshinx.dev/services/saas-mvp-development/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How long does it take to build a SaaS MVP?", "acceptedAnswer": { "@type": "Answer", "text": "An AI-first SaaS MVP typically takes 4–8 weeks from the discovery call to a production-ready release, depending on scope." } },
+        { "@type": "Question", "name": "Do you build the whole product or just the AI part?", "acceptedAnswer": { "@type": "Answer", "text": "The whole product — auth, billing, admin basics, and the core AI-powered workflow, as one architecture designed from day one." } },
+        { "@type": "Question", "name": "What if scope changes mid-build?", "acceptedAnswer": { "@type": "Answer", "text": "The scoped proposal is fixed before we start. Genuine scope changes are re-quoted transparently rather than absorbed silently or billed by the hour." } },
+        { "@type": "Question", "name": "What happens after launch?", "acceptedAnswer": { "@type": "Answer", "text": "A 2-week hypercare window is included. Ongoing evolution is available on a monthly retainer starting at $2,500/month." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.devshinx.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "SaaS MVP Development", "item": "https://www.devshinx.dev/services/saas-mvp-development/" }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<nav>
+  <a href="/" class="nav-logo">Dev<em>sphinx</em></a>
+  <a href="/" class="nav-back">← Back to Devsphinx</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top fu">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow eyebrow-ac">Services · SaaS MVP Development</span></div>
+        <h1 class="hero-h1">Your MVP, built <em>AI-first</em> from day one.</h1>
+        <p class="hero-desc">Not a prototype. A production-ready product real users can sign up for, use, and pay for — with AI as the architecture, not a feature bolted on after launch.</p>
+        <div class="btns"><a href="/#booking" class="btn btn-ac">Book a discovery call →</a></div>
+      </div>
+      <div class="hero-stats fu fd2">
+        <div class="hs-cell"><div class="hs-n">$12k<em>+</em></div><div class="hs-l">Starting price, fixed</div></div>
+        <div class="hs-cell"><div class="hs-n">4<em>–8</em></div><div class="hs-l">Weeks to launch</div></div>
+        <div class="hs-cell"><div class="hs-n">1<em>x</em></div><div class="hs-l">Build — no post-launch rewrite</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">The problem</div>
+  <h2 class="cs-h2">Most MVPs get rebuilt<br>the moment AI needs to be "added."</h2>
+  <p class="cs-p">Most MVPs are built to prove a UI, then rebuilt from scratch once AI needs to be added to the core workflow. That second build costs more than the first and burns the runway you needed for customer validation.</p>
+  <div class="prob-grid fu fd1">
+    <div class="prob-card prob-old">
+      <div class="prob-label">AI bolted on after launch</div>
+      <h3>Ship first, retrofit AI later.</h3>
+      <p>The UI and data model are built without AI in mind, so adding a real AI-powered workflow later means reworking both.</p>
+      <ul class="prob-list">
+        <li>Data model doesn't support what the AI needs to reason over</li>
+        <li>AI ends up as a bolted-on chatbot, not the core workflow</li>
+        <li>A second, more expensive build follows within months</li>
+      </ul>
+    </div>
+    <div class="prob-card prob-new">
+      <div class="prob-label">AI-first from day one</div>
+      <h3>Design the AI layer first. Build around it.</h3>
+      <p>We decide what the model handles and what data it needs before a single screen is designed — so the product doesn't need a second build to scale.</p>
+      <ul class="prob-list">
+        <li>Data model designed to support the core AI workflow from day one</li>
+        <li>AI is the product's core loop, not an add-on feature</li>
+        <li>Ships once, scales without a rewrite</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">What we build</div>
+  <h2 class="cs-h2">A production MVP,<br>not a proof of concept.</h2>
+  <p class="cs-p">Built on Next.js, React, and Node.js — the same stack we'd use for a funded Series A product, scoped down to what proves your core hypothesis fastest.</p>
+  <div class="con-card" style="max-width:680px;margin-top:24px;">
+    <div class="con-lbl">Deliverables</div>
+    <ul class="con-list">
+      <li>Production MVP on Next.js, React, and Node.js</li>
+      <li>Core AI-powered workflow, fully functional — not a demo</li>
+      <li>Authentication, billing, and admin basics included</li>
+      <li>Staging environment access throughout the build</li>
+    </ul>
+  </div>
+  <div class="stack-chips fu fd1">
+    <span class="s-chip pri">Next.js</span><span class="s-chip pri">React</span><span class="s-chip pri">Node.js</span><span class="s-chip">Claude API</span><span class="s-chip">PostgreSQL</span><span class="s-chip">Stripe</span>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">Process &amp; pricing</div>
+  <h2 class="cs-h2">4–8 weeks, fixed price,<br>weekly demos.</h2>
+  <p class="cs-p">Scope, not team size, is what moves this number — a single core workflow with one integration ships closer to 4 weeks; multiple user roles and third-party integrations push toward 8.</p>
+  <div class="step-list fu fd1">
+    <div class="step-row"><span class="step-n">01</span><span class="step-txt"><strong>Discovery call</strong> — free, 30 minutes. We map the product and the core hypothesis to test.</span></div>
+    <div class="step-row"><span class="step-n">02</span><span class="step-txt"><strong>Scoped proposal</strong> — fixed price and timeline, within 5 business days.</span></div>
+    <div class="step-row"><span class="step-n">03</span><span class="step-txt"><strong>Architecture design</strong> — the AI-first data model and workflow, before any UI work begins.</span></div>
+    <div class="step-row"><span class="step-n">04</span><span class="step-txt"><strong>Build, with weekly demos</strong> — staging access throughout, not a surprise at handover.</span></div>
+    <div class="step-row"><span class="step-n">05</span><span class="step-txt"><strong>Launch + hypercare</strong> — 2 weeks of tuning after go-live, optional retainer after that.</span></div>
+  </div>
+  <div class="price-grid fu fd2">
+    <div class="price-cell"><div class="price-n">$12,000</div><div class="price-l">Starting price</div></div>
+    <div class="price-cell"><div class="price-n">4–8 wks</div><div class="price-l">Typical timeline</div></div>
+    <div class="price-cell"><div class="price-n">$2,500/mo</div><div class="price-l">Optional retainer</div></div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">FAQs</div>
+  <h2 class="cs-h2">Questions before<br>the call.</h2>
+  <div class="faq-wrap fu fd1">
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="sm1" onclick="toggleFaq(this)">Do you build the whole product or just the AI part?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="sm1"><div class="faq-inner">The whole product — auth, billing, admin basics, and the core AI-powered workflow, as one architecture designed from day one.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="sm2" onclick="toggleFaq(this)">What if scope changes mid-build?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="sm2"><div class="faq-inner">The scoped proposal is fixed before we start. Genuine scope changes are re-quoted transparently, never absorbed silently or billed by the hour.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="sm3" onclick="toggleFaq(this)">Can you work with our existing designer?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="sm3"><div class="faq-inner">Yes — we regularly build from existing Figma files, or design the interface ourselves if you don't have one yet.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="sm4" onclick="toggleFaq(this)">What happens after launch?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="sm4"><div class="faq-inner">A 2-week hypercare window is included. Ongoing evolution is available on a monthly retainer starting at $2,500/month.</div></div>
+    </div>
+  </div>
+  <div class="related-links fu fd2">
+    <a href="/services/ai-agent-development/">AI Agent Development →</a>
+    <a href="/case-studies/dispatch-platform/">See the AI Dispatch Platform case study →</a>
+    <a href="/#founder">About Devsphinx →</a>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cta-section">
+  <div class="cta-inner fu">
+    <h2>Have a SaaS idea you want built AI-first from the start?</h2>
+    <div class="btns">
+      <a href="/#booking" class="btn btn-ac">Book a discovery call →</a>
+      <a href="/" class="btn btn-ghost">Back to Devsphinx</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="f-logo">Dev<em>sphinx</em></a>
+  <span class="f-copy">© 2026 Devsphinx · AI-First Software Studio</span>
+</footer>
+
+<script is:inline>
+function toggleFaq(btn){const row=btn.closest('.faq-row'),was=row.classList.contains('open');document.querySelectorAll('.faq-row.open').forEach(r=>{r.classList.remove('open');const b=r.querySelector('.faq-btn');if(b)b.setAttribute('aria-expanded','false');});if(!was){row.classList.add('open');btn.setAttribute('aria-expanded','true');}else{btn.setAttribute('aria-expanded','false');}}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</BaseLayout>
