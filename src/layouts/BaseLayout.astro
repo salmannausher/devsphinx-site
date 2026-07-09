@@ -1,5 +1,38 @@
 ---
-const { title, description } = Astro.props;
+const { title, description, ogImage = '/founder.png' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.devshinx.dev/#org",
+      "name": "Devsphinx",
+      "url": "https://www.devshinx.dev",
+      "description": "Devsphinx is a founder-led AI-first software studio. We build AI agent systems, AI-first SaaS products, and custom software.",
+      "founder": { "@id": "https://www.devshinx.dev/#founder" },
+      "email": "hello@devsphinx.com",
+      "sameAs": ["https://linkedin.com/company/devsphinx"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.devshinx.dev/#website",
+      "url": "https://www.devshinx.dev",
+      "name": "Devsphinx",
+      "publisher": { "@id": "https://www.devshinx.dev/#org" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.devshinx.dev/#founder",
+      "name": "Salman Nausher",
+      "jobTitle": "Founder & Principal Engineer",
+      "worksFor": { "@id": "https://www.devshinx.dev/#org" }
+    }
+  ]
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -7,11 +40,26 @@ const { title, description } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Devsphinx" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImageURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Caveat:wght@600;700&display=swap" rel="stylesheet" />
     <script is:inline>document.documentElement.classList.add('js');</script>
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   </head>
   <body>
     <slot />

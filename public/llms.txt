@@ -1,0 +1,22 @@
+# Devsphinx
+
+> Devsphinx is a founder-led AI-first software studio. We build AI agent systems, AI-first SaaS products, and custom software — with AI as the core architecture, not an added feature. Founded and led by Salman Nausher.
+
+## Services
+- AI Agent Systems — autonomous multi-agent systems for sales, support, and operations, built on Claude and MCP.
+- AI-First Software — SaaS platforms, internal tools, and vertical applications built with AI as the core architecture, on Next.js, React, and Node.js.
+- AI Automation Audits — architecture and build-plan engagements for teams that know there's automation potential but need it scoped first.
+
+## Facts
+- Delivery: fixed-price, founder-led, no hourly billing.
+- Timeline: AI agent systems in 3–5 weeks; AI-first MVPs in 4–8 weeks.
+- Pricing: agent systems from $8,000 USD; AI-first MVPs from $12,000 USD; retainers from $2,500/month USD.
+- Contact: hello@devsphinx.com
+- Founder: Salman Nausher, Founder & Principal Engineer.
+- NDAs signed on request before any discovery call.
+
+## Pages
+- Homepage: https://www.devshinx.dev/
+- AI Revenue Engine case study: https://www.devshinx.dev/case-studies/revenue-engine/
+- AI Dispatch Platform case study: https://www.devshinx.dev/case-studies/dispatch-platform/
+- Book a discovery call: https://www.devshinx.dev/#booking
