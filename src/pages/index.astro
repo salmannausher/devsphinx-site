@@ -121,18 +121,18 @@ const faqSchema = {
 <div id="agent-flow">
   <div class="af-inner">
     <div class="af-label fu">Example pipeline · AI Revenue Engine</div>
-    <div class="flow-track fu fd1">
-      <div class="flow-node"><div class="fn-box"><div class="fn-role">Agent 01</div><div class="fn-name">Research</div></div></div>
-      <div class="flow-arr"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="flow-node"><div class="fn-box"><div class="fn-role">Agent 02</div><div class="fn-name">Personalise</div></div></div>
-      <div class="flow-arr"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="flow-node"><div class="fn-box"><div class="fn-role">Agent 03</div><div class="fn-name">Outreach</div></div></div>
-      <div class="flow-arr"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="flow-node"><div class="fn-box"><div class="fn-role">Agent 04</div><div class="fn-name">CRM Sync</div></div></div>
-      <div class="flow-arr"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="flow-node"><div class="fn-box"><div class="fn-role">Agent 05</div><div class="fn-name">Report</div></div></div>
-      <div class="flow-arr"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-      <div class="flow-node"><div class="fn-end"><div class="fn-role">Output</div><div class="fn-name">Pipeline</div><div class="fn-live"><span class="live-dot"></span>Autonomous</div></div></div>
+    <div class="flow-track fu fd1" id="flowTrack">
+      <div class="flow-node"><div class="fn-box" data-step="0"><div class="fn-role">Agent 01</div><div class="fn-name">Research</div></div></div>
+      <div class="flow-arr" data-arr="1"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="flow-node"><div class="fn-box" data-step="1"><div class="fn-role">Agent 02</div><div class="fn-name">Personalise</div></div></div>
+      <div class="flow-arr" data-arr="2"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="flow-node"><div class="fn-box" data-step="2"><div class="fn-role">Agent 03</div><div class="fn-name">Outreach</div></div></div>
+      <div class="flow-arr" data-arr="3"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="flow-node"><div class="fn-box" data-step="3"><div class="fn-role">Agent 04</div><div class="fn-name">CRM Sync</div></div></div>
+      <div class="flow-arr" data-arr="4"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="flow-node"><div class="fn-box" data-step="4"><div class="fn-role">Agent 05</div><div class="fn-name">Report</div></div></div>
+      <div class="flow-arr" data-arr="5"><svg viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+      <div class="flow-node"><div class="fn-end" data-step="5"><div class="fn-role">Output</div><div class="fn-name">Pipeline</div><div class="fn-live"><span class="live-dot"></span>Autonomous</div></div></div>
     </div>
     <div class="stack-strip fu fd2">
       <span class="stack-chip">Claude API</span><span class="stack-chip">MCP</span><span class="stack-chip">Python</span><span class="stack-chip">Node.js</span><span class="stack-chip">React</span><span class="stack-chip">Next.js</span><span class="stack-chip">PostgreSQL</span><span class="stack-chip">HubSpot</span><span class="stack-chip">Salesforce</span><span class="stack-chip">Slack</span><span class="stack-chip">Notion</span>
@@ -1108,5 +1108,24 @@ updateStickyCta();
 const secs=document.querySelectorAll('section[id],div[id]');
 const nls=document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});nls.forEach(a=>{a.style.color=new URL(a.href).hash==='#'+cur?'var(--t)':'';});},{passive:true});
+
+/* Agent flow pulse — sweeps through the pipeline, respects reduced motion */
+(function(){
+  const track=document.getElementById('flowTrack');
+  if(!track)return;
+  const boxes=[...track.querySelectorAll('[data-step]')];
+  const arrows=[...track.querySelectorAll('[data-arr]')];
+  let step=0;
+  function render(){
+    boxes.forEach(b=>b.classList.toggle('active',Number(b.dataset.step)===step));
+    arrows.forEach(a=>a.classList.toggle('active',Number(a.dataset.arr)===step));
+  }
+  render();
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  function tick(){
+    setTimeout(()=>{step=step>=5?0:step+1;render();tick();},step===5?1500:850);
+  }
+  tick();
+})();
 </script>
 </BaseLayout>
