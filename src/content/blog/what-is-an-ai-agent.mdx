@@ -1,0 +1,56 @@
+---
+title: "What Is an AI Agent? (vs. a Chatbot or Automation)"
+description: "An AI agent completes a task end to end by making its own decisions — not just answering questions like a chatbot or moving data like an automation rule."
+publishDate: 2026-07-10
+cluster: "ai-agents-101"
+clusterLabel: "AI Agents 101"
+keyword: "what is an AI agent"
+---
+
+import SnippetAnswer from '../../components/SnippetAnswer.astro';
+
+"AI agent" gets used loosely enough that it's worth being precise about what it actually means — especially if you're deciding whether one is worth building for your business.
+
+<SnippetAnswer>
+An AI agent is software that completes a task end to end by making its own decisions, rather than following a fixed script. It researches, decides, writes, and acts — the way a capable employee would, without a human approving every step.
+</SnippetAnswer>
+
+That's the whole idea. Everything else is detail about how that plays out compared to the two things people usually confuse it with: chatbots and automation tools.
+
+## AI agent vs. chatbot: what's actually different
+
+A chatbot answers questions. You ask, it responds, the conversation ends. Even a good chatbot is fundamentally reactive — it's waiting for your next message.
+
+An AI agent doesn't wait to be asked. Given a goal, it plans the steps needed to reach it, executes them, and only surfaces something to a human when it's genuinely uncertain or the task is done. A support chatbot answers "what's your refund policy?" An AI agent reads an incoming refund request, checks the order against the policy, processes the refund if it qualifies, and logs the outcome — without anyone asking it to do any of those individual steps.
+
+## AI agent vs. automation (Zapier, Make): what's actually different
+
+This is the comparison that trips people up more, because automation tools genuinely do run without a human — they just don't *decide* anything.
+
+A Zapier rule fires when a trigger matches exactly what it expects: a new row in a spreadsheet, a new email in an inbox. It's reliable precisely because it never has to interpret anything. The moment the input looks slightly different from what the rule was built for, it either breaks or does the wrong thing silently.
+
+An AI agent reasons about the input instead of pattern-matching it. It can read an invoice that's missing a field, decide what's still usable, and act on it anyway — or decide it isn't, and escalate. That's the difference between an automation rule and an employee using judgment.
+
+| | Chatbot | Automation (Zapier/Make) | AI agent |
+|---|---|---|---|
+| Initiates action on its own | No | Only on a trigger | Yes |
+| Handles unexpected input | No | No | Yes, within its confidence threshold |
+| Makes a judgment call | No | No | Yes |
+| Needs a human to ask first | Yes | No (needs a trigger) | No |
+
+## What can an AI agent actually do?
+
+In practice, the workflows worth handing to an agent tend to share three traits: they're repeatable, they require some judgment, and doing them manually costs real hours. Some concrete examples:
+
+- Researching a new lead, drafting personalized outreach, and logging it to your CRM
+- Triaging an inbound support ticket, resolving it if it's routine, and escalating if it isn't
+- Reviewing a batch of invoices, flagging exceptions, and reconciling the rest automatically
+- Screening inbound CVs against a role, scoring candidates, and scheduling interviews for the strongest matches
+
+## When you don't need an AI agent
+
+Not every workflow needs one. If a task is genuinely rule-based — the input is always the same shape, and the action is always the same — a $20/month Zapier plan will outperform an agent on cost and reliability. Agents earn their cost when the "it depends" part of a workflow is what's actually eating your team's time, not the mechanical data-moving part.
+
+## How much does it cost to build one?
+
+A production AI agent system typically starts around $8,000 fixed price, with most complete builds landing between $10,000 and $15,000 depending on how many agents are involved and what systems they need to connect to. You can see the full breakdown, including what's included and how long it takes, on the [AI Agent Development](/services/ai-agent-development/) page.
