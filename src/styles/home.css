@@ -119,6 +119,8 @@ hr.rule{border:none;border-top:1px solid var(--b);}
 .quick-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;}
 .quick-links a{font-family:var(--M);font-size:11px;letter-spacing:.06em;padding:8px 16px;border:1px solid var(--b2);border-radius:100px;color:var(--t2);transition:color .15s,border-color .15s;}
 .quick-links a:hover{color:var(--t);border-color:var(--b3);}
+.quick-links a.ql-all{color:var(--ac);border-color:rgba(212,80,26,.3);}
+.quick-links a.ql-all:hover{border-color:var(--ac);}
 
 /* ── SERVICES TABS ── */
 #services{background:var(--bg);}

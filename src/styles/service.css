@@ -26,6 +26,20 @@
 .related-links a{font-family:var(--M);font-size:11px;letter-spacing:.06em;padding:8px 16px;border:1px solid var(--b2);border-radius:100px;color:var(--t2);transition:color .15s,border-color .15s;}
 .related-links a:hover{color:var(--t);border-color:var(--b3);}
 
+/* Services hub */
+.svc-hub-group-label{font-family:var(--M);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin:48px 0 20px;}
+.svc-hub-group-label:first-of-type{margin-top:0;}
+.svc-hub-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.svc-hub-grid.cols-3{grid-template-columns:repeat(3,1fr);}
+.svc-hub-card{background:var(--bg2);padding:32px;display:block;transition:background .2s,transform .2s;}
+.svc-hub-card:hover{background:var(--bg3);transform:translateY(-3px);}
+.svc-hub-card h3{font-family:var(--D);font-size:18px;font-weight:700;color:var(--t);letter-spacing:-0.01em;margin-bottom:10px;}
+.svc-hub-card p{font-size:13.5px;color:var(--t2);font-weight:300;line-height:1.7;margin-bottom:20px;}
+.svc-hub-foot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--b);}
+.svc-hub-price{font-family:var(--M);font-size:11px;color:var(--ac);}
+.svc-hub-link{font-family:var(--M);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);}
+
 @media(max-width:900px){
   .price-grid{grid-template-columns:1fr;}
+  .svc-hub-grid,.svc-hub-grid.cols-3{grid-template-columns:1fr;}
 }
