@@ -11,7 +11,7 @@
 - Delivery: fixed-price, founder-led, no hourly billing.
 - Timeline: AI agent systems in 3–5 weeks; AI-first MVPs in 4–8 weeks.
 - Pricing: agent systems from $8,000 USD; AI-first MVPs from $12,000 USD; retainers from $2,500/month USD.
-- Contact: hello@devsphinx.com
+- Contact: hello@devshinx.dev
 - Founder: Salman Nausher, Founder & Principal Engineer.
 - NDAs signed on request before any discovery call.
 
