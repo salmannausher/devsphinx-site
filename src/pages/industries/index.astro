@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-study.css';
+import '../../styles/service.css';
+
+const title = "Industries We Serve — Devsphinx";
+const description = "AI agents and automation for SaaS, healthcare, logistics, recruitment, and professional services.";
+
+const industries = [
+  { tag: 'B2B SaaS', title: 'SaaS & Digital Products', desc: 'AI-powered features, automated lead qualification, churn prediction, and intelligent onboarding.', href: '/services/saas-mvp-development/', service: 'SaaS MVP Development' },
+  { tag: 'Recruitment', title: 'Recruitment & HR', desc: 'Autonomous CV screening, candidate scoring, personalised outreach, and interview scheduling.', href: '/services/ai-agent-development/', service: 'AI Agent Development' },
+  { tag: 'Healthcare', title: 'Healthcare & Wellness', desc: 'AI scheduling, patient intake automation, and clinical workflow management, built for compliance.', href: '/services/healthcare-software-development/', service: 'Healthcare Software Development' },
+  { tag: 'Real Estate', title: 'Real Estate & Property', desc: 'Lead scoring, automated follow-up, property matching agents, and tenant communication systems.', href: '/services/ai-agent-development/', service: 'AI Agent Development' },
+  { tag: 'Logistics', title: 'Logistics & Operations', desc: 'Automated dispatching, route optimisation, vendor communication, and operational reporting.', href: '/services/ai-workflow-automation/', service: 'AI Workflow Automation' },
+  { tag: 'Hospitality', title: 'Hospitality & E-commerce', desc: 'AI guest experience agents, order management, support automation, and review management.', href: '/services/ai-workflow-automation/', service: 'AI Workflow Automation' },
+  { tag: 'Professional Services', title: 'Professional Services', desc: 'Document processing, client onboarding automation, and internal knowledge systems for firms and agencies.', href: '/services/custom-software-development/', service: 'Custom Software Development' },
+  { tag: 'Fintech', title: 'Fintech & Finance', desc: 'AI-powered compliance checks, fraud signal analysis, customer onboarding agents, and reporting automation.', href: '/services/crm-automation/', service: 'CRM Automation' },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.devshinx.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Industries", "item": "https://www.devshinx.dev/industries/" }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<nav>
+  <a href="/" class="nav-logo">Dev<em>sphinx</em></a>
+  <a href="/" class="nav-back">← Back to Devsphinx</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top fu">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow eyebrow-ac">Industries</span></div>
+        <h1 class="hero-h1">Where AI-first systems create <em>the most value.</em></h1>
+        <p class="hero-desc">We focus on industries where manual work, fragmented systems, and operational complexity make AI-first builds harder — and more valuable. Each card links to the service that fits it best.</p>
+        <div class="btns"><a href="/#booking" class="btn btn-ac">Book a discovery call →</a></div>
+      </div>
+      <div class="hero-stats fu fd2">
+        <div class="hs-cell"><div class="hs-n">8</div><div class="hs-l">Industries served</div></div>
+        <div class="hs-cell"><div class="hs-n">0<em>%</em></div><div class="hs-l">Hourly billing</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="svc-hub-grid" style="grid-template-columns:repeat(2,1fr);">
+    {industries.map((ind) => (
+      <a class="svc-hub-card" href={ind.href}>
+        <span class="cs-hub-tag">{ind.tag}</span>
+        <h3>{ind.title}</h3>
+        <p>{ind.desc}</p>
+        <div class="svc-hub-foot">
+          <span class="svc-hub-price">{ind.service}</span>
+          <span class="svc-hub-link">See service →</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cta-section">
+  <div class="cta-inner fu">
+    <h2>Don't see your industry? Tell us your workflow anyway.</h2>
+    <div class="btns">
+      <a href="/#booking" class="btn btn-ac">Book a discovery call →</a>
+      <a href="/" class="btn btn-ghost">Back to Devsphinx</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="f-logo">Dev<em>sphinx</em></a>
+  <span class="f-copy">© 2026 Devsphinx · AI-First Software Studio</span>
+</footer>
+
+<script is:inline>
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</BaseLayout>

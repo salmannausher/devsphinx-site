@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-study.css';
+import '../../styles/service.css';
+
+const title = "Case Studies — Devsphinx";
+const description = "Real AI agent systems and AI-first products Devsphinx has shipped, with architecture and metrics.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "AI Revenue Engine", "url": "https://www.devshinx.dev/case-studies/revenue-engine/" },
+        { "@type": "ListItem", "position": 2, "name": "AI Dispatch Platform", "url": "https://www.devshinx.dev/case-studies/dispatch-platform/" }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.devshinx.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://www.devshinx.dev/case-studies/" }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<nav>
+  <a href="/" class="nav-logo">Dev<em>sphinx</em></a>
+  <a href="/" class="nav-back">← Back to Devsphinx</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top fu">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow eyebrow-ac">Case Studies</span></div>
+        <h1 class="hero-h1">Systems <em>in the wild.</em></h1>
+        <p class="hero-desc">First deployments are live across both agent systems and AI-first software builds. Full case studies with metrics and architecture diagrams, publishing as each system ships.</p>
+        <div class="btns"><a href="/#booking" class="btn btn-ac">Book a discovery call →</a></div>
+      </div>
+      <div class="hero-stats fu fd2">
+        <div class="hs-cell"><div class="hs-n">2</div><div class="hs-l">Systems live</div></div>
+        <div class="hs-cell"><div class="hs-n">0<em>%</em></div><div class="hs-l">Human input, once deployed</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="svc-hub-grid">
+    <a class="svc-hub-card" href="/case-studies/revenue-engine/">
+      <span class="cs-hub-tag">B2B SaaS · Agent System</span>
+      <h3>AI Revenue Engine</h3>
+      <p>8-agent Claude system — Prospector, Researcher, Copywriter, CRM Agent, Scheduler, Analyst — replacing a full-time SDR. 50 emails/day, 0.7 confidence threshold, 3-tier memory.</p>
+      <div class="cs-hub-metric">8 agents · 0 human inputs required</div>
+      <div class="svc-hub-foot">
+        <span class="status-badge"><span class="status-dot"></span>In development</span>
+        <span class="svc-hub-link">View case study →</span>
+      </div>
+    </a>
+    <a class="svc-hub-card" href="/case-studies/dispatch-platform/">
+      <span class="cs-hub-tag">Trucking · AI-First SaaS</span>
+      <h3>AI Dispatch Platform</h3>
+      <p>7-agent system automating dispatching, load sourcing, rate negotiation, driver communication, and back-office ops for US trucking carriers.</p>
+      <div class="cs-hub-metric">$240K/year saved per 10-truck carrier</div>
+      <div class="svc-hub-foot">
+        <span class="status-badge"><span class="status-dot"></span>In development</span>
+        <span class="svc-hub-link">View case study →</span>
+      </div>
+    </a>
+    <div class="svc-hub-card disabled">
+      <span class="cs-hub-tag" style="color:var(--t3);">Recruitment · Agent System</span>
+      <h3>Autonomous CV screening and candidate scoring agent</h3>
+      <p>Claude-based agent ingesting CVs, scoring candidates, drafting personalised outreach, and scheduling interviews — without recruiter input at any stage.</p>
+      <div class="cs-hub-metric" style="color:var(--t3);">Metrics publishing soon</div>
+      <div class="svc-hub-foot">
+        <span class="status-badge muted"><span class="status-dot"></span>In progress</span>
+      </div>
+    </div>
+    <div class="svc-hub-card disabled">
+      <span class="cs-hub-tag" style="color:var(--t3);">SaaS Platform · AI-First Software</span>
+      <h3>AI-first mentoring platform with intelligent matching</h3>
+      <p>Full SaaS product with Claude-powered mentor matching, session summarisation, goal tracking, and progress analysis built into the core architecture.</p>
+      <div class="cs-hub-metric" style="color:var(--t3);">Case study publishing soon</div>
+      <div class="svc-hub-foot">
+        <span class="status-badge muted"><span class="status-dot"></span>Coming soon</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cta-section">
+  <div class="cta-inner fu">
+    <h2>Want a system like one of these built for your team?</h2>
+    <div class="btns">
+      <a href="/#booking" class="btn btn-ac">Book a discovery call →</a>
+      <a href="/" class="btn btn-ghost">Back to Devsphinx</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="f-logo">Dev<em>sphinx</em></a>
+  <span class="f-copy">© 2026 Devsphinx · AI-First Software Studio</span>
+</footer>
+
+<script is:inline>
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</BaseLayout>

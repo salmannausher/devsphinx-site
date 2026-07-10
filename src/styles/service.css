@@ -39,6 +39,15 @@
 .svc-hub-price{font-family:var(--M);font-size:11px;color:var(--ac);}
 .svc-hub-link{font-family:var(--M);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);}
 
+/* Case studies / industries hub extras */
+.cs-hub-tag{font-family:var(--M);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ac);display:block;margin-bottom:12px;}
+.cs-hub-metric{font-family:var(--D);font-size:14px;font-weight:700;color:var(--t);letter-spacing:-0.01em;margin-bottom:16px;}
+.status-badge.muted{border-color:var(--b2);background:var(--bg3);color:var(--t3);}
+.status-badge.muted .status-dot{background:var(--t3);animation:none;}
+.svc-hub-card.disabled{cursor:default;}
+.svc-hub-card.disabled:hover{background:var(--bg2);transform:none;}
+.svc-hub-card.disabled h3{color:var(--t2);}
+
 @media(max-width:900px){
   .price-grid{grid-template-columns:1fr;}
   .svc-hub-grid,.svc-hub-grid.cols-3{grid-template-columns:1fr;}
