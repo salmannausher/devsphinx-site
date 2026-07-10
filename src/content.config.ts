@@ -10,6 +10,7 @@ const blog = defineCollection({
     cluster: z.enum(['ai-agents-101', 'saas-mvp', 'automation-smes', 'healthcare', 'founder-led']),
     clusterLabel: z.string(),
     keyword: z.string(),
+    readingTime: z.string(),
     draft: z.boolean().default(false),
   }),
 });

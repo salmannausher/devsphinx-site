@@ -34,29 +34,39 @@
 .blog-hero p strong{color:var(--t);font-weight:500;}
 .blog-wrap{max-width:1000px;margin:0 auto;padding:0 48px 100px;}
 
-/* Featured post — the one real, published guide */
-.post-featured{display:block;background:var(--bg2);border:1px solid var(--b);border-radius:16px;padding:48px;margin-bottom:20px;transition:background .2s,border-color .2s;}
-.post-featured:hover{background:var(--bg3);border-color:var(--b2);}
-.post-featured .article-tag{margin-bottom:20px;}
-.post-featured h2{font-family:var(--D);font-size:clamp(26px,3.4vw,36px);font-weight:800;letter-spacing:-0.02em;line-height:1.15;color:var(--t);margin-bottom:14px;}
-.post-featured p{font-size:15.5px;color:var(--t2);font-weight:300;line-height:1.75;max-width:640px;}
-.post-featured-foot{display:flex;align-items:center;gap:16px;margin-top:28px;}
-.pf-sep{flex:0 0 32px;height:1px;background:var(--b2);}
-.pf-read{font-family:var(--B);font-size:14px;font-weight:600;color:var(--ac);}
-
-/* Upcoming — content pipeline teaser, not yet published */
-.post-upcoming-label{font-family:var(--M);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin:8px 0 16px;}
-.post-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--b);border:1px solid var(--b);border-radius:10px;overflow:hidden;}
-.post-teaser{background:var(--bg2);padding:28px 32px;}
-.post-teaser .article-tag{background:transparent;color:var(--t3);border-color:var(--b2);margin-bottom:14px;}
-.post-teaser h3{font-family:var(--D);font-size:17px;font-weight:700;color:var(--t2);letter-spacing:-0.01em;line-height:1.35;margin-bottom:12px;}
-.post-soon{font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);}
+.post-upcoming-label{font-family:var(--M);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin:36px 0 16px;}
 .post-empty{text-align:center;padding:60px 20px;color:var(--t3);font-family:var(--M);font-size:12px;}
+
+/* Bento grid */
+.bento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch;}
+
+/* Featured card — the one real, published guide */
+.bento-featured{grid-column:span 2;position:relative;display:block;background:var(--bg2);border:1px solid var(--b);border-radius:20px;padding:44px;transition:background .2s,border-color .2s;}
+.bento-featured:hover{background:var(--bg3);border-color:var(--b2);}
+.bento-featured:hover .bento-arrow{background:var(--ac);}
+.bento-featured:hover .bento-arrow svg{stroke:#fff;}
+.bento-tag-solid{display:inline-flex;font-family:var(--B);font-size:11px;font-weight:700;letter-spacing:.02em;color:#1a0d05;background:var(--ac);border-radius:100px;padding:6px 16px;margin-bottom:24px;}
+.bento-featured h2{font-family:var(--D);font-size:clamp(24px,3.2vw,34px);font-weight:800;letter-spacing:-0.02em;line-height:1.18;color:var(--t);margin-bottom:14px;max-width:520px;}
+.bento-featured p{font-size:15px;color:var(--t2);font-weight:300;line-height:1.75;max-width:480px;margin-bottom:40px;}
+.bento-featured-foot{display:flex;align-items:center;gap:12px;}
+.bento-avatar{width:28px;height:28px;border-radius:50%;background:var(--bg3);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-family:var(--M);font-size:9px;font-weight:500;color:var(--t2);flex-shrink:0;}
+.bento-meta-txt{font-family:var(--M);font-size:11px;color:var(--t3);}
+.bento-arrow{position:absolute;right:44px;bottom:44px;width:44px;height:44px;border-radius:50%;background:var(--t);display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.bento-arrow svg{width:16px;height:16px;stroke:var(--bg);stroke-width:2;fill:none;transition:stroke .2s;}
+
+/* Secondary / teaser cards — icon-led, clearly not-yet-published */
+.bento-card{grid-column:span 1;background:var(--bg2);border:1px solid var(--b);border-radius:20px;padding:28px;display:flex;flex-direction:column;transition:background .2s,border-color .2s;}
+.bento-card:hover{background:var(--bg3);border-color:var(--b2);}
+.bento-icon{width:44px;height:44px;border-radius:12px;background:var(--ac2);border:1px solid rgba(212,80,26,.22);display:flex;align-items:center;justify-content:center;margin-bottom:20px;flex-shrink:0;}
+.bento-icon svg{width:19px;height:19px;stroke:var(--ac);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.bento-card h3{font-family:var(--D);font-size:16px;font-weight:700;color:var(--t2);letter-spacing:-0.01em;line-height:1.35;margin-bottom:auto;padding-bottom:16px;}
+.bento-soon{font-family:var(--M);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);border-top:1px solid var(--b);padding-top:14px;}
 
 @media(max-width:900px){
   .article{padding:56px 20px 72px;}
   .blog-hero{padding:100px 20px 44px;}
   .blog-wrap{padding:0 20px 72px;}
-  .post-featured{padding:32px 24px;}
-  .post-grid{grid-template-columns:1fr;}
+  .bento-grid{grid-template-columns:1fr;}
+  .bento-featured{grid-column:span 1;padding:32px 24px;}
+  .bento-arrow{right:24px;bottom:24px;}
 }

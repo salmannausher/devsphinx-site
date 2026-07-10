@@ -13,12 +13,30 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 const featured = posts[0];
 const rest = posts.slice(1);
 
-// Topics queued in the 90-day content plan, not yet written.
+const AUTHOR_INITIALS = 'SN';
+
+// Topics queued in the 90-day content plan, not yet written — icons match the cluster.
 const upcoming = [
-  { clusterLabel: 'SaaS MVP', title: 'SaaS MVP Development Cost Breakdown (2026)' },
-  { clusterLabel: 'Automation for SMEs', title: 'Automating Sales Outreach With AI Agents, Step by Step' },
-  { clusterLabel: 'Healthcare', title: "HIPAA-Compliant AI: What's Actually Allowed" },
-  { clusterLabel: 'Founder-Led', title: 'Why We Build Software That Thinks' },
+  {
+    clusterLabel: 'SaaS MVP',
+    title: 'SaaS MVP Development Cost Breakdown (2026)',
+    icon: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+  },
+  {
+    clusterLabel: 'Automation for SMEs',
+    title: 'Automating Sales Outreach With AI Agents, Step by Step',
+    icon: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  },
+  {
+    clusterLabel: 'Healthcare',
+    title: "HIPAA-Compliant AI: What's Actually Allowed",
+    icon: '<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
+  },
+  {
+    clusterLabel: 'Founder-Led',
+    title: 'Why We Build Software That Thinks',
+    icon: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  },
 ];
 ---
 
@@ -37,42 +55,35 @@ const upcoming = [
   {!featured ? (
     <p class="post-empty">First posts publishing soon.</p>
   ) : (
-    <>
-      <a class="post-featured fu fd1" href={`/blog/${featured.id}/`}>
-        <span class="article-tag">{featured.data.clusterLabel}</span>
+    <div class="bento-grid fu fd1">
+      <a class="bento-featured" href={`/blog/${featured.id}/`}>
+        <span class="bento-tag-solid">Featured Guide</span>
         <h2>{featured.data.title}</h2>
         <p>{featured.data.description}</p>
-        <div class="post-featured-foot">
-          <span class="article-date">{featured.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-          <span class="pf-sep"></span>
-          <span class="pf-read">Read Guide →</span>
+        <div class="bento-featured-foot">
+          <span class="bento-avatar">{AUTHOR_INITIALS}</span>
+          <span class="bento-meta-txt">{featured.data.readingTime} · {featured.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
         </div>
+        <span class="bento-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
-      {rest.length > 0 && (
-        <div class="post-grid fu fd2" style="margin-bottom:20px;">
-          {rest.map((post) => (
-            <a class="post-teaser" href={`/blog/${post.id}/`} style="display:block;">
-              <span class="article-tag">{post.data.clusterLabel}</span>
-              <h3 style="color:var(--t);">{post.data.title}</h3>
-              <span class="article-date">{post.data.publishDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-            </a>
-          ))}
-        </div>
-      )}
-    </>
-  )}
+      {rest.map((post) => (
+        <a class="bento-card" href={`/blog/${post.id}/`}>
+          <span class="bento-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+          <h3 style="color:var(--t);">{post.data.title}</h3>
+          <span class="bento-soon" style="color:var(--ac);">{post.data.readingTime}</span>
+        </a>
+      ))}
 
-  <div class="post-upcoming-label fu fd2">Coming up next</div>
-  <div class="post-grid fu fd3">
-    {upcoming.map((item) => (
-      <div class="post-teaser">
-        <span class="article-tag">{item.clusterLabel}</span>
-        <h3>{item.title}</h3>
-        <span class="post-soon">Coming soon</span>
-      </div>
-    ))}
-  </div>
+      {upcoming.map((item) => (
+        <div class="bento-card">
+          <span class="bento-icon" aria-hidden="true" set:html={`<svg viewBox="0 0 24 24">${item.icon}</svg>`} />
+          <h3>{item.title}</h3>
+          <span class="bento-soon">Coming soon</span>
+        </div>
+      ))}
+    </div>
+  )}
 </div>
 
 <footer>
