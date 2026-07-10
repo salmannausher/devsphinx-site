@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-study.css';
+import '../../styles/service.css';
+
+const title = "Healthcare Software Development Company — Devsphinx";
+const description = "HIPAA-aware scheduling, intake, and clinical workflow software, designed for compliance from the architecture phase.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Healthcare Software Development",
+      "provider": { "@id": "https://www.devshinx.dev/#org" },
+      "serviceType": "Healthcare software development",
+      "areaServed": "Worldwide",
+      "description": description,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "15000",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": "15000", "priceCurrency": "USD" }
+      },
+      "url": "https://www.devshinx.dev/services/healthcare-software-development/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Are you HIPAA compliant?", "acceptedAnswer": { "@type": "Answer", "text": "Builds are designed around HIPAA and data-handling requirements from the architecture phase — access controls, audit logging, and encrypted storage decided before a single screen is designed." } },
+        { "@type": "Question", "name": "Can you integrate with our EHR?", "acceptedAnswer": { "@type": "Answer", "text": "In most cases yes, depending on the EHR's integration options — this is confirmed during the discovery call and architecture phase." } },
+        { "@type": "Question", "name": "Who owns the data?", "acceptedAnswer": { "@type": "Answer", "text": "You do. Devsphinx builds the system and hands over full ownership and documentation; no data is retained after handover unless a support retainer is in place." } },
+        { "@type": "Question", "name": "Do you sign a BAA?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, a Business Associate Agreement is signed for any engagement involving PHI, alongside the standard NDA." } },
+        { "@type": "Question", "name": "What happens if you're at capacity, or I need support after launch?", "acceptedAnswer": { "@type": "Answer", "text": "We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Ongoing support runs on a monthly retainer with response expectations agreed upfront." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.devshinx.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Healthcare Software Development", "item": "https://www.devshinx.dev/services/healthcare-software-development/" }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<nav>
+  <a href="/" class="nav-logo">Dev<em>sphinx</em></a>
+  <a href="/" class="nav-back">← Back to Devsphinx</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top fu">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow eyebrow-ac">Services · Healthcare Software Development</span></div>
+        <h1 class="hero-h1">Healthcare software that respects <em>compliance</em> from day one.</h1>
+        <p class="hero-desc">Patient intake, scheduling, and clinical workflow automation, built with access controls and audit logging decided before a single screen is designed — not added after a compliance review flags it.</p>
+        <div class="btns"><a href="/#booking" class="btn btn-ac">Book a discovery call →</a></div>
+      </div>
+      <div class="hero-stats fu fd2">
+        <div class="hs-cell"><div class="hs-n">$15k<em>+</em></div><div class="hs-l">Starting price, fixed</div></div>
+        <div class="hs-cell"><div class="hs-n">BAA</div><div class="hs-l">Signed on any PHI engagement</div></div>
+        <div class="hs-cell"><div class="hs-n">0<em>%</em></div><div class="hs-l">Hourly billing</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">The problem</div>
+  <h2 class="cs-h2">Retrofitting compliance is slower<br>and riskier than designing for it.</h2>
+  <p class="cs-p">Generic automation tools weren't built with PHI in mind, and adding compliance after launch — once a review flags what's missing — means rebuilding data flows that should have been designed correctly the first time.</p>
+  <div class="prob-grid fu fd1">
+    <div class="prob-card prob-old">
+      <div class="prob-label">Compliance as an afterthought</div>
+      <h3>Build first, fix the review findings later.</h3>
+      <p>A generic tool gets adopted, then a compliance review finds gaps that require rebuilding core data flows.</p>
+      <ul class="prob-list">
+        <li>Access controls bolted on after the fact</li>
+        <li>Audit logging gaps discovered during a review</li>
+        <li>Rework that costs more than doing it right the first time</li>
+      </ul>
+    </div>
+    <div class="prob-card prob-new">
+      <div class="prob-label">Compliance-first architecture</div>
+      <h3>Design the constraints in from day one.</h3>
+      <p>Access control, audit logging, and data handling decided during the architecture phase, before any UI is built.</p>
+      <ul class="prob-list">
+        <li>Access controls are part of the initial data model</li>
+        <li>Every action logged from the first deployment</li>
+        <li>Nothing to rebuild when the compliance review happens</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">What we build</div>
+  <h2 class="cs-h2">Scheduling, intake, and workflow<br>systems built for PHI.</h2>
+  <p class="cs-p">Data handling, access control, and audit requirements treated as first-class constraints — not an afterthought bolted on when a compliance review demands it.</p>
+  <div class="con-card" style="max-width:680px;margin-top:24px;">
+    <div class="con-lbl">Deliverables</div>
+    <ul class="con-list">
+      <li>HIPAA-aware architecture and data handling design</li>
+      <li>Scheduling, intake, or clinical workflow automation build</li>
+      <li>Audit logging and access control</li>
+      <li>Documentation for your compliance review</li>
+    </ul>
+  </div>
+  <div class="stack-chips fu fd1">
+    <span class="s-chip pri">Claude API</span><span class="s-chip pri">Node.js</span><span class="s-chip pri">PostgreSQL</span><span class="s-chip">Next.js</span><span class="s-chip">Ruby on Rails</span><span class="s-chip">MCP</span>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">Process &amp; pricing</div>
+  <h2 class="cs-h2">Compliance-aware architecture,<br>before any UI work.</h2>
+  <p class="cs-p">The architecture phase for healthcare builds is where data handling and access control get decided — before a single screen is designed.</p>
+  <div class="step-list fu fd1">
+    <div class="step-row"><span class="step-n">01</span><span class="step-txt"><strong>Discovery call</strong> — free, 30 minutes. We map the workflow and the compliance requirements involved.</span></div>
+    <div class="step-row"><span class="step-n">02</span><span class="step-txt"><strong>Scoped proposal</strong> — fixed price and timeline, within 5 business days.</span></div>
+    <div class="step-row"><span class="step-n">03</span><span class="step-txt"><strong>Compliance-aware architecture</strong> — access control, audit logging, and data handling designed before any UI work.</span></div>
+    <div class="step-row"><span class="step-n">04</span><span class="step-txt"><strong>Build, with weekly demos</strong> — on real data, in a staging environment you can access.</span></div>
+    <div class="step-row"><span class="step-n">05</span><span class="step-txt"><strong>Deploy + hypercare</strong> — 2 weeks of tuning after launch, optional retainer after that.</span></div>
+  </div>
+  <div class="price-grid fu fd2">
+    <div class="price-cell"><div class="price-n">$15,000</div><div class="price-l">Starting price</div></div>
+    <div class="price-cell"><div class="price-n">BAA + NDA</div><div class="price-l">Signed before any PHI is shared</div></div>
+    <div class="price-cell"><div class="price-n">$2,500/mo</div><div class="price-l">Optional retainer</div></div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">FAQs</div>
+  <h2 class="cs-h2">Questions before<br>the call.</h2>
+  <div class="faq-wrap fu fd1">
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="hc1" onclick="toggleFaq(this)">Are you HIPAA compliant?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="hc1"><div class="faq-inner">Builds are designed around HIPAA and data-handling requirements from the architecture phase — access controls, audit logging, and encrypted storage decided before a single screen is designed.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="hc2" onclick="toggleFaq(this)">Can you integrate with our EHR?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="hc2"><div class="faq-inner">In most cases yes, depending on the EHR's integration options — this is confirmed during the discovery call and architecture phase.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="hc3" onclick="toggleFaq(this)">Who owns the data?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="hc3"><div class="faq-inner">You do. Devsphinx builds the system and hands over full ownership and documentation; no data is retained after handover unless a support retainer is in place.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="hc4" onclick="toggleFaq(this)">Do you sign a BAA?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="hc4"><div class="faq-inner">Yes, a Business Associate Agreement is signed for any engagement involving PHI, alongside the standard NDA.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="hc5" onclick="toggleFaq(this)">What happens if you're at capacity, or I need support after launch?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="hc5"><div class="faq-inner">We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Ongoing support runs on a monthly retainer with response expectations agreed upfront.</div></div>
+    </div>
+  </div>
+  <div class="related-links fu fd2">
+    <a href="/services/ai-workflow-automation/">AI Workflow Automation →</a>
+    <a href="/services/custom-software-development/">Custom Software Development →</a>
+    <a href="/#founder">About Devsphinx →</a>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cta-section">
+  <div class="cta-inner fu">
+    <h2>Need software that treats compliance as a constraint, not an afterthought?</h2>
+    <div class="btns">
+      <a href="/#booking" class="btn btn-ac">Book a discovery call →</a>
+      <a href="/" class="btn btn-ghost">Back to Devsphinx</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="f-logo">Dev<em>sphinx</em></a>
+  <span class="f-copy">© 2026 Devsphinx · AI-First Software Studio</span>
+</footer>
+
+<script is:inline>
+function toggleFaq(btn){const row=btn.closest('.faq-row'),was=row.classList.contains('open');document.querySelectorAll('.faq-row.open').forEach(r=>{r.classList.remove('open');const b=r.querySelector('.faq-btn');if(b)b.setAttribute('aria-expanded','false');});if(!was){row.classList.add('open');btn.setAttribute('aria-expanded','true');}else{btn.setAttribute('aria-expanded','false');}}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</BaseLayout>

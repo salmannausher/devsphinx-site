@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-study.css';
+import '../../styles/service.css';
+
+const title = "Custom Software Development Agency — Devsphinx";
+const description = "Bespoke software with AI built into the architecture from the start — fixed price, founder-led, production-grade.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Custom Software Development",
+      "provider": { "@id": "https://www.devshinx.dev/#org" },
+      "serviceType": "Custom software development",
+      "areaServed": "Worldwide",
+      "description": description,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "10000",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": "10000", "priceCurrency": "USD" }
+      },
+      "url": "https://www.devshinx.dev/services/custom-software-development/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How is this different from a SaaS MVP?", "acceptedAnswer": { "@type": "Answer", "text": "A SaaS MVP is a new product built to test a hypothesis with outside customers. Custom software is usually built for internal use or a specific workflow inside your existing business — the scoping and pricing differ accordingly." } },
+        { "@type": "Question", "name": "Do you work with our in-house team?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — we regularly work alongside an existing team, handing off documentation and access rather than building in isolation." } },
+        { "@type": "Question", "name": "What tech stack do you use?", "acceptedAnswer": { "@type": "Answer", "text": "Most commonly Next.js, React, Node.js, and Ruby on Rails, chosen based on what fits the workflow and what your team already knows." } },
+        { "@type": "Question", "name": "Can you take over an existing codebase?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — a codebase review is part of the discovery process for any existing project before we scope new work." } },
+        { "@type": "Question", "name": "What happens if you're at capacity, or I need support after launch?", "acceptedAnswer": { "@type": "Answer", "text": "We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Ongoing support runs on a monthly retainer with response expectations agreed upfront." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.devshinx.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "Custom Software Development", "item": "https://www.devshinx.dev/services/custom-software-development/" }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<nav>
+  <a href="/" class="nav-logo">Dev<em>sphinx</em></a>
+  <a href="/" class="nav-back">← Back to Devsphinx</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top fu">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow eyebrow-ac">Services · Custom Software Development</span></div>
+        <h1 class="hero-h1">Software built around your workflow, <em>not a template.</em></h1>
+        <p class="hero-desc">When off-the-shelf software makes you bend your process to fit its features, it's time for something built around how your business actually works.</p>
+        <div class="btns"><a href="/#booking" class="btn btn-ac">Book a discovery call →</a></div>
+      </div>
+      <div class="hero-stats fu fd2">
+        <div class="hs-cell"><div class="hs-n">$10k<em>+</em></div><div class="hs-l">Typical starting scope</div></div>
+        <div class="hs-cell"><div class="hs-n">4<em>–8</em></div><div class="hs-l">Weeks to production</div></div>
+        <div class="hs-cell"><div class="hs-n">0<em>%</em></div><div class="hs-l">Hourly billing</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">The problem</div>
+  <h2 class="cs-h2">Generic tools force compromises.<br>Compromises compound as you grow.</h2>
+  <p class="cs-p">A workaround here, a manual export there, a feature you pay for but never use. Every off-the-shelf tool asks you to bend your process to fit its features — and every one of those small compromises gets more expensive the longer your team works around it.</p>
+  <div class="prob-grid fu fd1">
+    <div class="prob-card prob-old">
+      <div class="prob-label">Off-the-shelf software</div>
+      <h3>Built for everyone. Fits no one exactly.</h3>
+      <p>Generic tools are built to serve the widest possible market, which means your specific workflow is never quite what they had in mind.</p>
+      <ul class="prob-list">
+        <li>Manual exports and re-entry to bridge the gaps</li>
+        <li>Paying for a feature set most of which you'll never use</li>
+        <li>Workarounds that become permanent process</li>
+      </ul>
+    </div>
+    <div class="prob-card prob-new">
+      <div class="prob-label">Custom software</div>
+      <h3>Built for your workflow, specifically.</h3>
+      <p>Designed around how your business actually operates, with AI embedded wherever it removes manual work.</p>
+      <ul class="prob-list">
+        <li>No re-entry — your workflow is the data model</li>
+        <li>Only the features your team actually needs</li>
+        <li>AI handles the manual steps a generic tool never could</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">What we build</div>
+  <h2 class="cs-h2">A system designed around<br>your workflow, not a template.</h2>
+  <p class="cs-p">Not a template with your logo on it — an architecture scoped to your actual process, with AI embedded wherever it removes manual work.</p>
+  <div class="con-card" style="max-width:680px;margin-top:24px;">
+    <div class="con-lbl">Deliverables</div>
+    <ul class="con-list">
+      <li>Custom architecture, scoped to your workflow</li>
+      <li>Production deployment and documentation</li>
+      <li>Integrations with your existing tools</li>
+      <li>Handover or ongoing retainer, your choice</li>
+    </ul>
+  </div>
+  <div class="stack-chips fu fd1">
+    <span class="s-chip pri">Next.js</span><span class="s-chip pri">React</span><span class="s-chip pri">Node.js</span><span class="s-chip">Ruby on Rails</span><span class="s-chip">Claude API</span><span class="s-chip">PostgreSQL</span>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">Process &amp; pricing</div>
+  <h2 class="cs-h2">Scoped to your workflow,<br>priced before we start.</h2>
+  <p class="cs-p">Complexity varies more here than in any other service we offer — the proposal after discovery is where the real number gets set.</p>
+  <div class="step-list fu fd1">
+    <div class="step-row"><span class="step-n">01</span><span class="step-txt"><strong>Discovery call</strong> — free, 30 minutes. We map the workflow and where the compromises are costing you.</span></div>
+    <div class="step-row"><span class="step-n">02</span><span class="step-txt"><strong>Scoped proposal</strong> — fixed price and timeline, within 5 business days.</span></div>
+    <div class="step-row"><span class="step-n">03</span><span class="step-txt"><strong>Architecture design</strong> — data model and AI layer designed around your workflow. You approve before we build.</span></div>
+    <div class="step-row"><span class="step-n">04</span><span class="step-txt"><strong>Build, with weekly demos</strong> — on real data, in a staging environment you can access.</span></div>
+    <div class="step-row"><span class="step-n">05</span><span class="step-txt"><strong>Deploy + hypercare</strong> — 2 weeks of tuning after launch, optional retainer after that.</span></div>
+  </div>
+  <div class="price-grid fu fd2">
+    <div class="price-cell"><div class="price-n">$10,000+</div><div class="price-l">Typical starting scope</div></div>
+    <div class="price-cell"><div class="price-n">$10–30k</div><div class="price-l">Most complete engagements</div></div>
+    <div class="price-cell"><div class="price-n">$2,500/mo</div><div class="price-l">Optional retainer</div></div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">FAQs</div>
+  <h2 class="cs-h2">Questions before<br>the call.</h2>
+  <div class="faq-wrap fu fd1">
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="cs1" onclick="toggleFaq(this)">How is this different from a SaaS MVP?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="cs1"><div class="faq-inner">A SaaS MVP is a new product built to test a hypothesis with outside customers. Custom software is usually built for internal use or a specific workflow inside your existing business — the scoping and pricing differ accordingly.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="cs2" onclick="toggleFaq(this)">Do you work with our in-house team?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="cs2"><div class="faq-inner">Yes — we regularly work alongside an existing team, handing off documentation and access rather than building in isolation.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="cs3" onclick="toggleFaq(this)">What tech stack do you use?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="cs3"><div class="faq-inner">Most commonly Next.js, React, Node.js, and Ruby on Rails, chosen based on what fits the workflow and what your team already knows.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="cs4" onclick="toggleFaq(this)">Can you take over an existing codebase?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="cs4"><div class="faq-inner">Yes — a codebase review is part of the discovery process for any existing project before we scope new work.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="cs5" onclick="toggleFaq(this)">What happens if you're at capacity, or I need support after launch?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="cs5"><div class="faq-inner">We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Ongoing support runs on a monthly retainer with response expectations agreed upfront.</div></div>
+    </div>
+  </div>
+  <div class="related-links fu fd2">
+    <a href="/services/saas-mvp-development/">SaaS MVP Development →</a>
+    <a href="/services/ruby-on-rails-development/">Ruby on Rails Development →</a>
+    <a href="/#founder">About Devsphinx →</a>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cta-section">
+  <div class="cta-inner fu">
+    <h2>Working around software that doesn't fit how you work?</h2>
+    <div class="btns">
+      <a href="/#booking" class="btn btn-ac">Book a discovery call →</a>
+      <a href="/" class="btn btn-ghost">Back to Devsphinx</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="f-logo">Dev<em>sphinx</em></a>
+  <span class="f-copy">© 2026 Devsphinx · AI-First Software Studio</span>
+</footer>
+
+<script is:inline>
+function toggleFaq(btn){const row=btn.closest('.faq-row'),was=row.classList.contains('open');document.querySelectorAll('.faq-row.open').forEach(r=>{r.classList.remove('open');const b=r.querySelector('.faq-btn');if(b)b.setAttribute('aria-expanded','false');});if(!was){row.classList.add('open');btn.setAttribute('aria-expanded','true');}else{btn.setAttribute('aria-expanded','false');}}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</BaseLayout>

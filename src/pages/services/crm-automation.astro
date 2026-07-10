@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/case-study.css';
+import '../../styles/service.css';
+
+const title = "CRM Automation Services — Devsphinx";
+const description = "AI agents layered onto HubSpot, Salesforce, and custom CRMs — research, outreach, and data hygiene, automated.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "CRM Automation",
+      "provider": { "@id": "https://www.devshinx.dev/#org" },
+      "serviceType": "CRM automation",
+      "areaServed": "Worldwide",
+      "description": description,
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "6000",
+        "priceSpecification": { "@type": "PriceSpecification", "minPrice": "6000", "priceCurrency": "USD" }
+      },
+      "url": "https://www.devshinx.dev/services/crm-automation/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Does this replace our CRM?", "acceptedAnswer": { "@type": "Answer", "text": "No — the agent works on top of the CRM you already run your pipeline in. It doesn't replace HubSpot or Salesforce; it does the research, enrichment, and hygiene work your team currently does by hand." } },
+        { "@type": "Question", "name": "Which CRMs do you support?", "acceptedAnswer": { "@type": "Answer", "text": "HubSpot and Salesforce most commonly, plus custom-built or less common CRMs where an API or MCP integration is available." } },
+        { "@type": "Question", "name": "Can it write back to the CRM automatically?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, within permission boundaries you define — read/write access is scoped during the architecture phase, and destructive actions like deleting records are excluded by default." } },
+        { "@type": "Question", "name": "How is this different from native CRM automation rules?", "acceptedAnswer": { "@type": "Answer", "text": "Native workflow rules fire on exact triggers and can't judge whether a deal is genuinely stale or just slow. An AI agent reasons about the record — research, context, and judgment — before acting." } },
+        { "@type": "Question", "name": "What happens if you're at capacity, or I need support after launch?", "acceptedAnswer": { "@type": "Answer", "text": "We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Ongoing support runs on a monthly retainer with response expectations agreed upfront." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.devshinx.dev/" },
+        { "@type": "ListItem", "position": 2, "name": "CRM Automation", "item": "https://www.devshinx.dev/services/crm-automation/" }
+      ]
+    }
+  ]
+};
+---
+
+<BaseLayout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<nav>
+  <a href="/" class="nav-logo">Dev<em>sphinx</em></a>
+  <a href="/" class="nav-back">← Back to Devsphinx</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-top fu">
+      <div>
+        <div class="hero-eyebrow"><span class="eyebrow eyebrow-ac">Services · CRM Automation</span></div>
+        <h1 class="hero-h1">Your CRM, <em>with an agent</em> already working it.</h1>
+        <p class="hero-desc">HubSpot and Salesforce store your pipeline. They don't research leads, chase stale deals, or clean up bad data on their own — an agent layered on top can.</p>
+        <div class="btns"><a href="/#booking" class="btn btn-ac">Book a discovery call →</a></div>
+      </div>
+      <div class="hero-stats fu fd2">
+        <div class="hs-cell"><div class="hs-n">$6k<em>+</em></div><div class="hs-l">Starting price, fixed</div></div>
+        <div class="hs-cell"><div class="hs-n">$8<em>–12k</em></div><div class="hs-l">Typical complete integration</div></div>
+        <div class="hs-cell"><div class="hs-n">0<em>%</em></div><div class="hs-l">Hourly billing</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">The problem</div>
+  <h2 class="cs-h2">Your CRM stores the pipeline.<br>Your reps still clean it up by hand.</h2>
+  <p class="cs-p">Reps spend hours a week on CRM hygiene — updating stages, logging calls, chasing missing fields — instead of selling. Native workflow rules only fire on exact triggers and can't judge whether a deal is actually stale or just moving slowly.</p>
+  <div class="prob-grid fu fd1">
+    <div class="prob-card prob-old">
+      <div class="prob-label">Native CRM workflows</div>
+      <h3>Fire on triggers. Never judge context.</h3>
+      <p>A workflow rule can flag a deal untouched for 14 days — it can't tell you whether that's actually a problem.</p>
+      <ul class="prob-list">
+        <li>Flags every stale deal the same way, context-free</li>
+        <li>Can't research a lead or enrich a record</li>
+        <li>Data hygiene still falls on the rep</li>
+      </ul>
+    </div>
+    <div class="prob-card prob-new">
+      <div class="prob-label">An AI agent on your CRM</div>
+      <h3>Reasons about the record before acting.</h3>
+      <p>Reads the deal's history and context, decides what's actually stale versus just slow, and acts accordingly.</p>
+      <ul class="prob-list">
+        <li>Flags stale deals with a reason, not just a timestamp</li>
+        <li>Researches and enriches leads automatically</li>
+        <li>Keeps records clean without a rep doing it manually</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">What we build</div>
+  <h2 class="cs-h2">An agent layer on top of<br>the CRM you already use.</h2>
+  <p class="cs-p">Not a replacement for HubSpot or Salesforce — an agent that works inside the CRM you already run your pipeline on, handling the research and hygiene work your team currently does by hand.</p>
+  <div class="con-card" style="max-width:680px;margin-top:24px;">
+    <div class="con-lbl">Deliverables</div>
+    <ul class="con-list">
+      <li>Agent integration with your CRM — HubSpot, Salesforce, or custom</li>
+      <li>Lead enrichment and research automation</li>
+      <li>Deal-hygiene monitoring and stale-deal flagging with reasoning</li>
+      <li>Reporting on what the agent touched and why</li>
+    </ul>
+  </div>
+  <div class="stack-chips fu fd1">
+    <span class="s-chip pri">Claude API</span><span class="s-chip pri">MCP</span><span class="s-chip">HubSpot</span><span class="s-chip">Salesforce</span><span class="s-chip">PostgreSQL</span><span class="s-chip">Slack</span>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">Process &amp; pricing</div>
+  <h2 class="cs-h2">Fixed price,<br>scoped to your pipeline.</h2>
+  <p class="cs-p">Cost depends on how many workflows the agent handles and how many CRM objects it needs read/write access to.</p>
+  <div class="step-list fu fd1">
+    <div class="step-row"><span class="step-n">01</span><span class="step-txt"><strong>Discovery call</strong> — free, 30 minutes. We map where CRM hygiene is costing your team the most time.</span></div>
+    <div class="step-row"><span class="step-n">02</span><span class="step-txt"><strong>Scoped proposal</strong> — fixed price and timeline, within 5 business days.</span></div>
+    <div class="step-row"><span class="step-n">03</span><span class="step-txt"><strong>Architecture design</strong> — permission boundaries and read/write access defined before we build.</span></div>
+    <div class="step-row"><span class="step-n">04</span><span class="step-txt"><strong>Build, with weekly demos</strong> — on real data, in a staging environment you can access.</span></div>
+    <div class="step-row"><span class="step-n">05</span><span class="step-txt"><strong>Deploy + hypercare</strong> — 2 weeks of tuning after launch, optional retainer after that.</span></div>
+  </div>
+  <div class="price-grid fu fd2">
+    <div class="price-cell"><div class="price-n">$6,000</div><div class="price-l">Starting price</div></div>
+    <div class="price-cell"><div class="price-n">$8–12k</div><div class="price-l">Typical complete integration</div></div>
+    <div class="price-cell"><div class="price-n">$2,500/mo</div><div class="price-l">Optional retainer</div></div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cs fu">
+  <div class="cs-eye">FAQs</div>
+  <h2 class="cs-h2">Questions before<br>the call.</h2>
+  <div class="faq-wrap fu fd1">
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="crm1" onclick="toggleFaq(this)">Does this replace our CRM?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="crm1"><div class="faq-inner">No — the agent works on top of the CRM you already run your pipeline in. It doesn't replace HubSpot or Salesforce; it does the research, enrichment, and hygiene work your team currently does by hand.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="crm2" onclick="toggleFaq(this)">Which CRMs do you support?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="crm2"><div class="faq-inner">HubSpot and Salesforce most commonly, plus custom-built or less common CRMs where an API or MCP integration is available.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="crm3" onclick="toggleFaq(this)">Can it write back to the CRM automatically?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="crm3"><div class="faq-inner">Yes, within permission boundaries you define — read/write access is scoped during the architecture phase, and destructive actions like deleting records are excluded by default.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="crm4" onclick="toggleFaq(this)">How is this different from native CRM automation rules?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="crm4"><div class="faq-inner">Native workflow rules fire on exact triggers and can't judge whether a deal is genuinely stale or just slow. An AI agent reasons about the record — research, context, and judgment — before acting.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="crm5" onclick="toggleFaq(this)">What happens if you're at capacity, or I need support after launch?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="crm5"><div class="faq-inner">We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Ongoing support runs on a monthly retainer with response expectations agreed upfront.</div></div>
+    </div>
+  </div>
+  <div class="related-links fu fd2">
+    <a href="/services/ai-agent-development/">AI Agent Development →</a>
+    <a href="/case-studies/revenue-engine/">See the AI Revenue Engine case study →</a>
+    <a href="/#founder">About Devsphinx →</a>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="cta-section">
+  <div class="cta-inner fu">
+    <h2>Tired of your CRM being a dumping ground instead of a working pipeline?</h2>
+    <div class="btns">
+      <a href="/#booking" class="btn btn-ac">Book a discovery call →</a>
+      <a href="/" class="btn btn-ghost">Back to Devsphinx</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="/" class="f-logo">Dev<em>sphinx</em></a>
+  <span class="f-copy">© 2026 Devsphinx · AI-First Software Studio</span>
+</footer>
+
+<script is:inline>
+function toggleFaq(btn){const row=btn.closest('.faq-row'),was=row.classList.contains('open');document.querySelectorAll('.faq-row.open').forEach(r=>{r.classList.remove('open');const b=r.querySelector('.faq-btn');if(b)b.setAttribute('aria-expanded','false');});if(!was){row.classList.add('open');btn.setAttribute('aria-expanded','true');}else{btn.setAttribute('aria-expanded','false');}}
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis');}),{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+</script>
+</BaseLayout>
