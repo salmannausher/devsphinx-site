@@ -167,11 +167,14 @@ hr.rule{border:none;border-top:1px solid var(--b);}
 
 /* ── PROCESS ── */
 #process{background:var(--bg2);}
-.proc-list{border:1px solid var(--b);border-radius:10px;overflow:hidden;}
-.proc-row{display:grid;grid-template-columns:72px 1fr 120px;align-items:start;gap:28px;padding:36px 40px;border-bottom:1px solid var(--b);transition:background .18s;}
+.proc-list{position:relative;border:1px solid var(--b);border-radius:10px;overflow:hidden;}
+.proc-row{position:relative;z-index:1;display:grid;grid-template-columns:72px 1fr 120px;align-items:start;gap:28px;padding:36px 40px;border-bottom:1px solid var(--b);transition:background .18s;}
 .proc-row:last-child{border-bottom:none;}
 .proc-row:hover{background:rgba(255,255,255,.015);}
-.proc-n{font-family:var(--D);font-size:42px;font-weight:800;line-height:1;color:var(--b2);letter-spacing:-0.04em;padding-top:3px;}
+.proc-n{font-family:var(--D);font-size:42px;font-weight:800;line-height:1;color:var(--b2);letter-spacing:-0.04em;padding-top:3px;transition:color .4s,text-shadow .4s;}
+.proc-row.proc-active .proc-n{color:var(--ac);text-shadow:0 0 20px rgba(212,80,26,.3);}
+.proc-line{position:absolute;width:2px;background:var(--b2);z-index:0;}
+.proc-fill{position:absolute;width:2px;background:var(--ac);height:0;box-shadow:0 0 8px rgba(212,80,26,.5);z-index:0;}
 .proc-body h3{font-size:18px;font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-0.01em;}
 .proc-body p{font-size:14px;color:var(--t2);font-weight:300;line-height:1.78;max-width:520px;}
 .p-badge{font-family:var(--M);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:5px 13px;border-radius:100px;margin-top:6px;white-space:nowrap;text-align:center;}
@@ -355,6 +358,7 @@ footer{padding:40px 48px;border-top:1px solid var(--b);}
   .stat-cell:nth-child(4){border-top:1px solid var(--b);border-right:none;}
   .srv-grid,.srv-grid-3,.why-grid,.work-grid,.mf-grid,.ind-grid{grid-template-columns:1fr;}
   .proc-row{grid-template-columns:48px 1fr;gap:16px;}.p-badge{display:none;}
+  .proc-line,.proc-fill{display:none;}
   .app-inner{grid-template-columns:1fr;gap:28px;}.app-divider{display:none;}.app-side{padding:0 !important;}
   footer{padding:36px 20px;}.foot-top{grid-template-columns:1fr;gap:24px;}
   .foot-bottom{flex-direction:column;align-items:flex-start;}

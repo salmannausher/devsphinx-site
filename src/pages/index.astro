@@ -922,5 +922,45 @@ window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scro
   }
   tick();
 })();
+
+/* Process rail — fills as you scroll, respects reduced motion */
+(function(){
+  const list=document.querySelector('.proc-list');
+  if(!list)return;
+  const nums=[...list.querySelectorAll('.proc-n')];
+  const rows=[...list.querySelectorAll('.proc-row')];
+  if(!nums.length)return;
+  const line=document.createElement('div');line.className='proc-line';
+  const fill=document.createElement('div');fill.className='proc-fill';
+  list.prepend(fill);list.prepend(line);
+
+  let dims={top:0,bottom:0,height:0};
+  function layout(){
+    const listRect=list.getBoundingClientRect();
+    const firstRect=nums[0].getBoundingClientRect();
+    const lastRect=nums[nums.length-1].getBoundingClientRect();
+    const top=(firstRect.top+firstRect.height/2)-listRect.top;
+    const bottom=(lastRect.top+lastRect.height/2)-listRect.top;
+    const left=(firstRect.left+firstRect.width/2)-listRect.left;
+    line.style.left=left+'px';line.style.top=top+'px';line.style.bottom=(listRect.height-bottom)+'px';
+    fill.style.left=left+'px';fill.style.top=top+'px';
+    dims={top,bottom,height:bottom-top};
+  }
+  function update(){
+    const listRect=list.getBoundingClientRect();
+    const viewCenter=window.innerHeight*0.6;
+    let progressPx=viewCenter-listRect.top-dims.top;
+    progressPx=Math.max(0,Math.min(dims.height,progressPx));
+    fill.style.height=progressPx+'px';
+    let currentIdx=0;
+    rows.forEach((row,i)=>{if(row.getBoundingClientRect().top<viewCenter)currentIdx=i;});
+    rows.forEach((row,i)=>row.classList.toggle('proc-active',i===currentIdx));
+  }
+  layout();update();
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  window.addEventListener('scroll',update,{passive:true});
+  let resT;
+  window.addEventListener('resize',()=>{clearTimeout(resT);resT=setTimeout(()=>{layout();update();},200);});
+})();
 </script>
 </BaseLayout>
