@@ -30,7 +30,8 @@ const schema = {
         { "@type": "Question", "name": "What's the difference between an AI agent and Zapier or Make?", "acceptedAnswer": { "@type": "Answer", "text": "Zapier and Make move data between apps on a trigger. An AI agent reasons about the data and decides what to do with it — something no fixed rule can do." } },
         { "@type": "Question", "name": "Can this replace our Zapier or Make setup?", "acceptedAnswer": { "@type": "Answer", "text": "Often partially — simple triggers stay on Zapier where they work fine. The agent layer handles the steps that need judgment, sitting alongside your existing automations." } },
         { "@type": "Question", "name": "What if the agent makes a mistake?", "acceptedAnswer": { "@type": "Answer", "text": "Every workflow agent ships with a confidence threshold and an audit log. Below the threshold, or on any genuine exception, the task escalates to a human." } },
-        { "@type": "Question", "name": "How do you measure ROI?", "acceptedAnswer": { "@type": "Answer", "text": "Every engagement is scoped against a specific outcome — hours saved per week, tickets deflected, or throughput increased — agreed before the build starts." } }
+        { "@type": "Question", "name": "How do you measure ROI?", "acceptedAnswer": { "@type": "Answer", "text": "Every engagement is scoped against a specific outcome — hours saved per week, tickets deflected, or throughput increased — agreed before the build starts." } },
+        { "@type": "Question", "name": "What happens if you're at capacity, or I need support after launch?", "acceptedAnswer": { "@type": "Answer", "text": "We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Every build ships with documentation and a 2-week hypercare window. Ongoing support runs on a monthly retainer with response expectations agreed upfront." } }
       ]
     },
     {
@@ -160,6 +161,10 @@ const schema = {
     <div class="faq-row">
       <button class="faq-btn" aria-expanded="false" aria-controls="wa4" onclick="toggleFaq(this)">How do you measure ROI?<span class="faq-ic">+</span></button>
       <div class="faq-body" id="wa4"><div class="faq-inner">Every engagement is scoped against a specific outcome — hours saved per week, tickets deflected, or throughput increased — agreed before the build starts.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="wa5" onclick="toggleFaq(this)">What happens if you're at capacity, or I need support after launch?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="wa5"><div class="faq-inner">We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Ongoing support runs on a monthly retainer with response expectations agreed upfront.</div></div>
     </div>
   </div>
   <div class="related-links fu fd2">

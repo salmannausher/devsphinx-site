@@ -30,7 +30,8 @@ const schema = {
         { "@type": "Question", "name": "What is an AI agent?", "acceptedAnswer": { "@type": "Answer", "text": "An AI agent is software that completes a task end to end by making its own decisions, not just following a fixed script. It researches, decides, writes, and acts, the way a capable employee would." } },
         { "@type": "Question", "name": "How much does it cost to build an AI agent?", "acceptedAnswer": { "@type": "Answer", "text": "A production AI agent system from Devsphinx starts at $8,000, with most complete builds landing between $10,000 and $15,000, fixed price." } },
         { "@type": "Question", "name": "Can it connect to our existing CRM?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Agents connect to HubSpot, Salesforce, and most common CRMs via MCP or direct API integration." } },
-        { "@type": "Question", "name": "What happens when the agent isn't confident?", "acceptedAnswer": { "@type": "Answer", "text": "Every agent system ships with a confidence threshold. Below it, the task escalates to a human instead of the agent guessing." } }
+        { "@type": "Question", "name": "What happens when the agent isn't confident?", "acceptedAnswer": { "@type": "Answer", "text": "Every agent system ships with a confidence threshold. Below it, the task escalates to a human instead of the agent guessing." } },
+        { "@type": "Question", "name": "What happens if you're at capacity, or I need support after launch?", "acceptedAnswer": { "@type": "Answer", "text": "We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Every build ships with documentation and a 2-week hypercare window. Ongoing support runs on a monthly retainer with response expectations agreed upfront." } }
       ]
     },
     {
@@ -160,6 +161,10 @@ const schema = {
     <div class="faq-row">
       <button class="faq-btn" aria-expanded="false" aria-controls="sa4" onclick="toggleFaq(this)">Do you maintain it after launch?<span class="faq-ic">+</span></button>
       <div class="faq-body" id="sa4"><div class="faq-inner">Every build includes a 2-week hypercare window. After that, monthly retainers for ongoing tuning and evolution start at $2,500/month.</div></div>
+    </div>
+    <div class="faq-row">
+      <button class="faq-btn" aria-expanded="false" aria-controls="sa5" onclick="toggleFaq(this)">What happens if you're at capacity, or I need support after launch?<span class="faq-ic">+</span></button>
+      <div class="faq-body" id="sa5"><div class="faq-inner">We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Ongoing support runs on a monthly retainer with response expectations agreed upfront.</div></div>
     </div>
   </div>
   <div class="related-links fu fd2">

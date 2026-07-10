@@ -4,9 +4,25 @@ import '../styles/home.css';
 
 const title = "Devsphinx — AI-First Software Studio";
 const description = "Devsphinx builds AI agent systems and AI-first software that replace manual workflows in weeks. Fixed-scope builds, production architecture, and Claude-native delivery.";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Do you only build AI agents, or do you build full software products too?", "acceptedAnswer": { "@type": "Answer", "text": "Both. We build autonomous AI agent systems (multi-agent pipelines for sales, ops, and support) and full AI-first software products (SaaS platforms, internal tools, vertical apps). AI is the core architecture in everything we build, not a feature bolted on afterward." } },
+    { "@type": "Question", "name": "What's the difference between AI-first software and just adding AI to an app?", "acceptedAnswer": { "@type": "Answer", "text": "AI-first means the AI layer is designed before anything else — what the model handles, what data it needs, how it interacts with the rest of the system. The result is software where AI handles the heavy lifting on every core workflow, not just one bolt-on feature." } },
+    { "@type": "Question", "name": "How is this different from Zapier, Make, or a chatbot?", "acceptedAnswer": { "@type": "Answer", "text": "Automation tools move data between apps without reasoning or deciding anything. Devsphinx builds agent systems that research context, evaluate options, and take action autonomously — the difference between an automation rule and an employee who uses judgment." } },
+    { "@type": "Question", "name": "How long does a typical project take?", "acceptedAnswer": { "@type": "Answer", "text": "Agent systems: 3–5 weeks in production. AI-first software products: 4–8 weeks for an MVP, depending on scope." } },
+    { "@type": "Question", "name": "What does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "Agent system builds start from $8,000, typically $10,000–$15,000 complete. AI-first software MVPs start from $12,000. All engagements are fixed-price. Monthly retainers for ongoing evolution start at $2,500/month." } },
+    { "@type": "Question", "name": "Do you work with early-stage startups?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — some of our best-fit engagements are early-stage products where the founding team wants to build AI-first from the start rather than retrofit later." } },
+    { "@type": "Question", "name": "Do you sign NDAs?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. We sign a mutual NDA before the discovery call on request. Most case studies are anonymised for this reason." } },
+    { "@type": "Question", "name": "What happens if you're at capacity, or I need support after launch?", "acceptedAnswer": { "@type": "Answer", "text": "We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call and point you to someone we trust rather than overcommit. Every build ships with documentation and a 2-week hypercare window. Ongoing support runs on a monthly retainer with response expectations agreed upfront." } }
+  ]
+};
 ---
 
 <BaseLayout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 <div id="scroll-progress" aria-hidden="true"><span></span></div>
 
 <!-- NAV -->
@@ -623,6 +639,10 @@ const description = "Devsphinx builds AI agent systems and AI-first software tha
       <div class="faq-row">
         <button class="faq-btn" aria-expanded="false" aria-controls="faq-a7" onclick="toggleFaq(this)">Do you sign NDAs?<span class="faq-ic">+</span></button>
         <div class="faq-body" id="faq-a7"><div class="faq-inner">Yes. We're happy to sign a mutual NDA before the discovery call. Most of our case studies are anonymised for this reason. If you have sensitive processes or data requirements, let us know before we start.</div></div>
+      </div>
+      <div class="faq-row">
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-a8" onclick="toggleFaq(this)">What happens if you're at capacity, or I need support after launch?<span class="faq-ic">+</span></button>
+        <div class="faq-body" id="faq-a8"><div class="faq-inner">We only take on a small number of builds at a time, so if we can't meet your timeline, we'll tell you honestly on the discovery call — and point you to someone we trust rather than overcommit. Every build ships with documentation and a 2-week hypercare window, so you're never dependent on tribal knowledge. Ongoing support after that runs on a monthly retainer with response expectations agreed upfront, not left vague.</div></div>
       </div>
     </div>
   </div>
