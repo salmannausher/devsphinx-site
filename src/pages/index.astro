@@ -952,9 +952,7 @@ window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scro
     let progressPx=viewCenter-listRect.top-dims.top;
     progressPx=Math.max(0,Math.min(dims.height,progressPx));
     fill.style.height=progressPx+'px';
-    let currentIdx=0;
-    rows.forEach((row,i)=>{if(row.getBoundingClientRect().top<viewCenter)currentIdx=i;});
-    rows.forEach((row,i)=>row.classList.toggle('proc-active',i===currentIdx));
+    rows.forEach(row=>row.classList.toggle('proc-active',row.getBoundingClientRect().top<viewCenter));
   }
   layout();update();
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
