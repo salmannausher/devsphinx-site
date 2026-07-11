@@ -16,7 +16,28 @@ const rest = posts.slice(1);
 const AUTHOR_INITIALS = 'SN';
 
 // Next posts in the 90-day content plan, in order, not yet written.
-const upcoming = [];
+const upcoming = [
+  {
+    clusterLabel: 'AI Agents 101',
+    title: 'How Much Does an AI Agent Cost to Build? (2026 Pricing Guide)',
+    icon: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>',
+  },
+  {
+    clusterLabel: 'Automation for SMEs',
+    title: 'CRM Automation With AI: What to Automate First',
+    icon: '<polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>',
+  },
+  {
+    clusterLabel: 'Founder-Led',
+    title: "Why Devsphinx Doesn't Bill by the Hour",
+    icon: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+  },
+  {
+    clusterLabel: 'Healthcare',
+    title: 'AI Scheduling and Intake: What Healthcare Practices Can Actually Automate',
+    icon: '<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  },
+];
 ---
 
 <BaseLayout title={title} description={description}>
