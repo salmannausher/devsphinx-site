@@ -4,7 +4,7 @@ html{scroll-behavior:smooth;}
   --bg:#070707;--bg2:#0e0e0e;--bg3:#151515;--bg4:#1c1c1c;
   --b:rgba(255,255,255,0.07);--b2:rgba(255,255,255,0.13);--b3:rgba(255,255,255,0.22);
   --t:#F0EEE6;--t2:#97948C;--t3:#464540;--foot-t:#7A796F;
-  --ac:#D4501A;--ac2:rgba(212,80,26,0.13);--ac3:rgba(212,80,26,0.07);
+  --ac:#D4501A;--ac2:rgba(212,80,26,0.13);--ac3:rgba(212,80,26,0.07);--ac-btn:#C94C19;
   --blue:#3B82F6;--blue2:rgba(59,130,246,0.12);
   --green:#22c55e;--green2:rgba(34,197,94,0.1);
   --D:'Syne',sans-serif;--B:'DM Sans',sans-serif;--M:'DM Mono',monospace;
@@ -22,7 +22,7 @@ h1,h2,h3{font-family:var(--D);letter-spacing:-0.025em;line-height:1.06;}
 /* ── Buttons ── */
 .btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--B);font-size:14px;font-weight:500;padding:12px 24px;border-radius:var(--r);border:none;cursor:pointer;transition:opacity .15s,transform .1s;white-space:nowrap;letter-spacing:.01em;}
 .btn:active{transform:scale(.97);}
-.btn-ac{background:var(--ac);color:#fff;}.btn-ac:hover{opacity:.86;}
+.btn-ac{background:var(--ac-btn);color:#fff;}.btn-ac:hover{opacity:.86;}
 .btn-ghost{background:transparent;color:var(--t2);border:1px solid var(--b2);}.btn-ghost:hover{color:var(--t);border-color:var(--b3);}
 .btn-sm{padding:9px 18px;font-size:13px;}
 
@@ -248,7 +248,7 @@ hr.rule{border:none;border-top:1px solid var(--b);}
 
 /* ── BOOKING ── */
 #booking{background:var(--bg2);border-top:1px solid var(--b);}
-#sticky-cta{position:fixed;bottom:28px;right:28px;z-index:40;padding:13px 22px;background:var(--ac);color:#fff;font-family:var(--B);font-size:14px;font-weight:600;border-radius:8px;text-decoration:none;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease;white-space:nowrap;box-shadow:0 14px 34px rgba(0,0,0,.38);}
+#sticky-cta{position:fixed;bottom:28px;right:28px;z-index:40;padding:13px 22px;background:var(--ac-btn);color:#fff;font-family:var(--B);font-size:14px;font-weight:600;border-radius:8px;text-decoration:none;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease;white-space:nowrap;box-shadow:0 14px 34px rgba(0,0,0,.38);}
 #sticky-cta.sticky-cta--visible{opacity:1;pointer-events:auto;transform:translateY(0);}
 #sticky-cta:hover{opacity:.88;}
 .book-wrap{display:grid;grid-template-columns:1fr 1.35fr;gap:72px;align-items:start;max-width:1100px;margin:0 auto;padding:100px 48px;}
