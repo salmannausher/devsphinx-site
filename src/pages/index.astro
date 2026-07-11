@@ -44,7 +44,7 @@ const faqSchema = {
   </button>
 </nav>
 
-<div class="mob-menu" id="mob-menu" aria-hidden="true">
+<div class="mob-menu" id="mob-menu" aria-hidden="true" inert>
   <a href="/#services" onclick="closeMob()">Services</a>
   <a href="/#process" onclick="closeMob()">Process</a>
   <a href="/#industries" onclick="closeMob()">Industries</a>
@@ -55,6 +55,7 @@ const faqSchema = {
   <a href="/#booking" class="btn btn-ac" onclick="closeMob()">Book a discovery call →</a>
 </div>
 
+<main>
 <!-- HERO -->
 <section id="hero">
   <div class="hero-inner">
@@ -106,13 +107,13 @@ const faqSchema = {
   <div class="app-inner fu">
     <div class="app-side">
       <span class="eyebrow eyebrow-ac" style="margin-bottom:12px;display:block;">AI Agent Systems</span>
-      <h3>Autonomous agents that run your business operations</h3>
+      <h2>Autonomous agents that run your business operations</h2>
       <p>Multi-agent pipelines built on Claude that handle sales outreach, operations workflows, customer support, and internal processes — 24/7, without human input. Not chatbots. Not automations. AI that thinks and acts.</p>
     </div>
     <div class="app-divider"></div>
     <div class="app-side">
       <span class="eyebrow" style="color:var(--blue);margin-bottom:12px;display:block;">AI-First Software</span>
-      <h3>Software where AI is the architecture, not an add-on</h3>
+      <h2>Software where AI is the architecture, not an add-on</h2>
       <p>Web apps, SaaS platforms, and custom software built with AI at the core — not bolted on after launch. Every design decision starts with "what should AI handle here?" The result is software that gets smarter as it's used.</p>
     </div>
   </div>
@@ -683,6 +684,7 @@ const faqSchema = {
     </div>
   </div>
 </section>
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -767,8 +769,8 @@ const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target
 document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
 
 /* Hamburger */
-function toggleMob(){const h=document.getElementById('ham-btn'),m=document.getElementById('mob-menu');h.classList.toggle('open');m.classList.toggle('open');const open=m.classList.contains('open');h.setAttribute('aria-expanded',open);m.setAttribute('aria-hidden',!open);document.body.style.overflow=open?'hidden':'';}
-function closeMob(){const h=document.getElementById('ham-btn'),m=document.getElementById('mob-menu');h.classList.remove('open');m.classList.remove('open');h.setAttribute('aria-expanded','false');m.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+function toggleMob(){const h=document.getElementById('ham-btn'),m=document.getElementById('mob-menu');h.classList.toggle('open');m.classList.toggle('open');const open=m.classList.contains('open');h.setAttribute('aria-expanded',open);m.setAttribute('aria-hidden',!open);m.toggleAttribute('inert',!open);document.body.style.overflow=open?'hidden':'';}
+function closeMob(){const h=document.getElementById('ham-btn'),m=document.getElementById('mob-menu');h.classList.remove('open');m.classList.remove('open');h.setAttribute('aria-expanded','false');m.setAttribute('aria-hidden','true');m.setAttribute('inert','');document.body.style.overflow='';}
 
 /* Service tabs */
 function switchSvc(btn,panel){
