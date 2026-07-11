@@ -1,0 +1,59 @@
+---
+title: "Next.js vs. Rails for Your MVP: How to Choose"
+description: "The framework choice for your MVP matters less than one question: do you already have a codebase? Here's how Next.js and Rails actually compare for a first product."
+publishDate: 2026-07-03
+cluster: "saas-mvp"
+clusterLabel: "SaaS MVP"
+keyword: "next.js vs rails for mvp"
+readingTime: "6 min read"
+---
+
+import SnippetAnswer from '../../components/SnippetAnswer.astro';
+
+Founders ask this question expecting a technology answer — which framework is "better." The actual answer is almost always about your starting point, not the framework's merits.
+
+<SnippetAnswer>
+Choose Next.js for a brand-new product with no existing codebase, especially if AI features or a modern React frontend are central to the product. Choose Rails if you already have a Rails codebase — extending it is almost always cheaper and faster than rewriting in a different stack. Both pair equally well with an AI layer on top.
+</SnippetAnswer>
+
+## The real decision factor isn't the framework
+
+If you're starting from zero, both Next.js and Rails will get a production MVP shipped in a similar timeframe, at a similar cost, built by competent teams. The frameworks aren't the variable that matters most. What matters is whether a codebase already exists: extending a working Rails app is almost always cheaper and faster than migrating it to something else just because a newer stack looks more appealing. The rewrite tax is real, and it's rarely worth paying for a stack preference alone.
+
+## When Next.js is the right call
+
+Next.js (with React and Node.js) is the stronger default when:
+
+- You're building from scratch with no existing code to work around
+- The product is frontend-heavy — a lot of interactive UI, dashboards, or real-time updates
+- Your team already thinks in JavaScript/TypeScript, or you expect to hire from that pool
+- You want a single language across frontend and backend, which simplifies hiring and code review later
+
+## When Rails is the right call
+
+Rails is the stronger default when:
+
+- You already have a Rails codebase — extending it is cheaper than a rewrite, full stop
+- The product is backend-heavy — lots of business logic, background jobs, and data processing rather than a rich interactive frontend
+- You want mature conventions (ActiveRecord, Sidekiq for background jobs) that remove a lot of architectural decision-making up front
+- Your team already knows Ruby, or the existing engineers on the project do
+
+## Side-by-side comparison
+
+| | Next.js (greenfield) | Rails (existing codebase) | Rails (new build) |
+|---|---|---|---|
+| Best for | New product, frontend-heavy, JS/TS teams | Extending a working app | Backend-heavy new product |
+| Typical starting price | $12,000+ | $6,000+ | $12,000+ |
+| Typical timeline | 4–8 weeks | Scoped after a codebase review | 4–8 weeks |
+| Background jobs | Custom setup | Sidekiq, built-in convention | Sidekiq, built-in convention |
+| AI layer | Claude API, MCP | Claude API, MCP | Claude API, MCP |
+
+## Adding AI to either stack looks the same
+
+This is the part that surprises people: once you've picked a backend, adding an AI layer isn't a different decision. On Rails, the AI layer typically shows up as a new service object, a background job, or a new controller — it doesn't require touching the app's existing models or rewriting core logic. On Next.js, it's the same idea implemented as API routes and server actions. Neither framework has an inherent advantage for AI work; the model call, the prompt design, and the confidence-threshold logic look almost identical either way.
+
+## What it actually costs
+
+For a brand-new product, both paths land in a similar range: **$12,000+ fixed price**, typically **4–8 weeks**. The number that actually differs is what it costs to add AI to something you already have. If there's an existing Rails codebase, adding an AI-powered feature to it starts at **$6,000+** — a codebase review during discovery tells us what's involved before anything is scoped, so that number reflects the real system, not a guess.
+
+If you're starting from nothing, see the full breakdown on the [SaaS MVP Development](/services/saas-mvp-development/) page. If you have an existing Rails app and want to know what adding AI to it would look like, the [Ruby on Rails Development](/services/ruby-on-rails-development/) page covers that path — or [book a discovery call](/#booking) and we'll tell you plainly which one fits.

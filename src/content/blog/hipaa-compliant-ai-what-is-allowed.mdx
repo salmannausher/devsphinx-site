@@ -1,0 +1,47 @@
+---
+title: "HIPAA-Compliant AI: What's Actually Allowed"
+description: "HIPAA compliance for AI isn't a certificate you buy — it's an architecture decision. Here's what actually has to be true before AI can touch patient data."
+publishDate: 2026-06-26
+cluster: "healthcare"
+clusterLabel: "Healthcare"
+keyword: "hipaa compliant ai"
+readingTime: "7 min read"
+---
+
+import SnippetAnswer from '../../components/SnippetAnswer.astro';
+
+"Is this AI tool HIPAA compliant?" is the wrong question to lead with, because compliance isn't a property a tool has on its own — it's a property of how the whole system, contract, and data flow are set up together.
+
+<SnippetAnswer>
+There's no such thing as a single "HIPAA-certified" AI product. AI can be used with protected health information (PHI) only when a signed Business Associate Agreement (BAA) is in place with every vendor that touches that data, alongside encryption, access controls, and audit logging designed in from the start — not added afterward.
+</SnippetAnswer>
+
+## There's no such thing as "HIPAA certified" software
+
+HIPAA doesn't issue certifications the way SOC 2 or ISO 27001 audits do. No vendor can hand you a certificate that makes a product "HIPAA compliant" on its own. What actually exists is a set of legal and technical obligations that apply to how PHI is handled — by covered entities and their business associates — and those obligations depend on the full data flow, not just the software in isolation. A tool can be built in a way that supports compliance, but "compliant" describes the whole arrangement: the contract, the infrastructure, and the operational practices around it.
+
+## What actually has to be true
+
+For AI to touch PHI without creating a compliance problem, a few concrete things have to be in place before any data flows:
+
+- **A signed BAA with every vendor in the chain.** If an AI provider, hosting platform, or third-party API will process PHI, a Business Associate Agreement has to be signed with them first. No BAA means no PHI, full stop — regardless of how secure the tool otherwise looks.
+- **Encryption in transit and at rest.** PHI needs to be encrypted both while it moves between systems and while it's stored.
+- **Access controls.** Only the people and systems that need PHI to do their job should be able to reach it — enforced technically, not just by policy.
+- **Audit logging.** Every access to PHI needs a record of who touched it and when, so the trail exists if it's ever needed.
+- **The minimum necessary standard.** Systems should be designed to expose only the PHI a given workflow actually needs — not the full patient record by default.
+
+## Where AI and HIPAA actually get risky
+
+The common mistake isn't using AI with health data — it's using the wrong AI surface for it. Pasting patient information into a consumer chatbot's free tier is a real, common violation, because most consumer AI products don't offer a BAA at all, which means there's no compliant path to use them with PHI no matter how the request is phrased. The same risk applies to any tool bolted onto a healthcare workflow without checking, upfront, whether that vendor will sign a BAA. If they won't, that tool can't touch PHI — period, regardless of how the rest of the system is built.
+
+## What HIPAA-aware architecture looks like in practice
+
+The difference between a compliant build and a risky one comes down to when these decisions get made. Builds designed around HIPAA and data-handling requirements from the architecture phase have access controls, audit logging, and encrypted storage decided before a single screen is designed — not retrofitted after a security review flags a problem. That ordering matters: bolting on access controls after the data model is already built is where most of the expensive rework happens.
+
+## Data ownership after the project ends
+
+A question worth asking any vendor before you start: who owns the data, and what happens to it after the engagement ends? The honest answer should be that you own it — the vendor builds the system and hands over full ownership and documentation, with no data retained after handover unless an ongoing support retainer is explicitly in place. If a vendor is vague about this, that's worth pushing on before signing anything.
+
+## What this looks like for a real build
+
+At Devsphinx, healthcare builds start from **$15,000, fixed price**, and every engagement involving PHI includes a signed BAA alongside the standard NDA — before any patient data is shared, not after. Deliverables include HIPAA-aware architecture and data-handling design, the actual scheduling/intake/clinical workflow automation, audit logging and access control built in from day one, and documentation ready for a compliance review. See the full breakdown on the [Healthcare Software Development](/services/healthcare-software-development/) page, or [book a discovery call](/#booking) to talk through what your specific workflow requires.
